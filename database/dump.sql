@@ -118,7 +118,7 @@ CREATE TABLE public."Instructions" (
     "recipeId" numeric NOT NULL,
     "instructionDetail" text NOT NULL,
     "instructionOrder" numeric NOT NULL,
-    "createdAt" timestamp without time zone NOT NULL
+    "createdAt" timestamp(6) with time zone DEFAULT now() NOT NULL
 );
 
 
@@ -161,7 +161,7 @@ CREATE TABLE public."RecipeIngredients" (
     "recipeId" numeric NOT NULL,
     quantity numeric NOT NULL,
     unit text NOT NULL,
-    "createdAt" timestamp without time zone NOT NULL
+    "createdAt" timestamp(6) with time zone DEFAULT now() NOT NULL
 );
 
 
@@ -176,8 +176,8 @@ CREATE TABLE public."Recipes" (
     "mealPlan" boolean NOT NULL,
     "numberOfServings" numeric NOT NULL,
     "createdBy" text NOT NULL,
-    "createdAt" timestamp without time zone NOT NULL,
-    image text NOT NULL
+    image text NOT NULL,
+    "createdAt" timestamp(6) with time zone DEFAULT now() NOT NULL
 );
 
 
@@ -212,7 +212,7 @@ CREATE TABLE public."Users" (
     email text NOT NULL,
     password text NOT NULL,
     image text NOT NULL,
-    "createdAt" timestamp without time zone NOT NULL
+    "createdAt" timestamp(6) with time zone DEFAULT now() NOT NULL
 );
 
 
@@ -277,6 +277,8 @@ COPY public."FavoriteRecipes" ("userId", "recipeId") FROM stdin;
 --
 
 COPY public."Ingredients" ("ingredientId", "ingredientName") FROM stdin;
+1	salt
+2	pepper
 \.
 
 
@@ -308,7 +310,7 @@ COPY public."RecipeIngredients" ("ingredientId", "recipeId", quantity, unit, "cr
 -- Data for Name: Recipes; Type: TABLE DATA; Schema: public; Owner: -
 --
 
-COPY public."Recipes" ("recipeId", "recipeName", category, "mealPlan", "numberOfServings", "createdBy", "createdAt", image) FROM stdin;
+COPY public."Recipes" ("recipeId", "recipeName", category, "mealPlan", "numberOfServings", "createdBy", image, "createdAt") FROM stdin;
 \.
 
 
@@ -317,6 +319,7 @@ COPY public."Recipes" ("recipeId", "recipeName", category, "mealPlan", "numberOf
 --
 
 COPY public."Users" ("userId", name, "userName", email, password, image, "createdAt") FROM stdin;
+4	Patrick	Star	ThisIsPatrick@gmail.com	star	/home/dev/lfz/recipe-manager/server/public/images	2020-01-21 19:54:49.655566+00
 \.
 
 
@@ -324,7 +327,7 @@ COPY public."Users" ("userId", name, "userName", email, password, image, "create
 -- Name: Ingredients_ingredientId_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('public."Ingredients_ingredientId_seq"', 1, false);
+SELECT pg_catalog.setval('public."Ingredients_ingredientId_seq"', 2, true);
 
 
 --
@@ -345,7 +348,7 @@ SELECT pg_catalog.setval('public."Recipes_recipeId_seq"', 1, false);
 -- Name: Users_userId_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('public."Users_userId_seq"', 1, false);
+SELECT pg_catalog.setval('public."Users_userId_seq"', 4, true);
 
 
 --
