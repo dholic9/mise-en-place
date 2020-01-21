@@ -371,7 +371,10 @@ COPY public."Recipes" ("recipeId", "recipeName", category, "numberOfServings", "
 --
 
 COPY public."Users" ("userId", name, "userName", email, password, image, "createdAt") FROM stdin;
-4	Patrick	Star	ThisIsPatrick@gmail.com	star	/home/dev/lfz/recipe-manager/server/public/images	2020-01-21 11:54:49.655566-08
+
+5	SpongeBob	sb89	sb89@gmail.com	abc124	/images/spongebob.jpeg	2020-01-21 20:29:38.542567+00
+4	Patrick	Star	ThisIsPatrick@gmail.com	star	/images/patrickstar.jpg	2020-01-21 19:54:49.655566+00
+
 \.
 
 
@@ -400,7 +403,7 @@ SELECT pg_catalog.setval('public."Recipes_recipeId_seq"', 1, false);
 -- Name: Users_userId_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('public."Users_userId_seq"', 4, true);
+SELECT pg_catalog.setval('public."Users_userId_seq"', 5, true);
 
 
 --
