@@ -5,4 +5,3 @@ const db = new pg.Pool({
 });
 
 module.exports = db;
-© 2020 GitHub, Inc.
