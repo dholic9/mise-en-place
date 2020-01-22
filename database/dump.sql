@@ -385,6 +385,7 @@ COPY public."Recipes" ("recipeId", "recipeName", category, "numberOfServings", "
 1	Eggs Benedict	Breakfast	4	Patrick	test	2020-01-21 08:00:00+00
 2	Mac and Cheese	Dinner	4	Patrick	test	2020-01-22 08:00:00+00
 3	Scrambled Eggs	Breakfast	2	Patrick	test	2020-01-23 08:00:00+00
+4	Crepes	Breakfast	4	Patrick	test	2020-01-22 00:34:02.745628+00
 \.
 
 
@@ -393,6 +394,8 @@ COPY public."Recipes" ("recipeId", "recipeName", category, "numberOfServings", "
 --
 
 COPY public."Users" ("userId", name, "userName", email, password, image, "createdAt") FROM stdin;
+1	Patrick	Star	thisIsPatrick@gmail.com	star	/images/patrickstar.jpg	2020-01-22 00:36:43.874184+00
+2	Spongebob	Sponge	thisIsSpongebob@gmail.com	sponge	/images/spongebob.jpg	2020-01-22 00:37:43.707564+00
 \.
 
 
