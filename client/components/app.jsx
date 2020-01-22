@@ -1,6 +1,8 @@
 import React from 'react';
+import { BrowserRouter as Router, Route, Switch, withRouter } from 'react-router-dom';
 import Button from './button';
 import AppContext from '../lib/context';
+import IntroPage from './intro-page';
 
 export default class App extends React.Component {
   constructor(props) {
@@ -30,8 +32,15 @@ export default class App extends React.Component {
     }
     return (
       <AppContext.Provider value={context}>
-        <div>{color}</div>
-        <Button />
+        <Router>
+          <div className="container">
+            <div>{color}
+              <Button></Button>
+            </div>
+            <Route exact path="/intro" component={IntroPage}/>
+          </div>
+
+        </Router>
       </AppContext.Provider>
     );
   }
