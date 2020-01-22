@@ -14,8 +14,26 @@ app.use(sessionMiddleware);
 app.use(express.json());
 
 app.get('/api/health-check', (req, res, next) => {
-  db.query(`select 'successfully connected' as "message"`)
+  db.query('select \'successfully connected\' as "message"')
     .then(result => res.json(result.rows[0]))
+    .catch(err => next(err));
+});
+
+app.get('/api/recipes', (req, res, next) => {
+  const sql = `
+          SELECT "recipeId",
+                 "recipeName",
+                 "numberOfServings",
+                 "category",
+                 "createdBy",
+                 "image"
+          FROM  "Recipes"
+          ORDER BY "recipeId" ASC;
+  `;
+  db.query(sql)
+    .then(result => {
+      res.status(200).json(result.rows);
+    })
     .catch(err => next(err));
 });
 
