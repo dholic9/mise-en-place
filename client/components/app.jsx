@@ -32,7 +32,8 @@ export default class App extends React.Component {
     }
     return (
       <AppContext.Provider value={context}>
-        <Router>
+        <Router
+          forceRefresh={true}>
           <div className="container">
             <div>{color}
               <Button></Button>

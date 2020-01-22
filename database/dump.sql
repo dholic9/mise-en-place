@@ -393,10 +393,10 @@ COPY public."RecipeIngredients" ("ingredientId", "recipeId", quantity, unit, "cr
 --
 
 COPY public."Recipes" ("recipeId", "recipeName", category, "numberOfServings", "createdBy", image, "createdAt") FROM stdin;
-1	Eggs Benedict	Breakfast	4	Patrick	test	2020-01-21 08:00:00+00
-2	Mac and Cheese	Dinner	4	Patrick	test	2020-01-22 08:00:00+00
 3	Scrambled Eggs	Breakfast	2	Patrick	test	2020-01-23 08:00:00+00
-4	Crepes	Breakfast	4	Patrick	test	2020-01-22 00:34:02.745628+00
+4	Crepes	Breakfast	4	Patrick	/images/crepes.jpg	2020-01-22 00:34:02.745628+00
+1	Eggs Benedict	Breakfast	4	Patrick	/images/eggsBenedict.jpg	2020-01-21 08:00:00+00
+2	Mac and Cheese	Dinner	4	Patrick	/images/macAndCheese.jpg	2020-01-22 08:00:00+00
 \.
 
 
