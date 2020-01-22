@@ -1,9 +1,8 @@
 import React from 'react';
-<<<<<<< HEAD
-=======
+import { BrowserRouter as Router, Route, Switch, withRouter } from 'react-router-dom';
 import Button from './button';
->>>>>>> 794fd600c484cf048444ea87ac4ebdaac5a32c16
 import AppContext from '../lib/context';
+import IntroPage from './intro-page';
 
 export default class App extends React.Component {
   constructor(props) {
@@ -21,11 +20,6 @@ export default class App extends React.Component {
   }
 
   render() {
-<<<<<<< HEAD
-    return (
-
-    )
-=======
     const context = {
       handleClick: this.handleClick
     };
@@ -38,10 +32,16 @@ export default class App extends React.Component {
     }
     return (
       <AppContext.Provider value={context}>
-        <div>{color}</div>
-        <Button />
+        <Router>
+          <div className="container">
+            <div>{color}
+              <Button></Button>
+            </div>
+            <Route exact path="/intro" component={IntroPage}/>
+          </div>
+
+        </Router>
       </AppContext.Provider>
     );
->>>>>>> 794fd600c484cf048444ea87ac4ebdaac5a32c16
   }
 }
