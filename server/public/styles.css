@@ -1,0 +1,8 @@
+#root{
+  background-color: aqua;
+}
+
+.recipe{
+  border: 2px solid black;
+  width: 50vw;
+}
