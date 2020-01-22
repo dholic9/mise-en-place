@@ -268,6 +268,10 @@ ALTER TABLE ONLY public."Users" ALTER COLUMN "userId" SET DEFAULT nextval('publi
 --
 
 COPY public."FavoriteRecipes" ("userId", "recipeId") FROM stdin;
+2	3
+1	3
+1	4
+2	1
 \.
 
 
@@ -344,6 +348,8 @@ COPY public."Instructions" ("instructionId", "recipeId", "instructionDetail", "i
 --
 
 COPY public."MealPlan" ("userId", "recipeId") FROM stdin;
+1	4
+2	1
 \.
 
 
@@ -353,13 +359,11 @@ COPY public."MealPlan" ("userId", "recipeId") FROM stdin;
 
 COPY public."RecipeIngredients" ("ingredientId", "recipeId", quantity, unit, "createdAt") FROM stdin;
 1	1	2	-	2020-01-20 00:00:00+00
-2	1	4	-	2020-01-21 00:00:00+00
 3	1	4	slices	2020-01-22 00:00:00+00
 4	1	1	tsp	2020-01-23 00:00:00+00
 5	1	4	tbsp	2020-01-24 00:00:00+00
 6	1	4	-	2020-01-25 00:00:00+00
 7	1	2	tbsp	2020-01-26 00:00:00+00
-8	1	1	tbsp	2020-01-27 00:00:00+00
 9	2	8	oz	2020-01-28 00:00:00+00
 10	2	2	cups	2020-01-29 00:00:00+00
 11	2	0.5	cups	2020-07-17 00:00:00+00
@@ -371,9 +375,16 @@ COPY public."RecipeIngredients" ("ingredientId", "recipeId", quantity, unit, "cr
 17	2	1	tsp	2020-07-23 00:00:00+00
 18	3	4	-	2020-07-24 00:00:00+00
 19	3	1	tbsp	2020-07-25 00:00:00+00
-20	3	1	pinch	2020-07-26 00:00:00+00
-21	3	1	pinch	2020-07-27 00:00:00+00
-22	3	1	tbsp	2020-07-28 00:00:00+00
+8	2	1	tbsp	2020-01-27 00:00:00+00
+20	4	1	pinch	2020-07-26 00:00:00+00
+21	4	1	pinch	2020-07-27 00:00:00+00
+22	4	1	tbsp	2020-07-28 00:00:00+00
+12	4	1	cup	2020-01-22 01:36:51.373377+00
+2	1	4	-	2020-01-21 00:00:00+00
+2	4	2	-	2020-01-22 01:37:27.042495+00
+16	4	0.25	tbsp	2020-01-22 01:39:23.173669+00
+11	4	1.5	cups	2020-01-22 01:39:46.494503+00
+5	4	1	tbsp	2020-01-22 01:40:23.807494+00
 \.
 
 
