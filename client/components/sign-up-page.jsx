@@ -61,7 +61,13 @@ export default class SignUp extends React.Component {
     if (this.state.password !== this.state.passwordVerify) {
       return window.alert('Passwords do not Match');
     }
-
+    const user = {
+      name: this.state.name,
+      userName: this.state.userName,
+      email: this.state.email,
+      password: this.state.password
+    };
+    this.context.handleUserSignup(user);
   }
 
   render() {
@@ -71,7 +77,7 @@ export default class SignUp extends React.Component {
           <img src="/images/logo1.png" height="150" width="200" alt="loading" />
 
         </div>
-        <div className="row  mt-5 justify-content-around  ">
+        <div className="row  mt-3 justify-content-around text-light ">
           SIGNUP
           <div className="col-12 ">
             <form onSubmit={this.handleUserSubmit} className="input-group  flex-column">
@@ -142,21 +148,21 @@ export default class SignUp extends React.Component {
               </div>
 
               <div className="input-group-append flex-column w-100 justify-content-center align-items-center">
-                {/* <Link to="/public-page"> */}
+
+                {/* <Link to="/login"> */}
                 <button
                   type="submit"
                   className="btn btn-primary rounded my-2">
-                  Log In
+                    Submit
                 </button>
                 {/* </Link> */}
-                <Link to="/sign-up">
+                <Link to="/login">
                   <button
                     type="button"
                     className="btn btn-primary rounded my-2">
-                    Sign Up
+                  Cancel
                   </button>
                 </Link>
-
               </div>
             </form>
           </div>

@@ -5,7 +5,6 @@ import {
   Switch,
   Route,
   Link,
-  useParams,
   Redirect
 } from 'react-router-dom';
 import MyRecipes from './my-recipes';
@@ -24,6 +23,7 @@ export default class App extends React.Component {
     };
     this.handleClick = this.handleClick.bind(this);
     this.handleUserLogin = this.handleUserLogin.bind(this);
+    this.handleUserSignup = this.handleUserSignup.bind(this);
   }
 
   handleClick() {
@@ -49,6 +49,22 @@ export default class App extends React.Component {
       .catch(err => console.error(err));
   }
 
+  handleUserSignup(user) {
+    console.log('sign up user: ', user);
+    fetch('api/users/create', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(user)
+    })
+      .then(res => res.json())
+      .then(data => {
+        console.log('data returned:', data);
+      });
+
+  }
+
   componentDidMount() {
 
   }
@@ -58,7 +74,8 @@ export default class App extends React.Component {
     const context = {
       user: this.state.user,
       handleClick: this.handleClick,
-      handleUserLogin: this.handleUserLogin
+      handleUserLogin: this.handleUserLogin,
+      handleUserSignup: this.handleUserSignup
     };
     console.log('context', context);
     return (

@@ -50,12 +50,17 @@ app.post('/api/users', (req, res, next) => {
 
 /*     USERS Sign Up  */
 
-app.post('/api/users', (req, res, next) => {
-  const name = req.body.name;
-  const userName = req.body.userName;
-  const password = req.body.password;
-  const email = req.body.email;
-  const image = req.body.image;
+app.post('/api/users/create', (req, res, next) => {
+  if (!req.body.name || !req.body.userName || !req.body.email || !req.body.password) {
+    return res.status(400).json({ error: 'invalid user inputs' });
+  }
+  const user = {
+    name: req.body.name,
+    userName: req.body.userName,
+    password: req.body.password,
+    email: req.body.email,
+    image: req.body.image
+  };
 
   const sql = `
       SELECT *
@@ -64,7 +69,29 @@ app.post('/api/users', (req, res, next) => {
 
   db.query(sql)
     .then(result => {
-      res.status(200).json(result.rows);
+      const usersDb = result.rows;
+      usersDb.map(index => {
+        if (index.userName === user.userName || index.email === user.email) {
+          return res.status(400).json({ error: 'User already exists' });
+        }
+      });
+      const values = [
+        user.name,
+        user.userName,
+        user.email,
+        user.password,
+        user.image
+      ];
+      const creatingSQL = `
+              INSERT INTO "Users" ("name", "userName", "email", "password", "image")
+                  VALUES ($1, $2, $3, $4, $5)
+                  RETURNING *
+      `;
+      db.query(creatingSQL, values)
+        .then(result => {
+          res.status(201).json(result.rows[0]);
+        });
+
     })
     .catch(err => next(err));
 
@@ -100,12 +127,12 @@ app.get('/api/fav', (req, res, next) => {
   const sql = `
       select  "r"."recipeName",
               "r"."recipeId",
-            "r"."image",
-            "r"."category",
-            "r"."numberOfServings"
-          from "Recipes" as "r"
-          join "FavoriteRecipes" as "f" using ("recipeId")
-          where "f"."userId" = 1;`;
+              "r"."image",
+              "r"."category",
+              "r"."numberOfServings"
+         from "Recipes" as "r"
+         join "FavoriteRecipes" as "f" using ("recipeId")
+        where "f"."userId" = 1;`;
   db.query(sql)
     .then(response => {
       res.json(response.rows);
