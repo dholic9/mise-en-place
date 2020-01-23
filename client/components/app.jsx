@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Route, Switch, withRouter } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Redirect, Link, Switch, withRouter, useHistory } from 'react-router-dom';
 import Button from './button';
 import AppContext from '../lib/context';
 import Login from './login';
@@ -21,9 +21,22 @@ export default class App extends React.Component {
 
   handleUserLogin(user) {
     console.log('user passed in: ', user);
+    fetch('api/users', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(user)
+    })
+      .then(res => res.json())
+      .then(data => {
+        console.log('data', data);
+      });
+
   }
 
   render() {
+    console.log(history);
     const context = {
       user: this.state.user,
       handleClick: this.handleClick,
@@ -32,7 +45,7 @@ export default class App extends React.Component {
     return (
       <AppContext.Provider value={context}>
         <Router
-          forceRefresh={true}
+          forceRefresh={false}
         >
           <Route exact path="/login" component={Login}/>
         </Router>

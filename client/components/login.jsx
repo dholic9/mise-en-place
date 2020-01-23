@@ -26,7 +26,13 @@ export default class Login extends React.Component {
   }
 
   handleUserSubmit() {
-    console.log('submitted');
+    event.preventDefault();
+    console.log(this.context);
+    const user = {
+      userName: this.state.userName,
+      password: this.state.password
+    };
+    this.context.handleUserLogin(user);
   }
 
   render() {
@@ -86,3 +92,5 @@ export default class Login extends React.Component {
   }
 
 }
+
+Login.contextType = AppContext;
