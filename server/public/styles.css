@@ -1,0 +1,15 @@
+.title-container{
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+.picture{
+  height: 150px;
+  width: 30px;
+  object-fit: cover;
+}
+.button-container{
+  font-size: 1.5rem;
+}
+.button-container .fas{
+  cursor: pointer;
+}
