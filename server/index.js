@@ -44,7 +44,8 @@ app.post('/api/users', (req, res, next) => {
       }
       req.session.userId = result.rows[0].userId;
       return res.status(200).json(result.rows[0].userId);
-    });
+    })
+    .catch(err => next(err));
 });
 
 /*     USERS Sign Up  */

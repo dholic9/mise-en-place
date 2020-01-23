@@ -13,12 +13,13 @@ import Login from './login';
 import AppContext from '../lib/context';
 import PublicPage from './public-page';
 import RecipeDetailPage from './recipe-detail-page';
+import SignUp from './sign-up-page';
 
 export default class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      userId: null,
+      user: '',
       isButtonClicked: false
     };
     this.handleClick = this.handleClick.bind(this);
@@ -40,7 +41,10 @@ export default class App extends React.Component {
     })
       .then(res => res.json())
       .then(data => {
-        this.setState({ userId: data });
+        if (typeof data !== 'number') {
+          return console.log('error');
+        }
+        this.setState({ user: data });
       })
       .catch(err => console.error(err));
   }
@@ -56,16 +60,16 @@ export default class App extends React.Component {
       handleClick: this.handleClick,
       handleUserLogin: this.handleUserLogin
     };
-
+    console.log('context', context);
     return (
       <AppContext.Provider value={context}>
         <Router forceRefresh={true}>
           <Route exact path="/myRecipes" component={MyRecipes}/>
-          <Route exact path="/login" >
-            {this.state.userId ? <Redirect to="/public-page" /> : <Login/>}
-          </Route>
+          <Route exact path="/login" component={Login}/>
+          <Route exact path="/sign-up" component={SignUp}/>
           <Route exact path="/public-page" component={PublicPage}/>
           <Route exact path="/recipe-detail-page/:recipeId" component={RecipeDetailPage}/>
+
         </Router>
       </AppContext.Provider>
     );
