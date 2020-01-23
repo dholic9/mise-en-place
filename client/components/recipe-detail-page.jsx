@@ -11,7 +11,14 @@ export default class RecipeDetailPage extends React.Component {
   componentDidMount() {
   }
 
+  getRecipe(){
+    // fetch(`/recipe-detail-page/:recipeId`)
+    //   .then(response=> response.json())
+    //   .then(recipe => console.log(recipe))
+  }
+
   render() {
+    console.log('hello')
     return (
       <h1>ligma</h1>
     );

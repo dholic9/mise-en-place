@@ -92,6 +92,46 @@ app.get('/api/fav', (req, res, next) => {
   // }
 });
 
+//Recipe detail page
+app.get('/api/recipe-detail-page/:recipeId', (req, res, next)=>{
+  const sql = `
+  select "r"."recipeName",
+         "r"."category",
+         "r"."numberOfServings",
+         "r"."image",
+         "r"."recipeId",
+         to_json(array(
+           select "ingredientsArray"
+           from (select "ri"."unit",
+                        "ri"."quantity",
+                        "ri"."ingredientId",
+                        "i"."ingredientName"
+                   from "RecipeIngredients" as "ri"
+                   join "Ingredients" as "i" using ("ingredientId")
+                  where "ri"."recipeId" = "r"."recipeId") as "ingredientsArray"
+         )) as "ingredients",
+         to_json(array(
+           select "instructionsArray"
+           from (select "in"."instructionDetail",
+                        "in"."instructionOrder"
+                  from "Instructions" as "in"
+                  where "in"."recipeId" = "r"."recipeId") as "instructionsArray"
+                  order by "instructionOrder" ASC
+         )) as "instructions"
+         from "Recipes" as "r"
+         where "r"."recipeId" = ${req.params.recipeId}
+         group by "r"."recipeId"`
+  
+    
+  db.query(sql)
+  .then(response=>{
+    res.json(response.rows)
+  })
+  .catch(err=>next(err))
+})
+
+//Recipe detail page^
+
 app.use('/api', (req, res, next) => {
   next(new ClientError(`cannot ${req.method} ${req.originalUrl}`, 404));
 });
