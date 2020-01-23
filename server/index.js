@@ -43,8 +43,7 @@ app.post('/api/users', (req, res, next) => {
         throw (new ClientError('User Name of Password is incorrect', 400));
       }
       req.session.userId = result.rows[0].userId;
-      console.log('req.session:', req.session);
-      return res.status(200).json({ success: 'User has logged in' });
+      return res.status(200).json(result.rows[0].userId);
     });
 });
 
