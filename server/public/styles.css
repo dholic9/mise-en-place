@@ -1,8 +1,19 @@
-#root{
-  background-color: aqua;
+.recipe{
+  height: 100vmin;
 }
 
-.recipe{
-  border: 2px solid black;
-  width: 50vw;
+.recipeInfo{
+  bottom: 50px;
+  font-size: x-large;
+  position: relative;
+  color: black;
+  text-shadow: -1px 0 white, 0 1px white, 1px 0 white, 0 -1px white;
+  left: 25px;
+}
+
+.image{
+  float: left;
+  width: 100vmin;
+  height: 100vmin;
+  background-size: cover;
 }
