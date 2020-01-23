@@ -48,12 +48,12 @@ export default class Login extends React.Component {
           <img src="/images/logo1.png" height="150" width="200" alt="loading"/>
 
         </div>
-        <div className="row pt-4 mt-5 justify-content-around  ">
+        <div className="row pt-4 mt-5 justify-content-around text-light  ">
+          <h1>Login</h1>
           <div className="col-12 ">
             <form onSubmit={this.handleUserSubmit} className="input-group  flex-column">
               <div className="form-group my-4">
                 <div className="input-group  w-100 flex-column">
-                  {/* <p>User Name</p> */}
                   <input
                     type="text"
                     placeholder="User Name"
@@ -67,7 +67,6 @@ export default class Login extends React.Component {
 
               <div className="form-group my-4 ">
                 <div className="input-group align-items-center">
-                  {/* <p>Password</p> */}
                   <input
                     type="text"
                     placeholder="Password"
