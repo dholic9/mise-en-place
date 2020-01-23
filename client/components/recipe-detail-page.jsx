@@ -1,26 +1,31 @@
 import React from 'react';
 
-export default class RecipeDetailPage extends React.Component {
+class RecipeDetailPage extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-
+      recipe: []
     };
   }
 
-  componentDidMount() {
+  componentDidMount(){
+    this.getRecipe()
   }
 
   getRecipe(){
-    // fetch(`/recipe-detail-page/:recipeId`)
-    //   .then(response=> response.json())
-    //   .then(recipe => console.log(recipe))
+    fetch(`/api/recipe-detail-page/${this.props.match.params.recipeId}`)
+      .then(response => response.json())
+      .then(recipe=>this.setState({recipe}))
+      .catch(err => console.error(err));
   }
 
   render() {
-    console.log('hello')
-    return (
-      <h1>ligma</h1>
-    );
+    return  (
+      <div className="recipeInfo">
+        <div className="category">some stuff</div>
+      </div>
+    )
   }
 }
+
+export default RecipeDetailPage

@@ -34,12 +34,12 @@ export default class App extends React.Component {
     };
     return (
       <AppContext.Provider value={context}>
-        <Router forceRefresh={true}>
+        <Router >
           <TopBar/>
           <Route exact path="/myRecipes" component={MyRecipes}/>
           <Route exact path="/login" component={Login}/>
           <Route exact path="/public-page" component={PublicPage}/>
-          <Route exact path="/recipe-detail-page/:recipeId" component={RecipeDetailPage}/>
+          <Route path="/recipe-detail-page/:recipeId" component={RecipeDetailPage}/>
         </Router>
       </AppContext.Provider>
     );
