@@ -5,7 +5,8 @@ import {
   Switch,
   Route,
   Link,
-  useParams
+  useParams,
+  Redirect
 } from 'react-router-dom';
 import MyRecipes from './my-recipes';
 import Login from './login';
@@ -60,7 +61,9 @@ export default class App extends React.Component {
       <AppContext.Provider value={context}>
         <Router forceRefresh={true}>
           <Route exact path="/myRecipes" component={MyRecipes}/>
-          <Route exact path="/login" component={Login}/>
+          <Route exact path="/login" >
+            {this.state.userId ? <Redirect to="/public-page" /> : <Login/>}
+          </Route>
           <Route exact path="/public-page" component={PublicPage}/>
           <Route exact path="/recipe-detail-page/:recipeId" component={RecipeDetailPage}/>
         </Router>
