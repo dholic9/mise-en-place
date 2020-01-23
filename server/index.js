@@ -21,7 +21,31 @@ app.get('/api/health-check', (req, res, next) => {
 
 /*     USERS login    */
 app.post('/api/users', (req, res, next) => {
+  const userName = req.body.userName;
+  const password = req.body.password;
+  const values = [userName, password];
+  const sql = `
+          SELECT *
+          FROM "Users"
+          WHERE "userName" = $1
+            AND "password" = $2;
+  `;
+  if (userName.length < 4) {
+    return res.status(400).json({ error: 'User Name input was invalid' });
+  }
+  if (password.length < 4) {
+    return res.status(400).json({ error: 'Password was invalid' });
+  }
 
+  db.query(sql, values)
+    .then(result => {
+      if (result.rows.length < 1) {
+        throw (new ClientError('User Name of Password is incorrect', 400));
+      }
+      req.session.userId = result.rows[0].userId;
+      console.log('req.session:', req.session);
+      return res.status(200).json({ success: 'User has logged in' });
+    });
 });
 
 /*     USERS Sign Up  */

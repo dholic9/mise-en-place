@@ -1,9 +1,6 @@
 import React from 'react';
-import { BrowserRouter as Router, Route } from 'react-router-dom';
+import Button from './button';
 import AppContext from '../lib/context';
-import TopBar from './top-bar';
-import MyRecipes from './my-recipes';
-import Login from './login';
 import PublicPage from './public-page';
 import RecipeDetailPage from './recipe-detail-page';
 
@@ -24,9 +21,22 @@ export default class App extends React.Component {
 
   handleUserLogin(user) {
     console.log('user passed in: ', user);
+    fetch('api/users', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(user)
+    })
+      .then(res => res.json())
+      .then(data => {
+        console.log('data', data);
+      });
+
   }
 
   render() {
+    console.log(history);
     const context = {
       user: this.state.user,
       handleClick: this.handleClick,
