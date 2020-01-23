@@ -1,5 +1,5 @@
 import React from 'react';
-import RecipeList from './recipe-list-item'
+import RecipeList from './recipe-list-item';
 
 class PublicPage extends React.Component {
   constructor(props) {
@@ -37,7 +37,5 @@ class PublicPage extends React.Component {
     );
   }
 }
-
-
 
 export default PublicPage;

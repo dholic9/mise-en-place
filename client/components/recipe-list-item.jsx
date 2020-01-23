@@ -3,8 +3,6 @@ import { Link, withRouter } from 'react-router-dom';
 
 class RecipeList extends React.Component {
   render() {
-    console.log(this.props)
-
     return (
       <Link to={`/recipe-detail-page/${this.props.recipe.recipeId}`}>
         <div className="recipe" >
@@ -15,4 +13,4 @@ class RecipeList extends React.Component {
     );
   }
 }
-export default withRouter(RecipeList)
+export default withRouter(RecipeList);

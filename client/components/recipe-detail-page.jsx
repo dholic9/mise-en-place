@@ -5,14 +5,15 @@ export default class RecipeDetailPage extends React.Component {
     super(props);
     this.state = {
 
-    }
+    };
   }
+
   componentDidMount() {
-    console.log(this.props)
   }
+
   render() {
     return (
       <h1>ligma</h1>
-    )
+    );
   }
-} 
+}

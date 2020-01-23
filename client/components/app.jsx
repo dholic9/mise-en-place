@@ -4,7 +4,7 @@ import Button from './button';
 import AppContext from '../lib/context';
 import Login from './login';
 import PublicPage from './public-page';
-import RecipeDetailPage from './recipe-detail-page'
+import RecipeDetailPage from './recipe-detail-page';
 
 export default class App extends React.Component {
   constructor(props) {
