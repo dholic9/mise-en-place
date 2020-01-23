@@ -81,6 +81,9 @@ export default class App extends React.Component {
     return (
       <AppContext.Provider value={context}>
         <Router forceRefresh={true}>
+          <Route exact path='/'>
+            <Redirect to='/login'/>
+          </Route>
           <Route exact path="/myRecipes" component={MyRecipes}/>
           <Route exact path="/login" component={Login}/>
           <Route exact path="/sign-up" component={SignUp}/>
