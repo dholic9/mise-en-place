@@ -1,50 +1,58 @@
 import React from 'react';
-
-class MyRecipe extends React.Component {
+export default class MyRecipe extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      recipes: []
+      favoriteRecipes: []
     };
   }
 
   componentDidMount() {
-    this.getRecipes();
+    this.getData();
   }
 
-  getRecipes() {
-    fetch('/api/recipes')
+  getData() {
+    const init = {
+      method: 'GET'
+
+    };
+    fetch('/api/fav', init)
       .then(response => response.json())
-      .then(recipes => this.setState({ recipes }))
-      .catch(err => console.error(err));
-  }
-
-  generateRecipes() {
-    if (this.state.recipes.length > 0) {
-      const recipeArr = this.state.recipes.map(index => {
-        return <RecipeList recipe={index} key={index.recipeId} />;
+      .then(data => {
+        this.setState(state => ({ favoriteRecipes: data }));
       });
-      return recipeArr;
-    }
   }
 
   render() {
+    const data = this.state.favoriteRecipes;
+    const display = data.map(element => (<FavRecipe key={element.recipeId} recipe={element}/>));
     return (
-      <div className="MyRecipe">
-        {this.generateRecipes()}
+      <div className="recipes-container">
+        {display}
       </div>
     );
   }
 }
 
-class RecipeList extends React.Component {
-  render() {
-    return (
-      <div className="recipe">
-        <h5>{this.props.recipe.recipeName}</h5>
+function FavRecipe(props) {
+  return (
+    <div className="card">
+      <div className="card-body row">
+        <div className="col-6">
+          <h5 className="card-title">{props.recipe.recipeName}</h5>
+          <div className="card-text">
+            <div className="category-serving">
+              <p>Category: {props.recipe.category}</p>
+              <p>Serving: {props.recipe.numberOfServings}</p>
+            </div>
+            <div className="button-container">
+              <i className="fas fa-plus mr-3"></i>
+              <i className="fas fa-share"></i>
+            </div>
+          </div>
+        </div>
+        <img className="picture col-6" src={props.recipe.image} />
       </div>
-    );
-  }
+    </div >
+  );
 }
-
-export default MyRecipe;

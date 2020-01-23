@@ -19,6 +19,35 @@ app.get('/api/health-check', (req, res, next) => {
     .catch(err => next(err));
 });
 
+/*     USERS login    */
+app.post('/api/users', (req, res, next) => {
+
+});
+
+/*     USERS Sign Up  */
+
+app.post('/api/users', (req, res, next) => {
+  const name = req.body.name;
+  const userName = req.body.userName;
+  const password = req.body.password;
+  const email = req.body.email;
+  const image = req.body.image;
+
+  const sql = `
+      SELECT *
+      FROM  "Users"
+  `;
+
+  db.query(sql)
+    .then(result => {
+      res.status(200).json(result.rows);
+    })
+    .catch(err => next(err));
+
+});
+
+/*   MAIN FEATURED PAGE  GET METHOD */
+
 app.get('/api/recipes', (req, res, next) => {
   const sql = `
           SELECT "recipeId",
@@ -35,6 +64,32 @@ app.get('/api/recipes', (req, res, next) => {
       res.status(200).json(result.rows);
     })
     .catch(err => next(err));
+});
+
+// get my recipe
+app.get('/api/fav', (req, res, next) => {
+  // if (!req.session.userId) {
+  //   res.json([]);
+  // } else {
+  // const params = [req.session.userId];
+  // const params = [req.body.userId];
+  const sql = `
+      select  "r"."recipeName",
+              "r"."recipeId",
+            "r"."image",
+            "r"."category",
+            "r"."numberOfServings"
+          from "Recipes" as "r"
+          join "FavoriteRecipes" as "f" using ("recipeId")
+          where "f"."userId" = 1;`;
+  db.query(sql)
+    .then(response => {
+      res.json(response.rows);
+    })
+    .catch(err => {
+      next(err);
+    });
+  // }
 });
 
 app.use('/api', (req, res, next) => {

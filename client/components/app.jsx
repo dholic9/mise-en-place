@@ -1,46 +1,41 @@
 import React from 'react';
-import { BrowserRouter as Router, Route, Switch, withRouter } from 'react-router-dom';
-import Button from './button';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
 import AppContext from '../lib/context';
-import IntroPage from './intro-page';
+import TopBar from './top-bar';
+import MyRecipes from './my-recipes';
+import Login from './login';
 
 export default class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      message: null,
-      isLoading: true,
+      user: null,
       isButtonClicked: false
     };
     this.handleClick = this.handleClick.bind(this);
+    this.handleUserLogin = this.handleUserLogin.bind(this);
   }
 
   handleClick() {
     this.setState(state => ({ isButtonClicked: !state.isButtonClicked }));
   }
 
+  handleUserLogin(user) {
+    console.log('user passed in: ', user);
+  }
+
   render() {
     const context = {
-      handleClick: this.handleClick
+      user: this.state.user,
+      handleClick: this.handleClick,
+      handleUserLogin: this.handleUserLogin
     };
-
-    let color;
-    if (this.state.isButtonClicked) {
-      color = 'red';
-    } else {
-      color = 'green';
-    }
     return (
       <AppContext.Provider value={context}>
-        <Router
-          forceRefresh={true}>
-          <div className="container">
-            <div>{color}
-              <Button></Button>
-            </div>
-            <Route exact path="/intro" component={IntroPage}/>
-          </div>
-
+        <Router forceRefresh={true}>
+          <TopBar/>
+          <Route exact path="/myRecipes" component={MyRecipes}/>
+          <Route exact path="/login" component={Login}/>
         </Router>
       </AppContext.Provider>
     );

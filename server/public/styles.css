@@ -1,8 +1,45 @@
-#root{
-  background-color: aqua;
+.title{
+  position: fixed;
+  top: 0;
+  overflow: hidden;
+  width: 104%;
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+.picture{
+  height: 150px;
+  width: 30px;
+  object-fit: cover;
+}
+.fa-bars{
+  cursor: pointer;
+}
+.recipes-container{
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  margin-left: 2%;
+  margin-top: 20%;
+}
+.button-container{
+  font-size: 2rem;
+}
+.button-container .fas{
+ color: tomato;
+ cursor: pointer;
 }
 
-.recipe{
-  border: 2px solid black;
-  width: 50vw;
+.ratatouille{
+  background-image: url("/images/ratatouille.jpg");
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position-x: 75%;
+  object-fit: cover;
+  height: 100vh;
+  width:100%;
+}
+
+.title{
+  background-color: rgba(0,0,0,0.4);
 }
