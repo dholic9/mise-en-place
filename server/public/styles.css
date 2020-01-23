@@ -1,3 +1,34 @@
+.title{
+  position: fixed;
+  top: 0;
+  overflow: hidden;
+  width: 104%;
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+.picture{
+  height: 150px;
+  width: 30px;
+  object-fit: cover;
+}
+.fa-bars{
+  cursor: pointer;
+}
+.recipes-container{
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  margin-left: 2%;
+  margin-top: 20%;
+}
+.button-container{
+  font-size: 2rem;
+}
+.button-container .fas{
+ color: tomato;
+ cursor: pointer;
+}
+
 .ratatouille{
   background-image: url("/images/ratatouille.jpg");
   background-position: center;

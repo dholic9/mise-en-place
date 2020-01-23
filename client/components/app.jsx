@@ -1,7 +1,8 @@
 import React from 'react';
-import { BrowserRouter as Router, Route, Switch, withRouter } from 'react-router-dom';
-import Button from './button';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
 import AppContext from '../lib/context';
+import TopBar from './top-bar';
+import MyRecipes from './my-recipes';
 import Login from './login';
 
 export default class App extends React.Component {
@@ -31,9 +32,9 @@ export default class App extends React.Component {
     };
     return (
       <AppContext.Provider value={context}>
-        <Router
-          forceRefresh={true}
-        >
+        <Router forceRefresh={true}>
+          <TopBar/>
+          <Route exact path="/myRecipes" component={MyRecipes}/>
           <Route exact path="/login" component={Login}/>
         </Router>
       </AppContext.Provider>
