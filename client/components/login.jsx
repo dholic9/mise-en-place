@@ -48,7 +48,7 @@ export default class Login extends React.Component {
           <img src="/images/logo1.png" height="150" width="200" alt="loading"/>
 
         </div>
-        <div className="row pt-4 mt-5 justify-content-around text-light ">
+        <div className="row pt-4 mt-5 justify-content-around text-light  ">
           <h1>Login</h1>
           <div className="col-12 ">
             <form onSubmit={this.handleUserSubmit} className="input-group  flex-column">

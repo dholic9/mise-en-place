@@ -159,8 +159,8 @@ export default class SignUp extends React.Component {
                 <Link to="/login">
                   <button
                     type="button"
-                    className="btn btn-primary rounded my-2">
-                  Cancel
+                    className="btn btn-secondary rounded my-2">
+                  Back to Login Page
                   </button>
                 </Link>
               </div>
