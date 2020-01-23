@@ -1,4 +1,5 @@
 import React from 'react';
+import TopBar from './top-bar';
 import RecipeList from './recipe-list-item';
 
 class PublicPage extends React.Component {
@@ -31,9 +32,13 @@ class PublicPage extends React.Component {
 
   render() {
     return (
-      <div className="my-recipe">
-        {this.generateRecipes()}
-      </div>
+      <React.Fragment>
+        <TopBar/>
+        <div className="my-recipe">
+          {this.generateRecipes()}
+        </div>
+      </React.Fragment>
+
     );
   }
 }

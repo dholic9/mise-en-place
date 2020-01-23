@@ -1,5 +1,14 @@
 import React from 'react';
-import Button from './button';
+import ReactDOM from 'react-dom';
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link,
+  useParams
+} from 'react-router-dom';
+import MyRecipes from './my-recipes';
+import Login from './login';
 import AppContext from '../lib/context';
 import PublicPage from './public-page';
 import RecipeDetailPage from './recipe-detail-page';
@@ -8,7 +17,7 @@ export default class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      user: null,
+      userId: null,
       isButtonClicked: false
     };
     this.handleClick = this.handleClick.bind(this);
@@ -30,22 +39,26 @@ export default class App extends React.Component {
     })
       .then(res => res.json())
       .then(data => {
-        console.log('data', data);
-      });
+        this.setState({ userId: data });
+      })
+      .catch(err => console.error(err));
+  }
+
+  componentDidMount() {
 
   }
 
   render() {
-    console.log(history);
+
     const context = {
       user: this.state.user,
       handleClick: this.handleClick,
       handleUserLogin: this.handleUserLogin
     };
+
     return (
       <AppContext.Provider value={context}>
         <Router forceRefresh={true}>
-          <TopBar/>
           <Route exact path="/myRecipes" component={MyRecipes}/>
           <Route exact path="/login" component={Login}/>
           <Route exact path="/public-page" component={PublicPage}/>
