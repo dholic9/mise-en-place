@@ -66,6 +66,32 @@ app.get('/api/recipes', (req, res, next) => {
     .catch(err => next(err));
 });
 
+// get my recipe
+app.get('/api/fav', (req, res, next) => {
+  // if (!req.session.userId) {
+  //   res.json([]);
+  // } else {
+  // const params = [req.session.userId];
+  // const params = [req.body.userId];
+  const sql = `
+      select  "r"."recipeName",
+              "r"."recipeId",
+            "r"."image",
+            "r"."category",
+            "r"."numberOfServings"
+          from "Recipes" as "r"
+          join "FavoriteRecipes" as "f" using ("recipeId")
+          where "f"."userId" = 1;`;
+  db.query(sql)
+    .then(response => {
+      res.json(response.rows);
+    })
+    .catch(err => {
+      next(err);
+    });
+  // }
+});
+
 app.use('/api', (req, res, next) => {
   next(new ClientError(`cannot ${req.method} ${req.originalUrl}`, 404));
 });
