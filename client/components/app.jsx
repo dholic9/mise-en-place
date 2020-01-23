@@ -1,8 +1,8 @@
 import React from 'react';
-import { BrowserRouter as Router, Route, Switch, withRouter } from 'react-router-dom';
-import Button from './button';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
 import AppContext from '../lib/context';
-import IntroPage from './intro-page';
+import TopBar from './top-bar';
+import MyRecipes from './my-recipes';
 
 export default class App extends React.Component {
   constructor(props) {
@@ -21,26 +21,14 @@ export default class App extends React.Component {
 
   render() {
     const context = {
-      handleClick: this.handleClick
-    };
 
-    let color;
-    if (this.state.isButtonClicked) {
-      color = 'red';
-    } else {
-      color = 'green';
-    }
+    };
     return (
       <AppContext.Provider value={context}>
-        <Router
-          forceRefresh={true}>
-          <div className="container">
-            <div>{color}
-              <Button></Button>
-            </div>
-            <Route exact path="/intro" component={IntroPage}/>
-          </div>
+        <Router>
+          <TopBar/>
 
+          <Route exact path="/myRecipes" component={MyRecipes}/>
         </Router>
       </AppContext.Provider>
     );
