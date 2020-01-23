@@ -19,6 +19,35 @@ app.get('/api/health-check', (req, res, next) => {
     .catch(err => next(err));
 });
 
+/*     USERS login    */
+app.post('/api/users', (req, res, next) => {
+
+});
+
+/*     USERS Sign Up  */
+
+app.post('/api/users', (req, res, next) => {
+  const name = req.body.name;
+  const userName = req.body.userName;
+  const password = req.body.password;
+  const email = req.body.email;
+  const image = req.body.image;
+
+  const sql = `
+      SELECT *
+      FROM  "Users"
+  `;
+
+  db.query(sql)
+    .then(result => {
+      res.status(200).json(result.rows);
+    })
+    .catch(err => next(err));
+
+});
+
+/*   MAIN FEATURED PAGE  GET METHOD */
+
 app.get('/api/recipes', (req, res, next) => {
   const sql = `
           SELECT "recipeId",

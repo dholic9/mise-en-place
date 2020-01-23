@@ -1,4 +1,5 @@
 import React from 'react';
+import RecipeList from './recipe-list-item'
 
 class PublicPage extends React.Component {
   constructor(props) {
@@ -30,22 +31,13 @@ class PublicPage extends React.Component {
 
   render() {
     return (
-      <div className="MyRecipe">
+      <div className="my-recipe">
         {this.generateRecipes()}
       </div>
     );
   }
 }
 
-class RecipeList extends React.Component {
-  render() {
-    return (
-      <div className="recipe" >
-        <img src={this.props.recipe.image} alt={this.props.recipe.name} className="image"/>
-        <h5 className="recipeInfo"><i className="fas fa-star"></i>{this.props.recipe.recipeName}</h5>
-      </div>
-    );
-  }
-}
+
 
 export default PublicPage;

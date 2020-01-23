@@ -2,18 +2,35 @@
   height: 100vmin;
 }
 
-.recipeInfo{
+my-recipe{
+  width: 100%;
+}
+
+.recipe-info{
   bottom: 50px;
   font-size: x-large;
   position: relative;
   color: black;
   text-shadow: -1px 0 white, 0 1px white, 1px 0 white, 0 -1px white;
   left: 25px;
+  width: fit-content;
 }
 
 .image{
-  float: left;
-  width: 100vmin;
+  width: 100%;
   height: 100vmin;
+}
+.ratatouille{
+  background-image: url("/images/ratatouille.jpg");
+  background-position: center;
   background-size: cover;
+  background-repeat: no-repeat;
+  background-position-x: 75%;
+  object-fit: cover;
+  height: 100vh;
+  width:100%;
+}
+
+.title{
+  background-color: rgba(0,0,0,0.4);
 }
