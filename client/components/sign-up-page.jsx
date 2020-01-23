@@ -58,21 +58,21 @@ export default class SignUp extends React.Component {
 
   handleUserSubmit() {
     event.preventDefault();
-    // const user = {
-    //    userName: this.state.userName,
-    //    password: this.state.password
-    // };
+    if (this.state.password !== this.state.passwordVerify) {
+      return window.alert('Passwords do not Match');
+    }
 
   }
 
   render() {
     return (
       <div className="container d-flex ratatouille flex-column ">
-        <div className="row justify-content-center  mt-2 mb-5">
+        <div className="row justify-content-center  mt-2 mb-3">
           <img src="/images/logo1.png" height="150" width="200" alt="loading" />
 
         </div>
-        <div className="row pt-4 mt-5 justify-content-around  ">
+        <div className="row  mt-5 justify-content-around  ">
+          SIGNUP
           <div className="col-12 ">
             <form onSubmit={this.handleUserSubmit} className="input-group  flex-column">
               <div className="form-group my-4">
