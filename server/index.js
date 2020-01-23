@@ -71,8 +71,7 @@ app.get('/api/fav', (req, res, next) => {
   // if (!req.session.userId) {
   //   res.json([]);
   // } else {
-  // const params = [req.session.userId];
-  // const params = [req.body.userId];
+  //   const params = [req.session.userId];
   const sql = `
       select  "r"."recipeName",
               "r"."recipeId",
@@ -90,6 +89,51 @@ app.get('/api/fav', (req, res, next) => {
       next(err);
     });
   // }
+});
+
+app.post('/api/mealplan', (req, res, next) => {
+  const userId = req.body.userId;
+  const recipeId = req.body.recipeId;
+  if (!userId) {
+    next(new ClientError('please sign in to add to meal plan', 400));
+  } else {
+    const sql = `
+      select "recipeId"
+        from "Recipes"
+        where "recipeId" = $1`;
+    const params = [recipeId];
+    db.query(sql, params)
+      .then(response => {
+        if (!response.rows.length) {
+          throw new ClientError('cannot add to meal plan with a non-existing recipe', 400);
+        } else {
+          const sql = `
+          select "recipeId"
+          from "MealPlan"
+          where "userId" = $1 and "recipeId" = $2`;
+          const params = [userId, recipeId];
+          db.query(sql, params)
+            .then(response => {
+              if (response.rows.length) {
+                throw new ClientError('meal plan already exists', 400);
+              } else {
+                const sql = `
+                    insert into "MealPlan"("userId", "recipeId")
+                    values($1,$2)
+                    returning *`;
+                const params = [userId, recipeId];
+                db.query(sql, params)
+                  .then(response => {
+                    res.status(201).json(response.rows);
+                  })
+                  .catch(err => next(err));
+              }
+            })
+            .catch(err => { next(err); });
+        }
+      })
+      .catch(err => { next(err); });
+  }
 });
 
 app.use('/api', (req, res, next) => {
