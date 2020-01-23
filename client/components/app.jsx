@@ -4,6 +4,8 @@ import AppContext from '../lib/context';
 import TopBar from './top-bar';
 import MyRecipes from './my-recipes';
 import Login from './login';
+import PublicPage from './public-page';
+import RecipeDetailPage from './recipe-detail-page';
 
 export default class App extends React.Component {
   constructor(props) {
@@ -36,6 +38,8 @@ export default class App extends React.Component {
           <TopBar/>
           <Route exact path="/myRecipes" component={MyRecipes}/>
           <Route exact path="/login" component={Login}/>
+          <Route exact path="/public-page" component={PublicPage}/>
+          <Route exact path="/recipe-detail-page/:recipeId" component={RecipeDetailPage}/>
         </Router>
       </AppContext.Provider>
     );
