@@ -47,23 +47,23 @@ class RecipeDetailPage extends React.Component {
   render() {
     const recipe = this.state.recipe;
     return (
-        <div className="recipeContainer">
-          <TopBar displayIcon={true} title={this.state.recipe.recipeName} />
-          <div className="recipeInfo text-center">
-            <div className="category">Category: {recipe.category}</div>
-            <div className="servings">Servings: {recipe.numberOfServings}</div>
-          </div>
-          <i className="fas fa-star favStar"></i>
-          <img src={recipe.image} alt={recipe.recipeName} className="image" />
-          <div className="ingredientList">
-            <div className="text-center border-bottom border-dark m-0">Ingredients</div>
-            {this.generateIngredients()}
-          </div>
-          <div className="instructionList">
-            <div className="text-center border-bottom border-dark m-0">Instructions</div>
-            {this.generateInstructions()}
-          </div>
+      <div className="recipeContainer">
+        <TopBar displayIcon={true} title={this.state.recipe.recipeName} />
+        <div className="recipeInfo text-center">
+          <div className="category">Category: {recipe.category}</div>
+          <div className="servings">Servings: {recipe.numberOfServings}</div>
         </div>
+        <i className="fas fa-star favStar"></i>
+        <img src={recipe.image} alt={recipe.recipeName} className="image" />
+        <div className="ingredientList">
+          <div className="text-center border-bottom border-dark m-0">Ingredients</div>
+          {this.generateIngredients()}
+        </div>
+        <div className="instructionList">
+          <div className="text-center border-bottom border-dark m-0">Instructions</div>
+          {this.generateInstructions()}
+        </div>
+      </div>
     );
   }
 }
