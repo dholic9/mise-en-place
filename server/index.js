@@ -90,11 +90,12 @@ app.post('/api/users/create', (req, res, next) => {
                   VALUES ($1, $2, $3, $4, $5)
                   RETURNING *
       `;
-      db.query(creatingSQL, values)
-        .then(result => {
-          res.status(201).json(result.rows[0]);
-        });
-
+      return (
+        db.query(creatingSQL, values)
+          .then(result => {
+            res.status(201).json(result.rows[0]);
+          })
+      );
     })
     .catch(err => next(err));
 
@@ -120,7 +121,8 @@ app.get('/api/recipes', (req, res, next) => {
     .catch(err => next(err));
 });
 
-// get my recipe
+/*   GET my Recipes   */
+
 app.get('/api/fav', (req, res, next) => {
   // if (!req.session.userId) {
   //   res.json([]);
