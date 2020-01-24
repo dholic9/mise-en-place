@@ -89,8 +89,7 @@ export default class App extends React.Component {
           <Route exact path="/mealplan" component={MealPlan} />
           <Route exact path="/sign-up" component={SignUp}/>
           <Route exact path="/public-page" component={PublicPage}/>
-          <Route exact path="/recipe-detail-page/:recipeId" component={RecipeDetailPage}/>
-
+          <Route path="/recipe-detail-page/:recipeId" component={RecipeDetailPage}/>
         </Router>
       </AppContext.Provider>
     );

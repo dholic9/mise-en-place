@@ -6,7 +6,7 @@
   width: 100%;
 }
 
-.recipe-info{
+.recipeName{
   bottom: 50px;
   font-size: x-large;
   position: relative;
@@ -22,6 +22,7 @@
 }
 
 .title{
+  z-index: 1;
   position: fixed;
   top: 0;
   overflow: hidden;
@@ -63,5 +64,38 @@
   object-position: bottom;
   height: 100vh;
   width:100%;
+}
 
+.recipeContainer{
+  top: 68px;
+  position: absolute;
+}
+
+.ingredient{
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.quantity{
+  text-align: center;
+}
+
+.ing{
+  width: 33%;
+}
+
+.oddIngredient{
+  background-color: violet;
+}
+
+.evenIngredient{
+  background-color: yellowgreen;
+}
+
+.instructionOrder{
+  width: 10%;
+}
+
+.unit{
+  width: 80%;
 }
