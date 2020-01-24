@@ -2,6 +2,7 @@ import React from 'react';
 import IngredientListItem from './ingredient-list-item';
 import InstructionListItem from './instruction-list-item';
 import TopBar from './top-bar';
+import NavBar from './nav-bar';
 
 class RecipeDetailPage extends React.Component {
   constructor(props) {
@@ -62,6 +63,7 @@ class RecipeDetailPage extends React.Component {
           <div className="text-center border-bottom border-dark m-0">Instructions</div>
           {this.generateInstructions()}
         </div>
+        <NavBar/>
       </div>
     );
   }

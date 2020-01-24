@@ -1,6 +1,7 @@
 import React from 'react';
 import TopBar from './top-bar';
 import RecipeList from './recipe-list-item';
+import NavBar from './nav-bar';
 
 class PublicPage extends React.Component {
   constructor(props) {
@@ -37,6 +38,7 @@ class PublicPage extends React.Component {
         <div className="my-recipe">
           {this.generateRecipes()}
         </div>
+        <NavBar></NavBar>
       </React.Fragment>
 
     );
