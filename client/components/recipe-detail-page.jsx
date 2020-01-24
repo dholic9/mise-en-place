@@ -47,25 +47,23 @@ class RecipeDetailPage extends React.Component {
   render() {
     const recipe = this.state.recipe;
     return (
-      <>
-        <TopBar title={recipe.recipeName} displayIcon={true} />
         <div className="recipeContainer">
-          <div className="recipeInfo">
+          <TopBar displayIcon={true} title={this.state.recipe.recipeName} />
+          <div className="recipeInfo text-center">
             <div className="category">Category: {recipe.category}</div>
             <div className="servings">Servings: {recipe.numberOfServings}</div>
           </div>
           <i className="fas fa-star favStar"></i>
           <img src={recipe.image} alt={recipe.recipeName} className="image" />
           <div className="ingredientList">
-            Ingredients
+            <div className="text-center border-bottom border-dark m-0">Ingredients</div>
             {this.generateIngredients()}
           </div>
           <div className="instructionList">
-            Instructions
+            <div className="text-center border-bottom border-dark m-0">Instructions</div>
             {this.generateInstructions()}
           </div>
         </div>
-      </>
     );
   }
 }

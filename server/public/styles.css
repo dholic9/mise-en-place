@@ -31,6 +31,7 @@
   font-weight: bold;
   z-index: 1;
 }
+
 .picture{
   height: 150px;
   width: 30px;
@@ -56,6 +57,7 @@
 
 .ratatouille{
   background-image: url("/images/ratatouille.jpg");
+
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
@@ -103,4 +105,14 @@
 
 .favStar{
   position: absolute;
+}
+
+.icon{
+  cursor: pointer;
+  position: absolute;
+  right:0;
+  top: 2.5vh;
+}
+.clickable{
+  cursor: pointer;
 }
