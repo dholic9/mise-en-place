@@ -219,8 +219,8 @@ app.get('/api/mealplan', (req, res, next) => {
   }
 });
 
-//Recipe detail page
-app.get('/api/recipe-detail-page/:recipeId', (req, res, next)=>{
+// Recipe detail page
+app.get('/api/recipe-detail-page/:recipeId', (req, res, next) => {
   const sql = `
   select "r"."recipeName",
          "r"."category",
@@ -247,17 +247,16 @@ app.get('/api/recipe-detail-page/:recipeId', (req, res, next)=>{
          )) as "instructions"
          from "Recipes" as "r"
          where "r"."recipeId" = ${req.params.recipeId}
-         group by "r"."recipeId"`
-  
-    
-  db.query(sql)
-  .then(response=>{
-    res.json(response.rows)
-  })
-  .catch(err=>next(err))
-})
+         group by "r"."recipeId"`;
 
-//Recipe detail page^
+  db.query(sql)
+    .then(response => {
+      res.json(response.rows);
+    })
+    .catch(err => next(err));
+});
+
+// Recipe detail page^
 
 app.use('/api', (req, res, next) => {
   next(new ClientError(`cannot ${req.method} ${req.originalUrl}`, 404));
