@@ -8,6 +8,7 @@ import {
   Redirect
 } from 'react-router-dom';
 import MyRecipes from './my-recipes';
+import MealPlan from './meal-plan-page';
 import Login from './login';
 import AppContext from '../lib/context';
 import PublicPage from './public-page';
