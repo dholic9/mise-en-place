@@ -32,15 +32,15 @@ export default class Login extends React.Component {
     });
   }
 
-  handleUserSubmit() {
+  handleUserSubmit(event) {
     event.preventDefault();
     const user = {
       userName: this.state.userName,
       password: this.state.password
     };
     this.context.handleUserLogin(user)
-      .then(() => this.props.history.push('/public-page'))
-      .catch(() => console.log('stayOnPage'));
+      .then(() => { this.props.history.push('/public-page'); });
+
   }
 
   render() {
