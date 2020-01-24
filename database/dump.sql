@@ -210,7 +210,7 @@ CREATE TABLE public."Users" (
     "userName" text NOT NULL,
     email text NOT NULL,
     password text NOT NULL,
-    image text NOT NULL,
+    image text,
     "createdAt" timestamp(6) with time zone DEFAULT now() NOT NULL
 );
 
@@ -269,9 +269,9 @@ ALTER TABLE ONLY public."Users" ALTER COLUMN "userId" SET DEFAULT nextval('publi
 
 COPY public."FavoriteRecipes" ("userId", "recipeId") FROM stdin;
 2	3
-1	3
 1	4
 2	1
+1	1
 \.
 
 
@@ -350,6 +350,10 @@ COPY public."Instructions" ("instructionId", "recipeId", "instructionDetail", "i
 COPY public."MealPlan" ("userId", "recipeId") FROM stdin;
 1	4
 2	1
+3	4
+4	4
+4	3
+1	1
 \.
 
 
@@ -393,10 +397,10 @@ COPY public."RecipeIngredients" ("ingredientId", "recipeId", quantity, unit, "cr
 --
 
 COPY public."Recipes" ("recipeId", "recipeName", category, "numberOfServings", "createdBy", image, "createdAt") FROM stdin;
-3	Scrambled Eggs	Breakfast	2	Patrick	test	2020-01-23 08:00:00+00
-4	Crepes	Breakfast	4	Patrick	/images/crepes.jpg	2020-01-22 00:34:02.745628+00
 1	Eggs Benedict	Breakfast	4	Patrick	/images/eggsBenedict.jpg	2020-01-21 08:00:00+00
 2	Mac and Cheese	Dinner	4	Patrick	/images/macAndCheese.jpg	2020-01-22 08:00:00+00
+4	Crepes	Breakfast	4	Patrick	/images/Crepes.jpg	2020-01-22 00:34:02.745628+00
+3	Scrambled Eggs	Breakfast	2	Patrick	/images/scrambleEggs.jpeg	2020-01-23 08:00:00+00
 \.
 
 
@@ -407,6 +411,9 @@ COPY public."Recipes" ("recipeId", "recipeName", category, "numberOfServings", "
 COPY public."Users" ("userId", name, "userName", email, password, image, "createdAt") FROM stdin;
 1	Patrick	Star	thisIsPatrick@gmail.com	star	/images/patrickstar.jpg	2020-01-22 00:36:43.874184+00
 2	Spongebob	Sponge	thisIsSpongebob@gmail.com	sponge	/images/spongebob.jpg	2020-01-22 00:37:43.707564+00
+8	asdf	asdf	asdf	asdf	\N	2020-01-24 00:38:22.466803+00
+9	asfddfs	12	asdf	123	\N	2020-01-24 00:41:08.835707+00
+10	1234	1234	1	1	\N	2020-01-24 00:44:13.718546+00
 \.
 
 
@@ -435,7 +442,7 @@ SELECT pg_catalog.setval('public."Recipes_recipeId_seq"', 1, false);
 -- Name: Users_userId_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('public."Users_userId_seq"', 5, true);
+SELECT pg_catalog.setval('public."Users_userId_seq"', 10, true);
 
 
 --
@@ -480,4 +487,3 @@ GRANT ALL ON SCHEMA public TO PUBLIC;
 --
 -- PostgreSQL database dump complete
 --
-
