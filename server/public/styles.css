@@ -64,3 +64,28 @@
   width:100%;
 }
 
+.recipeContainer{
+  top: 68px;
+  position: absolute;
+}
+
+.ingredient{
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.quantity{
+  text-align: center;
+}
+
+.ing{
+  width: 33%;
+}
+
+.oddIngredient{
+  background-color: violet;
+}
+
+.evenIngredient{
+  background-color: yellowgreen;
+}

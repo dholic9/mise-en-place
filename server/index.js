@@ -124,7 +124,7 @@ app.get('/api/recipe-detail-page/:recipeId', (req, res, next) => {
 
   db.query(sql)
     .then(response => {
-      res.json(response.rows);
+      res.json(response.rows[0]);
     })
     .catch(err => next(err));
 });
