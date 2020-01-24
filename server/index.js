@@ -98,6 +98,7 @@ app.post('/api/users/create', (req, res, next) => {
           .catch(err => next(err))
       );
     })
+    .then(data => { console.log('data', data); })
     .catch(err => next(err));
 
 });
