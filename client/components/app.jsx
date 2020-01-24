@@ -45,8 +45,8 @@ export default class App extends React.Component {
           return console.log('error');
         }
         this.setState({ user: data });
-      })
-      .catch(err => console.error(err));
+      });
+
   }
 
   handleUserSignup(user) {
@@ -80,7 +80,7 @@ export default class App extends React.Component {
     console.log('context', context);
     return (
       <AppContext.Provider value={context}>
-        <Router forceRefresh={true}>
+        <Router >
           <Route exact path='/'>
             <Redirect to='/login'/>
           </Route>
