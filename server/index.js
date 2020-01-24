@@ -120,13 +120,13 @@ app.get('/api/recipes', (req, res, next) => {
     .catch(err => next(err));
 });
 
-// get my recipe
+/*   FAV RECIPES  GET METHOD */
 app.get('/api/fav', (req, res, next) => {
-  // if (!req.session.userId) {
-  //   res.json([]);
-  // } else {
-  //   const params = [req.session.userId];
-  const sql = `
+  if (!req.session.userId) {
+    res.json([]);
+  } else {
+    const params = [req.session.userId];
+    const sql = `
       select  "r"."recipeName",
               "r"."recipeId",
               "r"."image",
@@ -134,19 +134,19 @@ app.get('/api/fav', (req, res, next) => {
               "r"."numberOfServings"
          from "Recipes" as "r"
          join "FavoriteRecipes" as "f" using ("recipeId")
-        where "f"."userId" = 1;`;
-  db.query(sql)
-    .then(response => {
-      res.json(response.rows);
-    })
-    .catch(err => {
-      next(err);
-    });
-  // }
+        where "f"."userId" = $1;`;
+    db.query(sql, params)
+      .then(response => {
+        res.json(response.rows);
+      })
+      .catch(err => {
+        next(err);
+      });
+  }
 });
 
 app.post('/api/mealplan', (req, res, next) => {
-  const userId = req.body.userId;
+  const userId = req.session.userId;
   const recipeId = req.body.recipeId;
   if (!userId) {
     next(new ClientError('please sign in to add to meal plan', 400));
