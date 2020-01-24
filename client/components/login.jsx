@@ -46,9 +46,8 @@ export default class Login extends React.Component {
   render() {
     return (
       <div className="container d-flex ratatouille flex-column ">
-        <div className="row justify-content-center  mt-2 mb-5">
+        <div className="row justify-content-center login-title mb-5">
           <img src="/images/logo1.png" height="150" width="200" alt="loading"/>
-
         </div>
         <div className="row pt-4 mt-5 justify-content-around text-light  ">
           <h1>Login</h1>
@@ -66,11 +65,10 @@ export default class Login extends React.Component {
                   />
                 </div>
               </div>
-
               <div className="form-group my-4 ">
                 <div className="input-group align-items-center">
                   <input
-                    type="text"
+                    type="password"
                     placeholder="Password"
                     className="form-control w-100"
                     required
@@ -78,7 +76,6 @@ export default class Login extends React.Component {
                     onChange={this.handlePasswordChange}/>
                 </div>
               </div>
-
               <div className="input-group-append flex-column w-100 justify-content-center align-items-center">
                 {/* <Link to="/public-page"> */}
                 <button
@@ -90,21 +87,17 @@ export default class Login extends React.Component {
                 <Link to="/sign-up">
                   <button
                     type="button"
-                    className="btn btn-primary rounded my-2">
+                    className="btn btn-light rounded my-2">
                       Sign Up
                   </button>
                 </Link>
-
               </div>
             </form>
           </div>
         </div>
       </div>
-
     );
-
   }
-
 }
 
 Login.contextType = AppContext;
