@@ -5,7 +5,7 @@ class RecipeList extends React.Component {
   render() {
     return (
       <Link to={`/recipe-detail-page/${this.props.recipe.recipeId}`}>
-        <div className="recipe" >
+        <div className=" recipe" >
           <img src={this.props.recipe.image} alt={this.props.recipe.name} className="image clickable" />
           <h5 className="recipeName">{this.props.recipe.recipeName}</h5>
         </div>
