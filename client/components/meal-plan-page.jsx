@@ -26,7 +26,11 @@ export default class MealPlan extends React.Component {
 
   render() {
     const data = this.state.mealPlan;
-    const display = data.map(element => (<MealPlanRecipe key={element.recipeId} recipe={element}/>));
+    const display = data.map(element =>
+      (<MealPlanRecipe
+        key={element.recipeId}
+        recipe={element}
+      />));
     return (
       <React.Fragment>
         <TopBar displayIcon={false} title={'Meal Plan'}/>

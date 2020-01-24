@@ -30,12 +30,6 @@ app.post('/api/users', (req, res, next) => {
           WHERE "userName" = $1
             AND "password" = $2;
   `;
-  if (userName.length < 4) {
-    return res.status(400).json({ error: 'User Name input was invalid' });
-  }
-  if (password.length < 4) {
-    return res.status(400).json({ error: 'Password was invalid' });
-  }
 
   db.query(sql, values)
     .then(result => {
@@ -50,12 +44,12 @@ app.post('/api/users', (req, res, next) => {
     .catch(err => next(err));
 });
 
-/*     USERS Sign Up  */
+/*     POST USERS Sign Up  */
 
 app.post('/api/users/create', (req, res, next) => {
 
   if (!req.body.name || !req.body.userName || !req.body.email || !req.body.password) {
-    return res.status(400).json({ error: 'invalid user inputs' });
+    return res.status(401).json({ error: 'invalid user inputs' });
   }
   const user = {
     name: req.body.name,
@@ -64,18 +58,16 @@ app.post('/api/users/create', (req, res, next) => {
     email: req.body.email,
     image: req.body.image
   };
-
   const sql = `
       SELECT *
       FROM  "Users"
   `;
-
   db.query(sql)
     .then(result => {
       const usersDb = result.rows;
       usersDb.map(index => {
         if (index.userName === user.userName || index.email === user.email) {
-          return res.status(400).json({ error: 'User already exists' });
+          return res.status(402).json({ error: 'User already exists' });
         }
       });
       const values = [

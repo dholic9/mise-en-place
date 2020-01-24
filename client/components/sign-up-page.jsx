@@ -2,10 +2,7 @@ import React from 'react';
 import AppContext from '../lib/context';
 import {
   BrowserRouter as Router,
-  Switch,
-  Route,
-  Link,
-  useParams
+  Link
 } from 'react-router-dom';
 
 export default class SignUp extends React.Component {
@@ -67,8 +64,8 @@ export default class SignUp extends React.Component {
       email: this.state.email,
       password: this.state.password
     };
-    this.context.handleUserSignup(user);
-    // this.props.history.push('/login');
+    this.context.handleUserSignup(user)
+      .then(() => { this.props.history.push('/login'); });
   }
 
   render() {
@@ -76,9 +73,8 @@ export default class SignUp extends React.Component {
       <div className="container d-flex ratatouille flex-column ">
         <div className="row justify-content-center  mt-2 mb-3">
           <img src="/images/logo1.png" height="150" width="200" alt="loading" />
-
         </div>
-        <div className="row   justify-content-around text-light ">
+        <div className="row justify-content-around text-light ">
           <h1>Sign Up</h1>
           <div className="col-12 ">
             <form onSubmit={this.handleUserSubmit} className="input-group  flex-column">
@@ -94,7 +90,6 @@ export default class SignUp extends React.Component {
                   />
                 </div>
               </div>
-
               <div className="form-group my-4">
                 <div className="input-group  w-100 flex-column">
                   <input
@@ -107,7 +102,6 @@ export default class SignUp extends React.Component {
                   />
                 </div>
               </div>
-
               <div className="form-group my-4">
                 <div className="input-group  w-100 flex-column">
                   <input
@@ -120,12 +114,10 @@ export default class SignUp extends React.Component {
                   />
                 </div>
               </div>
-
               <div className="form-group my-4 ">
                 <div className="input-group align-items-center">
-                  {/* <p>Password</p> */}
                   <input
-                    type="text"
+                    type="password"
                     placeholder="Password"
                     className="form-control w-100"
                     required
@@ -133,12 +125,10 @@ export default class SignUp extends React.Component {
                     onChange={this.handlePasswordChange} />
                 </div>
               </div>
-
               <div className="form-group my-4">
                 <div className="input-group  w-100 flex-column">
-                  {/* <p>User Name</p> */}
                   <input
-                    type="text"
+                    type="password"
                     placeholder="Re-enter Password"
                     className="form-control w-100"
                     required
@@ -147,20 +137,16 @@ export default class SignUp extends React.Component {
                   />
                 </div>
               </div>
-
               <div className="input-group-append flex-column w-100 justify-content-center align-items-center">
-
-                {/* <Link to="/login"> */}
                 <button
                   type="submit"
                   className="btn btn-primary rounded my-2">
-                    Submit
+                    Create Account
                 </button>
-                {/* </Link> */}
                 <Link to="/login">
                   <button
                     type="button"
-                    className="btn btn-secondary rounded my-2">
+                    className="btn btn-light rounded my-2">
                   Back to Login Page
                   </button>
                 </Link>
@@ -169,11 +155,8 @@ export default class SignUp extends React.Component {
           </div>
         </div>
       </div>
-
     );
-
   }
-
 }
 
 SignUp.contextType = AppContext;
