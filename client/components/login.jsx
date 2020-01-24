@@ -1,5 +1,12 @@
 import React from 'react';
 import AppContext from '../lib/context';
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link,
+  useParams
+} from 'react-router-dom';
 
 export default class Login extends React.Component {
   constructor(props) {
@@ -26,24 +33,32 @@ export default class Login extends React.Component {
   }
 
   handleUserSubmit() {
-    console.log('submitted');
+    event.preventDefault();
+    const user = {
+      userName: this.state.userName,
+      password: this.state.password
+    };
+    this.context.handleUserLogin(user)
+      .then(() => this.props.history.push('/public-page'))
+      .catch(() => console.log('stayOnPage'));
   }
 
   render() {
     return (
-      <div className="container  ratatouille text-light">
-        <div className="row justify-content-center title mb-2">
+      <div className="container d-flex ratatouille flex-column ">
+        <div className="row justify-content-center  mt-2 mb-5">
           <img src="/images/logo1.png" height="150" width="200" alt="loading"/>
 
         </div>
-        <div className="row pt-4 mt-4 justify-content-around  ">
+        <div className="row pt-4 mt-5 justify-content-around text-light  ">
+          <h1>Login</h1>
           <div className="col-12 ">
-            <form onSubmit={this.handleUserSubmit} className="input-group flex-column">
+            <form onSubmit={this.handleUserSubmit} className="input-group  flex-column">
               <div className="form-group my-4">
-                <div className="input-group w-100 flex-column">
-                  <p>User Name</p>
+                <div className="input-group  w-100 flex-column">
                   <input
                     type="text"
+                    placeholder="User Name"
                     className="form-control w-100"
                     required
                     autoFocus
@@ -54,9 +69,9 @@ export default class Login extends React.Component {
 
               <div className="form-group my-4 ">
                 <div className="input-group align-items-center">
-                  <p>Password</p>
                   <input
                     type="text"
+                    placeholder="Password"
                     className="form-control w-100"
                     required
                     autoFocus
@@ -65,16 +80,21 @@ export default class Login extends React.Component {
               </div>
 
               <div className="input-group-append flex-column w-100 justify-content-center align-items-center">
+                {/* <Link to="/public-page"> */}
                 <button
                   type="submit"
                   className="btn btn-primary rounded my-2">
-                  Log In
+                    Log In
                 </button>
-                <button
-                  type="button"
-                  className="btn btn-primary rounded my-2">
-                    Sign Up
-                </button>
+                {/* </Link> */}
+                <Link to="/sign-up">
+                  <button
+                    type="button"
+                    className="btn btn-primary rounded my-2">
+                      Sign Up
+                  </button>
+                </Link>
+
               </div>
             </form>
           </div>
@@ -86,3 +106,5 @@ export default class Login extends React.Component {
   }
 
 }
+
+Login.contextType = AppContext;
