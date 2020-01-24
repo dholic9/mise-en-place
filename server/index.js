@@ -98,7 +98,6 @@ app.post('/api/users/create', (req, res, next) => {
           .catch(err => next(err))
       );
     })
-    .then(data => { console.log('data', data); })
     .catch(err => next(err));
 
 });
@@ -123,7 +122,7 @@ app.get('/api/recipes', (req, res, next) => {
     .catch(err => next(err));
 });
 
-/*  GET FAVORITE RECIPES  */
+/*   FAV RECIPES  GET METHOD */
 app.get('/api/fav', (req, res, next) => {
   if (!req.session.userId) {
     res.json([]);
@@ -150,8 +149,8 @@ app.get('/api/fav', (req, res, next) => {
 
 /*  POST MEAL PLAN  */
 app.post('/api/mealplan', (req, res, next) => {
-  const userId = req.session.userId;
-  const recipeId = req.body.recipeId;
+  const { userId } = req.session;
+  const { recipeId } = req.body;
   if (!userId) {
     next(new ClientError('please sign in to add to meal plan', 400));
   } else {
@@ -196,7 +195,6 @@ app.post('/api/mealplan', (req, res, next) => {
 
 /*  GET MEAL PLAN  */
 app.get('/api/mealplan', (req, res, next) => {
-  console.log(req.session.userId);
   if (!req.session.userId) {
     res.json([]);
   } else {
