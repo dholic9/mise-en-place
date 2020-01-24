@@ -33,21 +33,21 @@ export default class App extends React.Component {
 
   handleUserLogin(user) {
     console.log('user passed in: ', user);
-    fetch('api/users', {
+    return fetch('api/users', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
       },
       body: JSON.stringify(user)
     })
-      .then(res => res.json())
+      .then(res => res.ok ? res.json() : Promise.reject(new Error('Incorrect login information')))
       .then(data => {
         if (typeof data !== 'number') {
           return console.log('error');
         }
         this.setState({ user: data });
       })
-      .catch(err => console.error(err));
+      .catch(() => console.error('yo we catched'));
   }
 
   handleUserSignup(user) {
@@ -78,7 +78,6 @@ export default class App extends React.Component {
       handleUserLogin: this.handleUserLogin,
       handleUserSignup: this.handleUserSignup
     };
-    console.log('context', context);
     return (
       <AppContext.Provider value={context}>
         <Router forceRefresh={true}>
@@ -87,6 +86,7 @@ export default class App extends React.Component {
           </Route>
           <Route exact path="/myRecipes" component={MyRecipes}/>
           <Route exact path="/login" component={Login}/>
+          <Route exact path="/mealplan" component={MealPlan} />
           <Route exact path="/sign-up" component={SignUp}/>
           <Route exact path="/public-page" component={PublicPage}/>
           <Route exact path="/recipe-detail-page/:recipeId" component={RecipeDetailPage}/>
