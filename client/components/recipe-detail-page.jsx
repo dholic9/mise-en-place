@@ -53,7 +53,7 @@ class RecipeDetailPage extends React.Component {
           <div className="category">Category: {recipe.category}</div>
           <div className="servings">Servings: {recipe.numberOfServings}</div>
         </div>
-        <i className="fas fa-star favStar"></i>
+        <i className="fas fa-star favStar" ></i>
         <img src={recipe.image} alt={recipe.recipeName} className="image" />
         <div className="ingredientList">
           <div className="text-center border-bottom border-dark m-0">Ingredients</div>
