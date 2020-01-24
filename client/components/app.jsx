@@ -32,14 +32,14 @@ export default class App extends React.Component {
 
   handleUserLogin(user) {
     console.log('user passed in: ', user);
-    fetch('api/users', {
+    return fetch('api/users', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
       },
       body: JSON.stringify(user)
     })
-      .then(res => res.json())
+      .then(res => res.ok ? res.json() : Promise.reject(new Error('ligma')))
       .then(data => {
         if (typeof data !== 'number') {
           return console.log('error');
