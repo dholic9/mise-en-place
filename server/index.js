@@ -250,7 +250,7 @@ app.get('/api/recipe-detail-page/:recipeId', (req, res, next) => {
 /* ADD TO MY RECIPES */
 app.post('/api/fav', (req, res, next) => {
   const { recipeId } = req.body;
-  // const {userId} = req.session;
+  // const { userId } = req.session;
   const userId = 1;
   if (!userId) {
     next(new ClientError('please sign in to add to favorites', 400));
@@ -270,6 +270,7 @@ app.post('/api/fav', (req, res, next) => {
           const value = [userId, recipeId];
           db.query(sql, value)
             .then(response => {
+
               if (response.rows.length) {
                 throw new ClientError('recipe already saved to favorites', 400);
               } else {
@@ -279,7 +280,7 @@ app.post('/api/fav', (req, res, next) => {
                 const value = [userId, recipeId];
                 db.query(sql, value)
                   .then(response => {
-                    res.status(201).json(response.rows);
+                    return res.status(201).json(response.rows[0]);
                   })
                   .catch(err => next(err));
               }
