@@ -36,10 +36,11 @@ export default class MyRecipe extends React.Component {
     fetch('api/mealplan', init)
       .then(response => response.json())
       .then(result => {
-        window.alert('added to meal plan');
-      })
-      .catch(err => {
-        window.alert(err.error);
+        if (!result.error) {
+          window.alert('added to meal plan');
+        } else {
+          window.alert('result.error');
+        }
       });
   }
 
