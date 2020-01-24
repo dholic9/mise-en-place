@@ -38,8 +38,9 @@ export default class Login extends React.Component {
       userName: this.state.userName,
       password: this.state.password
     };
-    this.context.handleUserLogin(user);
-    this.props.history.push('/public-page');
+    this.context.handleUserLogin(user)
+      .then(() => this.props.history.push('/public-page'))
+      .catch(() => console.log('stayOnPage'));
   }
 
   render() {

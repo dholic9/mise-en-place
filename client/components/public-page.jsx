@@ -33,7 +33,7 @@ class PublicPage extends React.Component {
   render() {
     return (
       <React.Fragment>
-        <TopBar/>
+        <TopBar title={'Featured'} displayIcon={true}/>
         <div className="my-recipe">
           {this.generateRecipes()}
         </div>

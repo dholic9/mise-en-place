@@ -44,7 +44,7 @@ app.post('/api/users', (req, res, next) => {
       }
 
       req.session.userId = result.rows[0].userId;
-      console.log('req.session:', req.session);
+
       return res.status(200).json(result.rows[0].userId);
     })
     .catch(err => next(err));
@@ -53,7 +53,7 @@ app.post('/api/users', (req, res, next) => {
 /*     USERS Sign Up  */
 
 app.post('/api/users/create', (req, res, next) => {
-  console.log('req.session:', req.session);
+
   if (!req.body.name || !req.body.userName || !req.body.email || !req.body.password) {
     return res.status(400).json({ error: 'invalid user inputs' });
   }
@@ -90,11 +90,13 @@ app.post('/api/users/create', (req, res, next) => {
                   VALUES ($1, $2, $3, $4, $5)
                   RETURNING *
       `;
-      db.query(creatingSQL, values)
-        .then(result => {
-          res.status(201).json(result.rows[0]);
-        });
-
+      return (
+        db.query(creatingSQL, values)
+          .then(result => {
+            res.status(201).json(result.rows[0]);
+          })
+          .catch(err => next(err))
+      );
     })
     .catch(err => next(err));
 
@@ -129,12 +131,12 @@ app.get('/api/fav', (req, res, next) => {
     const sql = `
       select  "r"."recipeName",
               "r"."recipeId",
-              "r"."image",
-              "r"."category",
-              "r"."numberOfServings"
-         from "Recipes" as "r"
-         join "FavoriteRecipes" as "f" using ("recipeId")
-        where "f"."userId" = $1;`;
+            "r"."image",
+            "r"."category",
+            "r"."numberOfServings"
+          from "Recipes" as "r"
+          join "FavoriteRecipes" as "f" using ("recipeId")
+          where "f"."userId" = $1;`;
     db.query(sql, params)
       .then(response => {
         res.json(response.rows);
@@ -145,9 +147,10 @@ app.get('/api/fav', (req, res, next) => {
   }
 });
 
+/*  POST MEAL PLAN  */
 app.post('/api/mealplan', (req, res, next) => {
-  const userId = req.session.userId;
-  const recipeId = req.body.recipeId;
+  const { userId } = req.session;
+  const { recipeId } = req.body;
   if (!userId) {
     next(new ClientError('please sign in to add to meal plan', 400));
   } else {
@@ -187,6 +190,31 @@ app.post('/api/mealplan', (req, res, next) => {
         }
       })
       .catch(err => { next(err); });
+  }
+});
+
+/*  GET MEAL PLAN  */
+app.get('/api/mealplan', (req, res, next) => {
+  if (!req.session.userId) {
+    res.json([]);
+  } else {
+    const params = [req.session.userId];
+    const sql = `
+      select  "r"."recipeName",
+              "r"."recipeId",
+            "r"."image",
+            "r"."category",
+            "r"."numberOfServings"
+          from "Recipes" as "r"
+          join "MealPlan" as "f" using ("recipeId")
+          where "f"."userId" = $1;`;
+    db.query(sql, params)
+      .then(response => {
+        res.json(response.rows);
+      })
+      .catch(err => {
+        next(err);
+      });
   }
 });
 
