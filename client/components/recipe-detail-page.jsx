@@ -1,6 +1,7 @@
 import React from 'react';
-import IngredientListItem from './ingredient-list-item'
-import InstructionListItem from './instruction-list-item'
+import IngredientListItem from './ingredient-list-item';
+import InstructionListItem from './instruction-list-item';
+import TopBar from './top-bar';
 
 class RecipeDetailPage extends React.Component {
   constructor(props) {
@@ -22,45 +23,49 @@ class RecipeDetailPage extends React.Component {
   }
 
   generateIngredients() {
-    let count = 0
+    let count = 0;
     if (this.state.recipe.ingredients) {
       const ingredientList = this.state.recipe.ingredients.map(ing => {
-        count++
-        return <IngredientListItem count={count} ing={ing} key={ing.ingredientId}/>
-      })
-      return ingredientList
+        count++;
+        return <IngredientListItem count={count} ing={ing} key={ing.ingredientId} />;
+      });
+      return ingredientList;
     }
   }
 
-generateInstructions(){
-  let count = 0
+  generateInstructions() {
+    let count = 0;
     if (this.state.recipe.instructions) {
       const ingredientList = this.state.recipe.instructions.map(ins => {
-        count++
-        return <InstructionListItem count={count} ins={ins} key={ins.instructionOrder}/>
-      })
-      return ingredientList
+        count++;
+        return <InstructionListItem count={count} ins={ins} key={ins.instructionOrder} />;
+      });
+      return ingredientList;
     }
-}
+  }
 
   render() {
     const recipe = this.state.recipe;
     return (
-      <div className="recipeContainer">
-        <div className="recipeInfo">
-          <div className="category">Category: {recipe.category}</div>
-          <div className="servings">Servings: {recipe.numberOfServings}</div>
+      <>
+        <TopBar title={recipe.recipeName} displayIcon={true} />
+        <div className="recipeContainer">
+          <div className="recipeInfo">
+            <div className="category">Category: {recipe.category}</div>
+            <div className="servings">Servings: {recipe.numberOfServings}</div>
+          </div>
+          <i className="fas fa-star favStar"></i>
+          <img src={recipe.image} alt={recipe.recipeName} className="image" />
+          <div className="ingredientList">
+            Ingredients
+            {this.generateIngredients()}
+          </div>
+          <div className="instructionList">
+            Instructions
+            {this.generateInstructions()}
+          </div>
         </div>
-        <img src={recipe.image} alt={recipe.recipeName} className="image" />
-        <div className="ingredientList">
-          Ingredients
-          {this.generateIngredients()}
-        </div>
-        <div className="instructionList">
-          Instructions
-          {this.generateInstructions()}
-        </div>
-      </div>
+      </>
     );
   }
 }

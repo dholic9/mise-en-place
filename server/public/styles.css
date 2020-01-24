@@ -67,8 +67,9 @@
 }
 
 .recipeContainer{
-  top: 68px;
+  margin-top: 68px;
   position: absolute;
+  margin-bottom: 100PX;
 }
 
 .ingredient{
@@ -98,4 +99,8 @@
 
 .unit{
   width: 80%;
+}
+
+.favStar{
+  position: absolute;
 }
