@@ -36,10 +36,11 @@ export default class MyRecipe extends React.Component {
     fetch('api/mealplan', init)
       .then(response => response.json())
       .then(result => {
-        window.alert('added to meal plan');
-      })
-      .catch(err => {
-        window.alert(err.error);
+        if (!result.error) {
+          window.alert('added to meal plan');
+        } else {
+          window.alert(result.error);
+        }
       });
   }
 
@@ -47,35 +48,35 @@ export default class MyRecipe extends React.Component {
     const data = this.state.favoriteRecipes;
     const display = data.map(element => (<FavRecipe key={element.recipeId} recipe={element} addToMealPlan={this.addToMealPlan}/>));
     return (
-      <div className="recipes-container">
-        {display}
-      </div>
+      <React.Fragment>
+        <TopBar displayIcon={true} title={'My Recipes'}/>
+        <div className="recipes-container">
+          {display}
+        </div>
+      </React.Fragment>
     );
   }
 }
 
 function FavRecipe(props) {
   return (
-    <React.Fragment>
-      <TopBar/>
-      <div className="card">
-        <div className="card-body row">
-          <div className="col-6">
-            <h5 className="card-title">{props.recipe.recipeName}</h5>
-            <div className="card-text">
-              <div className="category-serving">
-                <p>Category: {props.recipe.category}</p>
-                <p>Serving: {props.recipe.numberOfServings}</p>
-              </div>
-              <div className="button-container">
-                <i className="fas fa-plus mr-3" onClick={() => { props.addToMealPlan(props.recipe.recipeId); }}></i>
-                <i className="fas fa-share"></i>
-              </div>
+    <div className="card">
+      <div className="card-body row">
+        <div className="col-6">
+          <h5 className="card-title">{props.recipe.recipeName}</h5>
+          <div className="card-text">
+            <div className="category-serving">
+              <p>Category: {props.recipe.category}</p>
+              <p>Serving: {props.recipe.numberOfServings}</p>
+            </div>
+            <div className="button-container">
+              <i className="fas fa-plus mr-3" onClick={() => { props.addToMealPlan(props.recipe.recipeId); }}></i>
+              <i className="fas fa-share"></i>
             </div>
           </div>
-          <img className="picture col-6" src={props.recipe.image} />
         </div>
-      </div >
-    </React.Fragment>
+        <img className="picture col-6" src={props.recipe.image} />
+      </div>
+    </div >
   );
 }

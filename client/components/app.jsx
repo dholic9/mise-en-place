@@ -8,6 +8,7 @@ import {
   Redirect
 } from 'react-router-dom';
 import MyRecipes from './my-recipes';
+import MealPlan from './meal-plan-page';
 import Login from './login';
 import AppContext from '../lib/context';
 import PublicPage from './public-page';
@@ -39,7 +40,7 @@ export default class App extends React.Component {
       },
       body: JSON.stringify(user)
     })
-      .then(res => res.ok ? res.json() : Promise.reject(new Error('ligma')))
+      .then(res => res.ok ? res.json() : Promise.reject(new Error('Incorrect login information')))
       .then(data => {
         if (typeof data !== 'number') {
           return console.log('error');
@@ -77,7 +78,6 @@ export default class App extends React.Component {
       handleUserLogin: this.handleUserLogin,
       handleUserSignup: this.handleUserSignup
     };
-    console.log('context', context);
     return (
       <AppContext.Provider value={context}>
         <Router >
@@ -86,6 +86,7 @@ export default class App extends React.Component {
           </Route>
           <Route exact path="/myRecipes" component={MyRecipes}/>
           <Route exact path="/login" component={Login}/>
+          <Route exact path="/mealplan" component={MealPlan} />
           <Route exact path="/sign-up" component={SignUp}/>
           <Route exact path="/public-page" component={PublicPage}/>
           <Route exact path="/recipe-detail-page/:recipeId" component={RecipeDetailPage}/>
