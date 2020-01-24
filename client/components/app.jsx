@@ -9,6 +9,7 @@ import {
   Redirect
 } from 'react-router-dom';
 import MyRecipes from './my-recipes';
+import MealPlan from './meal-plan-page';
 import Login from './login';
 import AppContext from '../lib/context';
 import PublicPage from './public-page';
@@ -60,7 +61,8 @@ export default class App extends React.Component {
     return (
       <AppContext.Provider value={context}>
         <Router forceRefresh={true}>
-          <Route exact path="/myRecipes" component={MyRecipes}/>
+          <Route exact path="/mealplan" component={MealPlan} />
+          <Route exact path="/myrecipes" component={MyRecipes}/>
           <Route exact path="/login" >
             {this.state.userId ? <Redirect to="/public-page" /> : <Login/>}
           </Route>
