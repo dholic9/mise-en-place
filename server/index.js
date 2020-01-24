@@ -44,7 +44,7 @@ app.post('/api/users', (req, res, next) => {
       }
 
       req.session.userId = result.rows[0].userId;
-      console.log('req.session:', req.session);
+
       return res.status(200).json(result.rows[0].userId);
     })
     .catch(err => next(err));
@@ -53,7 +53,7 @@ app.post('/api/users', (req, res, next) => {
 /*     USERS Sign Up  */
 
 app.post('/api/users/create', (req, res, next) => {
-  console.log('req.session:', req.session);
+
   if (!req.body.name || !req.body.userName || !req.body.email || !req.body.password) {
     return res.status(400).json({ error: 'invalid user inputs' });
   }
@@ -95,6 +95,7 @@ app.post('/api/users/create', (req, res, next) => {
           .then(result => {
             res.status(201).json(result.rows[0]);
           })
+          .catch(err => next(err))
       );
     })
     .catch(err => next(err));
