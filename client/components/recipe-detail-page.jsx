@@ -1,5 +1,6 @@
 import React from 'react';
 import IngredientListItem from './ingredient-list-item'
+import InstructionListItem from './instruction-list-item'
 
 class RecipeDetailPage extends React.Component {
   constructor(props) {
@@ -31,6 +32,17 @@ class RecipeDetailPage extends React.Component {
     }
   }
 
+generateInstructions(){
+  let count = 0
+    if (this.state.recipe.instructions) {
+      const ingredientList = this.state.recipe.instructions.map(ins => {
+        count++
+        return <InstructionListItem count={count} ins={ins} key={ins.instructionOrder}/>
+      })
+      return ingredientList
+    }
+}
+
   render() {
     const recipe = this.state.recipe;
     return (
@@ -43,6 +55,10 @@ class RecipeDetailPage extends React.Component {
         <div className="ingredientList">
           Ingredients
           {this.generateIngredients()}
+        </div>
+        <div className="instructionList">
+          Instructions
+          {this.generateInstructions()}
         </div>
       </div>
     );

@@ -89,3 +89,11 @@
 .evenIngredient{
   background-color: yellowgreen;
 }
+
+.instructionOrder{
+  width: 10%;
+}
+
+.unit{
+  width: 80%;
+}
