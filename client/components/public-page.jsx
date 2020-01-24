@@ -34,11 +34,21 @@ class PublicPage extends React.Component {
   render() {
     return (
       <React.Fragment>
-        <TopBar title={'Featured'} displayIcon={true}/>
-        <div className="my-recipe">
-          {this.generateRecipes()}
+        <div className="container-fluid w-100 p-0">
+          <div className="row w-100">
+            <TopBar title={'Featured'} displayIcon={true}/>
+          </div>
+          <div className="row featured">
+            <div className="my-recipe">
+              {this.generateRecipes()}
+            </div>
+          </div>
+          <div className="row">
+            <NavBar/>
+          </div>
+
         </div>
-        <NavBar></NavBar>
+
       </React.Fragment>
 
     );

@@ -9,7 +9,7 @@ export default class TopBar extends React.Component {
 
   render() {
     const iconDisplay = this.props.displayIcon
-      ? <i className="fas icon fa-utensils col-2 text-dark"/>
+      ? <i className="fas icon fa-shopping-cart col-2 text-dark"/>
       : null;
     return (
       <div className="
@@ -22,6 +22,7 @@ export default class TopBar extends React.Component {
         text-dark
         "
       >
+        <img src="/images/logo1.png" className="logo" alt=""/>
         <div className="title-text col-12 p-0 text-center">
           {this.props.title}
         </div>
