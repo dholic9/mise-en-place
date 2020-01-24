@@ -5,7 +5,9 @@
 .my-recipe{
   width: 100%;
 }
-
+.row{
+  margin: 0;
+}
 .recipeName{
   bottom: 50px;
   font-size: x-large;
@@ -20,18 +22,38 @@
   width: 100%;
   height: 100vmin;
 }
+.outline{
+  text-shadow:
+    -1px -1px 0 #000,
+    1px -1px 0 #000,
+    -1px 1px 0 #000,
+    1px 1px 0 #000;
+}
 
 .title{
   z-index: 1;
   position: fixed;
   top: 0;
   overflow: hidden;
-  width: 104%;
+  width: 100%;
   font-size: 1.5rem;
   font-weight: bold;
-  z-index: 1;
+  background-color: rgba(53, 140, 223, 0.993);
 }
-
+.nav-bar {
+  bottom: -1px;
+  right:0;
+  height: 69px;
+  font-size: 2em;
+  color: white;
+  background-color: rgb(197, 197, 197);
+}
+.white{
+  color: white
+}
+.black{
+  color:black
+}
 .picture{
   height: 150px;
   width: 30px;
@@ -57,7 +79,6 @@
 
 .ratatouille{
   background-image: url("/images/ratatouille.jpg");
-
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;

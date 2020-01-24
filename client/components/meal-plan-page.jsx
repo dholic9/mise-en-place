@@ -1,5 +1,6 @@
 import React from 'react';
 import TopBar from './top-bar';
+import NavBar from './nav-bar';
 
 export default class MealPlan extends React.Component {
   constructor(props) {
@@ -37,6 +38,7 @@ export default class MealPlan extends React.Component {
         <div className="recipes-container">
           {display}
         </div>
+        <NavBar/>
       </React.Fragment>
     );
   }
