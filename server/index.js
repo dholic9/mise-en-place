@@ -210,7 +210,7 @@ app.get('/api/mealplan', (req, res, next) => {
   }
 });
 
-// Recipe detail page
+/* RECIPE DETIAL PAGE */
 app.get('/api/recipe-detail-page/:recipeId', (req, res, next) => {
   const sql = `
   select "r"."recipeName",
@@ -237,17 +237,60 @@ app.get('/api/recipe-detail-page/:recipeId', (req, res, next) => {
                   order by "instructionOrder" ASC
          )) as "instructions"
          from "Recipes" as "r"
-         where "r"."recipeId" = ${req.params.recipeId}
+         where "r"."recipeId" = $1
          group by "r"."recipeId"`;
-
-  db.query(sql)
+  const value = [req.params.recipeId];
+  db.query(sql, value)
     .then(response => {
       res.json(response.rows[0]);
     })
     .catch(err => next(err));
 });
 
-// Recipe detail page^
+/* ADD TO MY RECIPES */
+app.post('/api/fav', (req, res, next) => {
+  const { recipeId } = req.body;
+  // const { userId } = req.session;
+  const userId = 1;
+  if (!userId) {
+    next(new ClientError('please sign in to add to favorites', 400));
+  } else {
+    const sql = `select "recipeId"
+                  from "Recipes"
+                  where "recipeId" = $1;`;
+    const value = [recipeId];
+    db.query(sql, value)
+      .then(response => {
+        if (!response.rows) {
+          throw new ClientError('cannot find recipe with that recipeId', 404);
+        } else {
+          const sql = `select "recipeId"
+                      from "FavoriteRecipes"
+                      where "userId" = $1 and "recipeId" = $2;`;
+          const value = [userId, recipeId];
+          db.query(sql, value)
+            .then(response => {
+
+              if (response.rows.length) {
+                throw new ClientError('recipe already saved to favorites', 400);
+              } else {
+                const sql = `insert into "FavoriteRecipes" ("userId", "recipeId")
+                                values ($1, $2)
+                                returning *`;
+                const value = [userId, recipeId];
+                db.query(sql, value)
+                  .then(response => {
+                    return res.status(201).json(response.rows[0]);
+                  })
+                  .catch(err => next(err));
+              }
+            })
+            .catch(err => next(err));
+        }
+      })
+      .catch(err => next(err));
+  }
+});
 
 app.use('/api', (req, res, next) => {
   next(new ClientError(`cannot ${req.method} ${req.originalUrl}`, 404));
