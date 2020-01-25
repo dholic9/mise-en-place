@@ -251,7 +251,6 @@ app.get('/api/recipe-detail-page/:recipeId', (req, res, next) => {
 app.post('/api/fav', (req, res, next) => {
   const { recipeId } = req.body;
   const { userId } = req.session;
-  // const userId = 1;
   if (!userId) {
     next(new ClientError('please sign in to add to favorites', 400));
   } else {
