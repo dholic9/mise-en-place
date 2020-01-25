@@ -10,7 +10,16 @@ a{
 .my-recipe{
   width: 100%;
 }
-
+.row{
+  margin: 0;
+}
+.logo{
+  height: 80px;
+  width: 80px;
+  position: absolute;
+  top: -8px;
+  left: 2px;
+}
 .recipeName{
   bottom: 50px;
   font-size: x-large;
@@ -20,10 +29,22 @@ a{
   left: 25px;
   width: fit-content;
 }
+.featured{
+  padding-top: 68px;
+  padding-bottom: 67px;
 
+}
 .image{
   width: 100%;
   height: 100vmin;
+  object-fit: cover;
+}
+.outline{
+  text-shadow:
+    -1px -1px 0 #000,
+    1px -1px 0 #000,
+    -1px 1px 0 #000,
+    1px 1px 0 #000;
 }
 
 .title{
@@ -31,12 +52,25 @@ a{
   position: fixed;
   top: 0;
   overflow: hidden;
-  width: 104%;
+  width: 100%;
   font-size: 1.5rem;
   font-weight: bold;
-  z-index: 1;
+  background-color: rgba(219, 219, 219, 0.993);
 }
-
+.nav-bar {
+  bottom: -2px;
+  right:0;
+  height: 69px;
+  font-size: 2em;
+  color: white;
+  background-color: rgb(197, 197, 197);
+}
+.white{
+  color: white
+}
+.black{
+  color:black
+}
 .picture{
   height: 150px;
   width: 30px;
@@ -57,8 +91,12 @@ a{
   display: flex;
   flex-direction: column;
   text-align: center;
-  margin-left: 2%;
   margin-top: 20%;
+}
+.recipeContainer{
+  top: 68px;
+  position: absolute;
+  padding-bottom: 66px;
 }
 .button-container{
   font-size: 2rem;
@@ -69,21 +107,15 @@ a{
 
 .ratatouille{
   background-image: url("/images/ratatouille.jpg");
-
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
   background-position-x: 75%;
   object-fit: cover;
-  object-position: bottom;
   height: 100vh;
   width:100%;
 }
 
-.recipeContainer{
-  top: 68px;
-  position: absolute;
-}
 
 .ingredient{
   display: flex;
@@ -93,9 +125,11 @@ a{
 .quantity{
   text-align: center;
 }
-
+.login-title{
+  background-color: rgba(230, 230, 230, 0.459);
+}
 .ing{
-  width: 33%;
+  width: 99%;
 }
 
 .oddIngredient{
@@ -113,6 +147,15 @@ a{
 .unit{
   width: 80%;
 }
+
+.favStar{
+  text-shadow: -1px 0 white, 0 1px white, 1px 0 white, 0 -1px white;
+  top: 70px;
+  position: absolute;
+  left: 20px;
+  font-size: xx-large;
+}
+
 .icon{
   cursor: pointer;
   position: absolute;

@@ -2,6 +2,7 @@ import React from 'react';
 import IngredientListItem from './ingredient-list-item';
 import InstructionListItem from './instruction-list-item';
 import TopBar from './top-bar';
+import NavBar from './nav-bar';
 
 class RecipeDetailPage extends React.Component {
   constructor(props) {
@@ -27,7 +28,7 @@ class RecipeDetailPage extends React.Component {
     if (this.state.recipe.ingredients) {
       const ingredientList = this.state.recipe.ingredients.map(ing => {
         count++;
-        return <IngredientListItem count={count} ing={ing} key={ing.ingredientId}/>;
+        return <IngredientListItem count={count} ing={ing} key={ing.ingredientId} />;
       });
       return ingredientList;
     }
@@ -38,7 +39,7 @@ class RecipeDetailPage extends React.Component {
     if (this.state.recipe.instructions) {
       const ingredientList = this.state.recipe.instructions.map(ins => {
         count++;
-        return <InstructionListItem count={count} ins={ins} key={ins.instructionOrder}/>;
+        return <InstructionListItem count={count} ins={ins} key={ins.instructionOrder} />;
       });
       return ingredientList;
     }
@@ -48,11 +49,12 @@ class RecipeDetailPage extends React.Component {
     const recipe = this.state.recipe;
     return (
       <div className="recipeContainer">
-        <TopBar displayIcon={true} title={this.state.recipe.recipeName}/>
+        <TopBar displayIcon={true} title={this.state.recipe.recipeName} />
         <div className="recipeInfo text-center">
           <div className="category">Category: {recipe.category}</div>
           <div className="servings">Servings: {recipe.numberOfServings}</div>
         </div>
+        <i className="fas fa-star favStar" onClick={() => addToFav(recipe.recipeId)}></i>
         <img src={recipe.image} alt={recipe.recipeName} className="image" />
         <div className="ingredientList">
           <div className="text-center border-bottom border-dark m-0">Ingredients</div>
@@ -62,9 +64,27 @@ class RecipeDetailPage extends React.Component {
           <div className="text-center border-bottom border-dark m-0">Instructions</div>
           {this.generateInstructions()}
         </div>
+        <NavBar/>
       </div>
     );
   }
 }
 
 export default RecipeDetailPage;
+
+function addToFav(recipeId) {
+  const favAddReq = {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ recipeId })
+  };
+  fetch('/api/fav', favAddReq)
+    .then(response => response.json())
+    .then(result => {
+      if (!result.error) {
+        window.alert('added to My Recipes');
+      } else {
+        window.alert(result.error);
+      }
+    });
+}

@@ -45,11 +45,11 @@ export default class Login extends React.Component {
 
   render() {
     return (
-      <div className="container d-flex ratatouille flex-column ">
-        <div className="row justify-content-center login-title mb-5">
+      <div className="container p-0 d-flex align-items-center ratatouille flex-column ">
+        <div className="row justify-content-center login-title  w-100 mb-5">
           <img src="/images/logo1.png" height="150" width="200" alt="loading"/>
         </div>
-        <div className="row pt-4 mt-5 justify-content-around text-light  ">
+        <div className="row  mt-5 justify-content-around text-light ">
           <h1>Login</h1>
           <div className="col-12 ">
             <form onSubmit={this.handleUserSubmit} className="input-group  flex-column">

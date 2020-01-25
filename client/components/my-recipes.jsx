@@ -1,6 +1,8 @@
 import React from 'react';
 import TopBar from './top-bar';
 import { Link } from 'react-router-dom';
+import NavBar from './nav-bar';
+
 export default class MyRecipe extends React.Component {
   constructor(props) {
     super(props);
@@ -54,6 +56,7 @@ export default class MyRecipe extends React.Component {
         <div className="recipes-container">
           {display}
         </div>
+        <NavBar />
       </React.Fragment>
     );
   }
