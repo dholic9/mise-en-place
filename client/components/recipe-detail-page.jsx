@@ -2,6 +2,7 @@ import React from 'react';
 import IngredientListItem from './ingredient-list-item';
 import InstructionListItem from './instruction-list-item';
 import TopBar from './top-bar';
+import NavBar from './nav-bar';
 
 class RecipeDetailPage extends React.Component {
   constructor(props) {
@@ -53,7 +54,7 @@ class RecipeDetailPage extends React.Component {
           <div className="category">Category: {recipe.category}</div>
           <div className="servings">Servings: {recipe.numberOfServings}</div>
         </div>
-        <i className="fas fa-star favStar" onClick={()=>addToFav(recipe.recipeId)}></i>
+        <i className="fas fa-star favStar" onClick={() => addToFav(recipe.recipeId)}></i>
         <img src={recipe.image} alt={recipe.recipeName} className="image" />
         <div className="ingredientList">
           <div className="text-center border-bottom border-dark m-0">Ingredients</div>
@@ -63,6 +64,7 @@ class RecipeDetailPage extends React.Component {
           <div className="text-center border-bottom border-dark m-0">Instructions</div>
           {this.generateInstructions()}
         </div>
+        <NavBar/>
       </div>
     );
   }
@@ -70,19 +72,19 @@ class RecipeDetailPage extends React.Component {
 
 export default RecipeDetailPage;
 
-function addToFav (recipeId) {
+function addToFav(recipeId) {
   const favAddReq = {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({recipeId})
-  }
+    body: JSON.stringify({ recipeId })
+  };
   fetch('/api/fav', favAddReq)
-  .then(response=>response.json())
-  .then(result=>{
-    if(!result.error){
-      window.alert('added to My Recipes')
-    }else{
-      window.alert(result.error)
-    }
-  })
+    .then(response => response.json())
+    .then(result => {
+      if (!result.error) {
+        window.alert('added to My Recipes');
+      } else {
+        window.alert(result.error);
+      }
+    });
 }
