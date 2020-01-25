@@ -26,7 +26,7 @@
 }
 .featured{
   padding-top: 68px;
-  padding-bottom: 68px;
+  padding-bottom: 67px;
 
 }
 .image{
@@ -53,7 +53,7 @@
   background-color: rgba(219, 219, 219, 0.993);
 }
 .nav-bar {
-  bottom: -1px;
+  bottom: -2px;
   right:0;
   height: 69px;
   font-size: 2em;
@@ -78,9 +78,12 @@
   display: flex;
   flex-direction: column;
   text-align: center;
-  margin-left: 2%;
   margin-top: 20%;
-
+}
+.recipeContainer{
+  top: 68px;
+  position: absolute;
+  padding-bottom: 66px;
 }
 .button-container{
   font-size: 2rem;
@@ -101,11 +104,7 @@
   width:100%;
 }
 
-.recipeContainer{
-  top: 68px;
-  position: absolute;
-  padding-bottom: 68px;
-}
+
 
 .ingredient{
   display: flex;
