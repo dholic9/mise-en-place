@@ -210,6 +210,50 @@ app.get('/api/mealplan', (req, res, next) => {
   }
 });
 
+/*  GET SHOPPING LIST  */
+
+app.get('/api/shoppinglist', (req, res, next) => {
+  const params = [req.session.userId];
+  if (!req.session.userId) {
+    res.json([]);
+  } else {
+    const sql = `
+      select "userId"
+        from "Users"
+        where "userId" = $1;
+        `;
+    db.query(sql, params)
+      .then(response => {
+        if (!response.rows.length) {
+          throw new ClientError(`no userId found at userId ${req.session.userId}`, 400);
+        } else {
+          const sql = `
+      select "i"."ingredientName",
+        "ri"."recipeId",
+        "ri"."quantity",
+        "ri"."unit",
+        "r"."recipeName"
+        from "RecipeIngredients" as "ri"
+        join "MealPlan" as "m" using ("recipeId")
+        join "Recipes" as "r" using ("recipeId")
+        join "Ingredients" as "i" using ("ingredientId")
+        where "m"."userId" = $1`;
+
+          return db.query(sql, params)
+            .then(response => {
+              if (!response.rows.length) {
+                throw new ClientError('Please add recipes to your meal plan to see shopping list', 400);
+              } else {
+                res.json(response.rows);
+              }
+            });
+        }
+      })
+      .catch(err => { next(err); });
+
+  }
+});
+
 /* RECIPE DETIAL PAGE */
 app.get('/api/recipe-detail-page/:recipeId', (req, res, next) => {
   const sql = `
