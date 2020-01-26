@@ -37,11 +37,11 @@ export default class NavBar extends React.Component {
             <i className="fas fa-clipboard-list"></i>
           </div>
         </Link>
-        <Link className="black" to={'/'}>
-          <div className="col-3">
-            <i className="fas fa-user"></i>
-          </div>
-        </Link>
+        {/* <Link className="black" to={'/'}> */}
+        <div className="black col-3">
+          <i className="fas fa-user"></i>
+        </div>
+        {/* </Link> */}
       </div>
 
     );

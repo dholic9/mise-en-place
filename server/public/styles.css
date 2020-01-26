@@ -153,3 +153,11 @@
 .clickable{
   cursor: pointer;
 }
+
+.transition{
+  transition: ease .25s;
+}
+
+.transition:hover {
+    transform: scale(1.5);
+}

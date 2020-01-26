@@ -24,7 +24,8 @@ class PublicPage extends React.Component {
 
   generateRecipes() {
     if (this.state.recipes.length > 0) {
-      const recipeArr = this.state.recipes.map(index => {
+      const shuffledArr = this.state.recipes.sort(() => Math.random() - 0.5);
+      const recipeArr = shuffledArr.map(index => {
         return <RecipeList recipe={index} key={index.recipeId} />;
       });
       return recipeArr;
