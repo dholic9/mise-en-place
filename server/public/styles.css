@@ -25,7 +25,7 @@
   width: fit-content;
 }
 .featured{
-  padding-top: 68px;
+  padding-top: 67px;
   padding-bottom: 67px;
 
 }
@@ -50,7 +50,7 @@
   width: 100%;
   font-size: 1.5rem;
   font-weight: bold;
-  background-color: rgba(219, 219, 219, 0.993);
+  background-color: rgb(255, 255, 255);
 }
 .nav-bar {
   bottom: -2px;
@@ -152,12 +152,4 @@
 }
 .clickable{
   cursor: pointer;
-}
-
-.transition{
-  transition: ease .25s;
-}
-
-.transition:hover {
-    transform: scale(1.5);
 }

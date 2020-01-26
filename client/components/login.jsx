@@ -46,7 +46,7 @@ export default class Login extends React.Component {
   render() {
     return (
       <div className="container p-0 d-flex align-items-center ratatouille flex-column ">
-        <div className="row transition justify-content-center login-title  w-100 mb-5">
+        <div className="row justify-content-center login-title  w-100 mb-5">
           <img src="/images/logo1.png" height="150" width="200" alt="loading"/>
         </div>
         <div className="row  mt-5 justify-content-around text-light ">
