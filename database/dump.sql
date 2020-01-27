@@ -210,7 +210,7 @@ CREATE TABLE public."Users" (
     "userName" text NOT NULL,
     email text NOT NULL,
     password text NOT NULL,
-    image text NOT NULL,
+    image text,
     "createdAt" timestamp(6) with time zone DEFAULT now() NOT NULL
 );
 
@@ -268,6 +268,10 @@ ALTER TABLE ONLY public."Users" ALTER COLUMN "userId" SET DEFAULT nextval('publi
 --
 
 COPY public."FavoriteRecipes" ("userId", "recipeId") FROM stdin;
+2	3
+1	4
+2	1
+1	1
 \.
 
 
@@ -279,7 +283,6 @@ COPY public."Ingredients" ("ingredientId", "ingredientName") FROM stdin;
 1	english muffin
 2	eggs
 3	canadian bacon
-4	vinager
 5	butter
 6	lime juice
 7	heavy whipping cream
@@ -298,6 +301,9 @@ COPY public."Ingredients" ("ingredientId", "ingredientName") FROM stdin;
 20	sugar
 21	strawberries
 22	powdered sugar
+4	vinegar
+23	baking powder
+24	maple syrup
 \.
 
 
@@ -336,6 +342,11 @@ COPY public."Instructions" ("instructionId", "recipeId", "instructionDetail", "i
 28	4	In a large mixing bowl, create a well with flour then add eggs, slowly whisking them into flour. Add sugar and salt and stir until combined. Gradually add the milk, whisking to combine. Let batter stand at room temperature until bubbly on top, 15 to 20 minutes.	1	2019-01-21 08:00:00+00
 29	4	In a small skillet over medium heat, melt butter. About 1/4 cup at a time, drop batter evenly onto pan, swirling it to evenly coat.	2	2019-01-21 08:00:00+00
 30	4	Cook 2 minutes, then flip and cook 1 minute more; repeat with remaining batter. Serve crêpes warm with fresh fruit and powdered sugar.	3	2019-01-21 08:00:00+00
+31	5	In a bowl, add the flour and baking powder together, stirring to combine.	1	2020-01-24 23:41:40.651084+00
+32	5	In a separate bowl, add the butter, milk, and egg yolks, stirring to combine.	2	2020-01-24 23:42:12.391351+00
+33	5	In a third bowl, use a hand mixer to beat the egg whites until soft peaks form.	3	2020-01-24 23:42:44.025916+00
+34	5	Gently combine the bowl of flour with the butter and milk mixture, stirring until combined. Gently fold in the egg whites.	4	2020-01-24 23:43:02.055582+00
+35	5	Pour a large scoop of pancake batter into an 8-inch (20 cm) nonstick pan on low heat. Place the lid on top, and cook for 3 to 5 minutes, or until a toothpick comes out clean. Repeat with remaining batter. Serve with maple syrup.	5	2020-01-24 23:43:52.24922+00
 \.
 
 
@@ -344,6 +355,12 @@ COPY public."Instructions" ("instructionId", "recipeId", "instructionDetail", "i
 --
 
 COPY public."MealPlan" ("userId", "recipeId") FROM stdin;
+1	4
+2	1
+3	4
+4	4
+4	3
+1	1
 \.
 
 
@@ -353,13 +370,11 @@ COPY public."MealPlan" ("userId", "recipeId") FROM stdin;
 
 COPY public."RecipeIngredients" ("ingredientId", "recipeId", quantity, unit, "createdAt") FROM stdin;
 1	1	2	-	2020-01-20 00:00:00+00
-2	1	4	-	2020-01-21 00:00:00+00
 3	1	4	slices	2020-01-22 00:00:00+00
 4	1	1	tsp	2020-01-23 00:00:00+00
 5	1	4	tbsp	2020-01-24 00:00:00+00
 6	1	4	-	2020-01-25 00:00:00+00
 7	1	2	tbsp	2020-01-26 00:00:00+00
-8	1	1	tbsp	2020-01-27 00:00:00+00
 9	2	8	oz	2020-01-28 00:00:00+00
 10	2	2	cups	2020-01-29 00:00:00+00
 11	2	0.5	cups	2020-07-17 00:00:00+00
@@ -371,9 +386,23 @@ COPY public."RecipeIngredients" ("ingredientId", "recipeId", quantity, unit, "cr
 17	2	1	tsp	2020-07-23 00:00:00+00
 18	3	4	-	2020-07-24 00:00:00+00
 19	3	1	tbsp	2020-07-25 00:00:00+00
-20	3	1	pinch	2020-07-26 00:00:00+00
-21	3	1	pinch	2020-07-27 00:00:00+00
-22	3	1	tbsp	2020-07-28 00:00:00+00
+8	2	1	tbsp	2020-01-27 00:00:00+00
+20	4	1	pinch	2020-07-26 00:00:00+00
+21	4	1	pinch	2020-07-27 00:00:00+00
+22	4	1	tbsp	2020-07-28 00:00:00+00
+12	4	1	cup	2020-01-22 01:36:51.373377+00
+2	1	4	-	2020-01-21 00:00:00+00
+2	4	2	-	2020-01-22 01:37:27.042495+00
+16	4	0.25	tbsp	2020-01-22 01:39:23.173669+00
+11	4	1.5	cups	2020-01-22 01:39:46.494503+00
+5	4	1	tbsp	2020-01-22 01:40:23.807494+00
+12	5	4	cups	2020-01-24 23:30:51.903538+00
+11	5	4	cups	2020-01-24 23:31:38.895724+00
+5	5	0.75	cups	2020-01-24 23:32:12.152148+00
+19	5	3	-	2020-01-24 23:32:44.862362+00
+2	5	4	-	2020-01-24 23:32:54.168271+00
+23	5	4	tbsp	2020-01-24 23:35:27.261676+00
+24	5	1	-	2020-01-24 23:35:43.164697+00
 \.
 
 
@@ -382,9 +411,11 @@ COPY public."RecipeIngredients" ("ingredientId", "recipeId", quantity, unit, "cr
 --
 
 COPY public."Recipes" ("recipeId", "recipeName", category, "numberOfServings", "createdBy", image, "createdAt") FROM stdin;
-1	Eggs Benedict	Breakfast	4	Patrick	test	2020-01-21 08:00:00+00
-2	Mac and Cheese	Dinner	4	Patrick	test	2020-01-22 08:00:00+00
-3	Scrambled Eggs	Breakfast	2	Patrick	test	2020-01-23 08:00:00+00
+1	Eggs Benedict	Breakfast	4	Patrick	/images/eggsBenedict.jpg	2020-01-21 08:00:00+00
+2	Mac and Cheese	Dinner	4	Patrick	/images/macAndCheese.jpg	2020-01-22 08:00:00+00
+4	Crepes	Breakfast	4	Patrick	/images/Crepes.jpg	2020-01-22 00:34:02.745628+00
+3	Scrambled Eggs	Breakfast	2	Patrick	/images/scrambleEggs.jpeg	2020-01-23 08:00:00+00
+5	Fluffy Pancake	Breakfast	4	David	/images/Fluffy-Pancake.png	2020-01-24 23:25:16.890037+00
 \.
 
 
@@ -393,6 +424,11 @@ COPY public."Recipes" ("recipeId", "recipeName", category, "numberOfServings", "
 --
 
 COPY public."Users" ("userId", name, "userName", email, password, image, "createdAt") FROM stdin;
+1	Patrick	Star	thisIsPatrick@gmail.com	star	/images/patrickstar.jpg	2020-01-22 00:36:43.874184+00
+2	Spongebob	Sponge	thisIsSpongebob@gmail.com	sponge	/images/spongebob.jpg	2020-01-22 00:37:43.707564+00
+10	1234	1234	1	1	\N	2020-01-24 00:44:13.718546+00
+11	David	neow	no	no	\N	2020-01-24 03:11:40.404757+00
+12	Weilin	horrible	no	no	\N	2020-01-24 03:22:07.297355+00
 \.
 
 
@@ -400,7 +436,7 @@ COPY public."Users" ("userId", name, "userName", email, password, image, "create
 -- Name: Ingredients_ingredientId_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('public."Ingredients_ingredientId_seq"', 2, true);
+SELECT pg_catalog.setval('public."Ingredients_ingredientId_seq"', 3, true);
 
 
 --
@@ -414,14 +450,14 @@ SELECT pg_catalog.setval('public."Instructions_instructionId_seq"', 1, false);
 -- Name: Recipes_recipeId_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('public."Recipes_recipeId_seq"', 1, false);
+SELECT pg_catalog.setval('public."Recipes_recipeId_seq"', 2, true);
 
 
 --
 -- Name: Users_userId_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('public."Users_userId_seq"', 5, true);
+SELECT pg_catalog.setval('public."Users_userId_seq"', 16, true);
 
 
 --
