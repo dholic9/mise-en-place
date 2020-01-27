@@ -50,7 +50,7 @@
   width: 100%;
   font-size: 1.5rem;
   font-weight: bold;
-  background-color: rgb(255, 255, 255);
+  background-color: rgb(14, 14, 14);
 }
 .nav-bar {
   bottom: -2px;
@@ -114,7 +114,7 @@
   text-align: center;
 }
 .login-title{
-  background-color: rgba(230, 230, 230, 0.459);
+
 }
 .ing{
   width: 99%;
@@ -154,11 +154,18 @@
   cursor: pointer;
 }
 
+
 .fadeIn{
   animation: fadein 1s ease-in-out;
 }
-
+.longFadeIn{
+  animation: fadein 2s ease-in-out;
+}
 @keyframes fadein {
     from { opacity: 0; }
     to   { opacity: 1; }
+}
+
+.nav-bar > a:hover {
+  border-bottom: 3px solid black;
 }

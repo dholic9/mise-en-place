@@ -39,7 +39,7 @@ class PublicPage extends React.Component {
           <div className="row w-100">
             <TopBar title={'Featured'} displayIcon={true}/>
           </div>
-          <div className="row featured">
+          <div className="row longFadeIn text-center featured">
             <div className="my-recipe">
               {this.generateRecipes()}
             </div>
