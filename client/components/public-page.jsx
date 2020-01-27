@@ -1,6 +1,6 @@
 import React from 'react';
 import TopBar from './top-bar';
-import RecipeList from './recipe-list-item';
+import RecipeList from './RecipeList';
 import NavBar from './nav-bar';
 
 class PublicPage extends React.Component {
@@ -22,35 +22,19 @@ class PublicPage extends React.Component {
       .catch(err => console.error(err));
   }
 
-  generateRecipes() {
-    if (this.state.recipes.length > 0) {
-      const recipeArr = this.state.recipes.map(index => {
-        return <RecipeList recipe={index} key={index.recipeId} />;
-      });
-      return recipeArr;
-    }
-  }
-
   render() {
     return (
-      <React.Fragment>
-        <div className="container-fluid w-100 p-0">
-          <div className="row w-100">
-            <TopBar title={'Featured'} displayIcon={true}/>
-          </div>
-          <div className="row featured">
-            <div className="my-recipe">
-              {this.generateRecipes()}
-            </div>
-          </div>
-          <div className="row">
-            <NavBar/>
-          </div>
-
+      <div className="container-fluid w-100 p-0">
+        <div className="row w-100">
+          <TopBar title={'Featured'} displayIcon={true} />
         </div>
-
-      </React.Fragment>
-
+        <div className="row featured">
+          <RecipeList recipes={this.state.recipes} />
+        </div>
+        <div className="row">
+          <NavBar />
+        </div>
+      </div>
     );
   }
 }

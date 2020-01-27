@@ -292,6 +292,8 @@ app.post('/api/fav', (req, res, next) => {
   }
 });
 
+/* USER CAN ADD RECIPES */
+
 app.use('/api', (req, res, next) => {
   next(new ClientError(`cannot ${req.method} ${req.originalUrl}`, 404));
 });
