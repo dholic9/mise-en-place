@@ -70,7 +70,7 @@ export default class SignUp extends React.Component {
 
   render() {
     return (
-      <div className="container d-flex ratatouille flex-column ">
+      <div className="container-fluid d-flex ratatouille flex-column fadeIn">
         <div className="row justify-content-center  mt-2 mb-3">
           <img src="/images/logo1.png" height="150" width="200" alt="loading" />
         </div>

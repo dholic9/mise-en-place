@@ -24,17 +24,22 @@ class PublicPage extends React.Component {
 
   render() {
     return (
-      <div className="container-fluid w-100 p-0">
-        <div className="row w-100">
-          <TopBar title={'Featured'} displayIcon={true} />
+      <React.Fragment>
+        <div className="container-fluid w-100 p-0 fadeIn">
+          <div className="row w-100">
+            <TopBar title={'Featured'} displayIcon={true}/>
+          </div>
+          <div className="row longFadeIn text-center featured">
+            <RecipeList recipes={this.state.recipes}/>
+          </div>
+          <div className="row">
+            <NavBar/>
+          </div>
+
         </div>
-        <div className="row featured">
-          <RecipeList recipes={this.state.recipes} />
-        </div>
-        <div className="row">
-          <NavBar />
-        </div>
-      </div>
+
+      </React.Fragment>
+
     );
   }
 }
