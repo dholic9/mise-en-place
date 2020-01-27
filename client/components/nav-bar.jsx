@@ -1,16 +1,40 @@
 import React from 'react';
 import {
   Link,
-  Redirect
+  useLocation
 } from 'react-router-dom';
-import AppContext from '../lib/context';
 
-export default class NavBar extends React.Component {
+const tabs = [{
+  path: '/public-page',
+  icon: 'fa-home'
+}, {
+  path: '/myRecipes',
+  icon: 'fa-star'
+}, {
+  path: '/mealplan',
+  icon: 'fa-clipboard-list'
+}, {
+  path: '/',
+  icon: 'fa-user'
+}
+];
 
-  render() {
+function renderTab({ path, icon }, index) {
+  const { pathname } = useLocation();
+  const isCurrentPath = pathname === path;
+  const color = isCurrentPath ? 'blue' : 'black';
+  return (
+    <Link className="black" to={path} key={index}>
+      <div className="col-3 w-25">
+        <i className={`fas ${icon} ${color} text-center`}></i>
+      </div>
+    </Link>
+  );
+}
 
-    return (
-      <div className="
+function NavBar() {
+  return (
+    <div className="
         row
         nav-bar
         justify-content-between
@@ -21,30 +45,11 @@ export default class NavBar extends React.Component {
         align-items-center
         text-light
         "
-      >
-        <Link className="black" to={'/public-page'}>
-          <div className="col-3 w-25">
-            <i className="fas fa-home text-center"></i>
-          </div>
-        </Link>
-        <Link className="black" to={'/myRecipes'}>
-          <div className=" col-3 w-25">
-            <i className="fas fa-star text-center"></i>
-          </div>
-        </Link>
-        <Link className="black" to={'/mealplan'}>
-          <div className="col-3">
-            <i className="fas fa-clipboard-list"></i>
-          </div>
-        </Link>
-        <Link className="black" to={'/'}>
-          <div className="col-3">
-            <i className="fas fa-user"></i>
-          </div>
-        </Link>
-      </div>
 
-    );
-  }
+    >
+      {tabs.map(renderTab)}
+    </div>
 
+  );
 }
+export default NavBar;
