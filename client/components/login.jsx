@@ -49,16 +49,21 @@ export default class Login extends React.Component {
         <div className="row justify-content-center login-title  w-100 mb-5">
           <img src="/images/logo1.png" height="150" width="200" alt="loading"/>
         </div>
-        <div className="row  mt-5 justify-content-around text-light ">
-          <h1 className="login">Login</h1>
+        <div className="row  mt-4 justify-content-around text-light ">
+          <h1 className="signup">Login</h1>
           <div className="col-12 ">
             <form onSubmit={this.handleUserSubmit} className="input-group  flex-column">
               <div className="form-group my-4">
-                <div className="input-group  w-100 flex-column">
+                <div className="input-group  w-100 flex-row justify-content-center ">
+                  <div className="input-group-prepend">
+                    <span className="input-group-text">
+                      <i className="fas fa-user" />
+                    </span>
+                  </div>
                   <input
                     type="text"
                     placeholder="User Name"
-                    className="form-control w-100"
+                    className="form-control w-70"
                     required
                     autoFocus
                     onChange={this.handleUserNameChange}
@@ -66,11 +71,16 @@ export default class Login extends React.Component {
                 </div>
               </div>
               <div className="form-group my-4 ">
-                <div className="input-group align-items-center">
+                <div className="input-group w-100 flex-row justify-content-center">
+                  <div className="input-group-prepend">
+                    <span className="input-group-text">
+                      <i className="fas fa-key" />
+                    </span>
+                  </div>
                   <input
                     type="password"
                     placeholder="Password"
-                    className="form-control w-100"
+                    className="form-control w-70"
                     required
                     autoFocus
                     onChange={this.handlePasswordChange}/>

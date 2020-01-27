@@ -9,7 +9,7 @@ export default class TopBar extends React.Component {
 
   render() {
     const iconDisplay = this.props.displayIcon
-      ? <i className="fas icon fa-shopping-cart cartIcon col-2 text-light"/>
+      ? <i className="fas icon fa-list-alt cartIcon col-2 text-right text-light"/>
       : null;
     return (
       <div className="
@@ -20,6 +20,8 @@ export default class TopBar extends React.Component {
         d-flex
         row
         text-light
+        align-items-center
+
         "
       >
         {/* <img src="/images/logo1.png" className="logo" alt=""/> */}
