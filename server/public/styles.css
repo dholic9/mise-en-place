@@ -153,3 +153,12 @@
 .clickable{
   cursor: pointer;
 }
+
+.fadeIn{
+  animation: fadein 1s ease-in-out;
+}
+
+@keyframes fadein {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}

@@ -46,7 +46,7 @@ export default class MealPlan extends React.Component {
 
 function MealPlanRecipe(props) {
   return (
-    <div className="card">
+    <div className="card fadeIn">
       <div className="card-body row">
         <div className="col-6">
           <h5 className="card-title">{props.recipe.recipeName}</h5>
