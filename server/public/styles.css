@@ -165,3 +165,11 @@ a{
 .clickable{
   cursor: pointer;
 }
+
+.black{
+  color: black;
+}
+
+.blue{
+  color: blue;
+}
