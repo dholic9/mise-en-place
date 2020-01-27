@@ -1,7 +1,7 @@
 import React from 'react';
 import TopBar from './top-bar';
+import { Link } from 'react-router-dom';
 import NavBar from './nav-bar';
-
 export default class MealPlan extends React.Component {
   constructor(props) {
     super(props);
@@ -35,7 +35,7 @@ export default class MealPlan extends React.Component {
     return (
       <React.Fragment>
         <TopBar displayIcon={false} title={'Meal Plan'}/>
-        <div className="recipes-container">
+        <div className="recipes-container fadeIn">
           {display}
         </div>
         <NavBar/>
@@ -46,19 +46,21 @@ export default class MealPlan extends React.Component {
 
 function MealPlanRecipe(props) {
   return (
-    <div className="card fadeIn">
-      <div className="card-body row">
-        <div className="col-6">
-          <h5 className="card-title">{props.recipe.recipeName}</h5>
-          <div className="card-text">
-            <div className="category-serving">
-              <p>Category: {props.recipe.category}</p>
-              <p>Serving: {props.recipe.numberOfServings}</p>
+    <Link to={`/recipe-detail-page/${props.recipe.recipeId}`}>
+      <div className="card">
+        <div className="card-body row">
+          <div className="col-6">
+            <h5 className="card-title">{props.recipe.recipeName}</h5>
+            <div className="card-text">
+              <div className="category-serving">
+                <p>Category: {props.recipe.category}</p>
+                <p>Serving: {props.recipe.numberOfServings}</p>
+              </div>
             </div>
           </div>
+          <img className="picture col-6" src={props.recipe.image} />
         </div>
-        <img className="picture col-6" src={props.recipe.image} />
-      </div>
-    </div >
+      </div >
+    </Link>
   );
 }

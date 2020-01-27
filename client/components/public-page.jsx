@@ -1,6 +1,6 @@
 import React from 'react';
 import TopBar from './top-bar';
-import RecipeList from './recipe-list-item';
+import RecipeList from './RecipeList';
 import NavBar from './nav-bar';
 
 class PublicPage extends React.Component {
@@ -22,16 +22,6 @@ class PublicPage extends React.Component {
       .catch(err => console.error(err));
   }
 
-  generateRecipes() {
-    if (this.state.recipes.length > 0) {
-      const shuffledArr = this.state.recipes.sort(() => Math.random() - 0.5);
-      const recipeArr = shuffledArr.map(index => {
-        return <RecipeList recipe={index} key={index.recipeId} />;
-      });
-      return recipeArr;
-    }
-  }
-
   render() {
     return (
       <React.Fragment>
@@ -40,9 +30,7 @@ class PublicPage extends React.Component {
             <TopBar title={'Featured'} displayIcon={true}/>
           </div>
           <div className="row longFadeIn text-center featured">
-            <div className="my-recipe">
-              {this.generateRecipes()}
-            </div>
+            <RecipeList recipes={this.state.recipes}/>
           </div>
           <div className="row">
             <NavBar/>

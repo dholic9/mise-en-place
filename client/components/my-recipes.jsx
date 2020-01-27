@@ -1,5 +1,6 @@
 import React from 'react';
 import TopBar from './top-bar';
+import { Link } from 'react-router-dom';
 import NavBar from './nav-bar';
 
 export default class MyRecipe extends React.Component {
@@ -68,7 +69,9 @@ function FavRecipe(props) {
     <div className="card ">
       <div className="card-body row">
         <div className="col-6">
-          <h5 className="card-title">{props.recipe.recipeName}</h5>
+          <Link to={`/recipe-detail-page/${props.recipe.recipeId}`}>
+            <h5 className="card-title">{props.recipe.recipeName}</h5>
+          </Link>
           <div className="card-text">
             <div className="category-serving">
               <p>Category: {props.recipe.category}</p>

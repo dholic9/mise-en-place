@@ -2,6 +2,11 @@
   height: 100vmin;
 }
 
+a{
+  text-decoration: none;
+  color: inherit;
+ }
+
 .my-recipe{
   width: 100%;
 }
@@ -71,10 +76,18 @@
   width: 30px;
   object-fit: cover;
 }
-.fas-utensils{
+.fa-utensils, .fa-times{
   cursor: pointer;
 }
-.recipes-container{
+.shoppinglist-container .card-title{
+  font-size: 2rem;
+}
+.fa-times{
+  font-size: 3rem;
+  color: rgb(61, 153, 214);
+}
+
+.recipes-container, .shoppinglist-container{
   display: flex;
   flex-direction: column;
   text-align: center;
@@ -89,7 +102,6 @@
   font-size: 2rem;
 }
 .button-container .fas{
- color: tomato;
  cursor: pointer;
 }
 
@@ -168,4 +180,11 @@
 
 .nav-bar > a:hover {
   border-bottom: 3px solid black;
+}
+.black{
+  color: black;
+}
+
+.blue{
+  color: blue;
 }
