@@ -92,6 +92,8 @@ a{
   flex-direction: column;
   text-align: center;
   margin-top: 20%;
+  padding-bottom: 66px;
+
 }
 .recipeContainer{
   top: 68px;
