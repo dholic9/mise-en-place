@@ -27,24 +27,24 @@ export default class MealPlan extends React.Component {
   }
 
   deleteMealPlan(recipeId) {
+    console.log('recipeId', recipeId);
     const init = {
       method: 'DELETE',
       body: {
-        recipeId: recipeId
+        recipeId: JSON.stringify(recipeId)
       }
     };
-    fetch('/api/mealplan', init)
+    fetch(`/api/mealplan/${recipeId}`, init)
       .then(response => response.json())
       .then(data => {
         const tempState = [...this.state.mealPlan];
-        console.log('tempState', tempState);
-        console.log('data', data);
-        tempState.map(index => {
-          if (index.recipeId === this.props.recipeId) {
-            tempState.splice(index, 1);
+        for (let i = 0; i < tempState.length; i++) {
+          if (tempState[i].recipeId === recipeId) {
+            tempState.splice(i, 1);
           }
-          this.setState({ mealPlan: tempState });
-        });
+        }
+        this.setState({ mealPlan: tempState });
+
       });
   }
 
