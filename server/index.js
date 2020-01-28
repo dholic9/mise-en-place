@@ -150,6 +150,7 @@ app.get('/api/fav', (req, res, next) => {
 });
 
 /*  POST MEAL PLAN  */
+
 app.post('/api/mealplan', (req, res, next) => {
   const { userId } = req.session;
   const { recipeId } = req.body;
@@ -202,11 +203,11 @@ app.get('/api/mealplan', (req, res, next) => {
   } else {
     const params = [req.session.userId];
     const sql = `
-      select  "r"."recipeName",
-              "r"."recipeId",
-            "r"."image",
-            "r"."category",
-            "r"."numberOfServings"
+                    select  "r"."recipeName",
+                            "r"."recipeId",
+                            "r"."image",
+                            "r"."category",
+                            "r"."numberOfServings"
           from "Recipes" as "r"
           join "MealPlan" as "f" using ("recipeId")
           where "f"."userId" = $1;`;
@@ -216,6 +217,28 @@ app.get('/api/mealplan', (req, res, next) => {
       })
       .catch(err => {
         next(err);
+      });
+  }
+});
+
+/*    DELETE from MEAL PLAN    */
+
+app.delete('/api/mealplan', (req, res, next) => {
+
+  if (!req.session.userId) {
+    res.json({ error: 'User is not logged in' });
+  } else {
+    const recipeId = req.body.recipeId;
+    const values = [req.session.userId, recipeId];
+    const sql = `
+        DELETE FROM "MealPlan"
+              WHERE "userId" = $1
+              AND "recipeId" = $2
+    `;
+    db.query(sql, values)
+      .then(result => {
+        console.log('deleted');
+        res.status(200).json(result.rows);
       });
   }
 });
