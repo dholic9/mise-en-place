@@ -1,5 +1,6 @@
 import React from 'react';
 import TopBar from './top-bar';
+import NavBar from './nav-bar';
 import { Link } from 'react-router-dom';
 
 export default class ShoppingList extends React.Component {
@@ -62,6 +63,7 @@ export default class ShoppingList extends React.Component {
         <div className="shoppinglist-container">
           {display}
         </div>
+        <NavBar/>
       </React.Fragment>
     );
   }
