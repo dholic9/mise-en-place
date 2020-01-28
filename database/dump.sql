@@ -273,6 +273,10 @@ COPY public."FavoriteRecipes" ("userId", "recipeId") FROM stdin;
 1	4
 2	1
 1	1
+1	5
+11	5
+11	4
+1	2
 \.
 
 
@@ -305,6 +309,19 @@ COPY public."Ingredients" ("ingredientId", "ingredientName") FROM stdin;
 4	vinegar
 23	baking powder
 24	maple syrup
+25	eggplant
+26	tomatoes
+27	squashes
+28	yellow squashes
+29	zucchinis
+30	olive oil
+31	garlic
+32	onion
+33	bell pepper
+34	crushed tomatoes
+35	fresh basil
+36	parsely
+37	thyme
 \.
 
 
@@ -348,6 +365,13 @@ COPY public."Instructions" ("instructionId", "recipeId", "instructionDetail", "i
 33	5	In a third bowl, use a hand mixer to beat the egg whites until soft peaks form.	3	2020-01-24 23:42:44.025916+00
 34	5	Gently combine the bowl of flour with the butter and milk mixture, stirring until combined. Gently fold in the egg whites.	4	2020-01-24 23:43:02.055582+00
 35	5	Pour a large scoop of pancake batter into an 8-inch (20 cm) nonstick pan on low heat. Place the lid on top, and cook for 3 to 5 minutes, or until a toothpick comes out clean. Repeat with remaining batter. Serve with maple syrup.	5	2020-01-24 23:43:52.24922+00
+36	6	Preheat the oven for 375˚F (190˚C).	1	2020-01-27 23:36:06.545553+00
+37	6	Slice the eggplant, tomatoes, squash, and zucchini into approximately ¹⁄₁₆-inch (1-mm) rounds, then set aside.	2	2020-01-27 23:36:31.591753+00
+38	6	Make the sauce: Heat the olive oil in a 12-inch (30-cm) oven-safe pan over medium-high heat. Sauté the onion, garlic, and bell peppers until soft, about 10 minutes. Season with salt and pepper, then add the crushed tomatoes. Stir until the ingredients are fully incorporated. Remove from heat, then add the basil. Stir once more, then smooth the surface of the sauce with a spatula.	3	2020-01-27 23:37:00.574022+00
+39	6	Arrange the sliced veggies in alternating patterns, (for example, eggplant, tomato, squash, zucchini) on top of the sauce from the outer edge to the middle of the pan. Season with salt and pepper.	4	2020-01-27 23:38:57.633306+00
+40	6	Make the herb seasoning: In a small bowl, mix together the basil, garlic, parsley, thyme, salt, pepper, and olive oil. Spoon the herb seasoning over the vegetables.	5	2020-01-27 23:39:17.130042+00
+41	6	Cover the pan with foil and bake for 40 minutes. Uncover, then bake for another 20 minutes, until the vegetables are softened.	6	2020-01-27 23:39:33.559585+00
+42	6	Serve while hot as a main dish or side. The ratatouille is also excellent the next day--cover with foil and reheat in a 350˚F (180˚C) oven for 15 minutes, or simply microwave to desired temperature.	7	2020-01-27 23:39:57.610362+00
 \.
 
 
@@ -362,6 +386,7 @@ COPY public."MealPlan" ("userId", "recipeId") FROM stdin;
 4	4
 4	3
 1	1
+11	5
 \.
 
 
@@ -404,6 +429,20 @@ COPY public."RecipeIngredients" ("ingredientId", "recipeId", quantity, unit, "cr
 2	5	4	-	2020-01-24 23:32:54.168271+00
 23	5	4	tbsp	2020-01-24 23:35:27.261676+00
 24	5	1	-	2020-01-24 23:35:43.164697+00
+25	6	2	-	2020-01-27 23:30:03.231281+00
+26	6	6	-	2020-01-27 23:30:30.505633+00
+27	6	2	-	2020-01-27 23:30:42.101907+00
+28	6	2	-	2020-01-27 23:30:54.216941+00
+28	6	2	-	2020-01-27 23:31:11.242776+00
+29	6	2	-	2020-01-27 23:31:23.053351+00
+30	6	6	tbsp	2020-01-27 23:31:53.386625+00
+31	6	6	tsp	2020-01-27 23:32:47.042349+00
+32	6	1	-	2020-01-27 23:33:09.442333+00
+33	6	2	-	2020-01-27 23:33:23.374741+00
+34	6	28	oz	2020-01-27 23:33:41.352486+00
+35	6	4	tbsp	2020-01-27 23:34:06.355683+00
+36	6	2	tbsp	2020-01-27 23:34:23.486292+00
+37	6	2	tsp	2020-01-27 23:34:33.980932+00
 \.
 
 
@@ -426,11 +465,9 @@ COPY public."Recipes" ("recipeId", "recipeName", category, "numberOfServings", "
 --
 
 COPY public."Users" ("userId", name, "userName", email, password, image, "createdAt") FROM stdin;
-1	Patrick	Star	thisIsPatrick@gmail.com	star	/images/patrickstar.jpg	2020-01-22 00:36:43.874184+00
-2	Spongebob	Sponge	thisIsSpongebob@gmail.com	sponge	/images/spongebob.jpg	2020-01-22 00:37:43.707564+00
-10	1234	1234	1	1	\N	2020-01-24 00:44:13.718546+00
-11	David	neow	no	no	\N	2020-01-24 03:11:40.404757+00
-12	Weilin	horrible	no	no	\N	2020-01-24 03:22:07.297355+00
+17	davidd	hello	somewher@gmail.com	$2b$10$t3QEU1s0k24Xr7LshXVyZ.jS5MTPfX/H5FoQoTYrF8S7TzxjFegDK	\N	2020-01-28 00:24:20.993495+00
+18	Patrick	Star	thisispatrick@gmail.com	$2b$10$VJvq2l2Q45QJCCM13TLdo.UoMyh2KPwpmVz15A85epCGfLawZ.FEu	\N	2020-01-28 00:52:55.168322+00
+19	David	neow	nope	$2b$10$yCBIU1rcyfDdKnGcHtJCoeEa7zjY1.ZOs//FN/65B/EhH/krrbX9O	\N	2020-01-28 00:53:33.567692+00
 \.
 
 
@@ -459,7 +496,7 @@ SELECT pg_catalog.setval('public."Recipes_recipeId_seq"', 6, true);
 -- Name: Users_userId_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('public."Users_userId_seq"', 16, true);
+SELECT pg_catalog.setval('public."Users_userId_seq"', 19, true);
 
 
 --
@@ -512,4 +549,3 @@ GRANT ALL ON SCHEMA public TO PUBLIC;
 --
 -- PostgreSQL database dump complete
 --
-

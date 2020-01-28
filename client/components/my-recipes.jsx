@@ -65,10 +65,13 @@ export default class MyRecipe extends React.Component {
 function FavRecipe(props) {
   return (
     <div className="card">
+      <button type="button" className="close" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
       <div className="card-body row">
         <div className="col-6">
           <Link to={`/recipe-detail-page/${props.recipe.recipeId}`}>
-            <h5 className="card-title">{props.recipe.recipeName}</h5>
+            <h5 className="card-title text-primary">{props.recipe.recipeName}</h5>
           </Link>
           <div className="card-text">
             <div className="category-serving">
