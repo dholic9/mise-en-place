@@ -42,7 +42,7 @@ app.post('/api/users', (req, res, next) => {
             req.session.userId = result.rows[0].userId;
             res.status(200).json(result.rows[0].userId);
           } else {
-            res.send('Incorrect Username or Password');
+            res.status(400).json({ error: 'Incorrect Username or Password' });
             res.redirect('/');
           }
         }
