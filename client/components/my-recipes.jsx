@@ -52,13 +52,11 @@ export default class MyRecipe extends React.Component {
     const display = data.map(element => (<FavRecipe key={element.recipeId} recipe={element} addToMealPlan={this.addToMealPlan}/>));
     return (
       <React.Fragment>
-        <div className="container-fluid mb-4 pb-4 p-0 w-100 fadeIn">
-          <TopBar displayIcon={true} title={'My Recipes'}/>
-          <div className="recipes-container">
-            {display}
-          </div>
-          <NavBar />
+        <TopBar displayIcon={true} title={'My Recipes'}/>
+        <div className="recipes-container">
+          {display}
         </div>
+        <NavBar />
       </React.Fragment>
     );
   }
@@ -66,11 +64,11 @@ export default class MyRecipe extends React.Component {
 
 function FavRecipe(props) {
   return (
-    <div className="card ">
+    <div className="card">
       <div className="card-body row">
         <div className="col-6">
           <Link to={`/recipe-detail-page/${props.recipe.recipeId}`}>
-            <h5 className="card-title">{props.recipe.recipeName}</h5>
+            <h5 className="card-title text-primary">{props.recipe.recipeName}</h5>
           </Link>
           <div className="card-text">
             <div className="category-serving">
