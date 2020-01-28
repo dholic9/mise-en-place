@@ -464,11 +464,9 @@ COPY public."Recipes" ("recipeId", "recipeName", category, "numberOfServings", "
 --
 
 COPY public."Users" ("userId", name, "userName", email, password, image, "createdAt") FROM stdin;
-1	Patrick	Star	thisIsPatrick@gmail.com	star	/images/patrickstar.jpg	2020-01-22 00:36:43.874184+00
-2	Spongebob	Sponge	thisIsSpongebob@gmail.com	sponge	/images/spongebob.jpg	2020-01-22 00:37:43.707564+00
-10	1234	1234	1	1	\N	2020-01-24 00:44:13.718546+00
-11	David	neow	no	no	\N	2020-01-24 03:11:40.404757+00
-12	Weilin	horrible	no	no	\N	2020-01-24 03:22:07.297355+00
+17	davidd	hello	somewher@gmail.com	$2b$10$t3QEU1s0k24Xr7LshXVyZ.jS5MTPfX/H5FoQoTYrF8S7TzxjFegDK	\N	2020-01-28 00:24:20.993495+00
+18	Patrick	Star	thisispatrick@gmail.com	$2b$10$VJvq2l2Q45QJCCM13TLdo.UoMyh2KPwpmVz15A85epCGfLawZ.FEu	\N	2020-01-28 00:52:55.168322+00
+19	David	neow	nope	$2b$10$yCBIU1rcyfDdKnGcHtJCoeEa7zjY1.ZOs//FN/65B/EhH/krrbX9O	\N	2020-01-28 00:53:33.567692+00
 \.
 
 
@@ -497,7 +495,7 @@ SELECT pg_catalog.setval('public."Recipes_recipeId_seq"', 2, true);
 -- Name: Users_userId_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('public."Users_userId_seq"', 16, true);
+SELECT pg_catalog.setval('public."Users_userId_seq"', 19, true);
 
 
 --
