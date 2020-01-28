@@ -68,13 +68,10 @@ app.post('/api/users/create', (req, res, next) => {
       image: req.body.image
     };
     if (err) { console.error(err); }
-
-    console.log('user', user);
-
     const sql = `
       SELECT *
       FROM  "Users"
-  `;
+      `;
     db.query(sql)
       .then(result => {
         const usersDb = result.rows;
@@ -94,7 +91,7 @@ app.post('/api/users/create', (req, res, next) => {
               INSERT INTO "Users" ("name", "userName", "email", "password", "image")
                   VALUES ($1, $2, $3, $4, $5)
                   RETURNING *
-      `;
+              `;
         return (
           db.query(creatingSQL, values)
             .then(result => {
@@ -267,7 +264,7 @@ app.get('/api/shoppinglist', (req, res, next) => {
   }
 });
 
-/* RECIPE DETIAL PAGE */
+/* RECIPE DETAIL PAGE */
 app.get('/api/recipe-detail-page/:recipeId', (req, res, next) => {
   const sql = `
   select "r"."recipeName",
