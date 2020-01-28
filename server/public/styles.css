@@ -92,8 +92,6 @@ a{
   flex-direction: column;
   text-align: center;
   margin-top: 20%;
-  padding-bottom: 66px;
-
 }
 .recipeContainer{
   top: 68px;
@@ -109,15 +107,10 @@ a{
 
 .ratatouille{
   background-image: url("/images/ratatouille.jpg");
-  background-position: center;
   background-size: cover;
-  background-repeat: no-repeat;
-  background-position-x: 75%;
-  object-fit: cover;
   height: 100vh;
   width:100%;
 }
-
 
 .ingredient{
   display: flex;
@@ -165,6 +158,8 @@ a{
 .clickable{
   cursor: pointer;
 }
+<<<<<<< HEAD
+=======
 
 
 .fadeIn{
@@ -195,3 +190,4 @@ a{
 				 1px -1px 0 #000,
 				-1px -1px 0 #000;
 }
+>>>>>>> 161ad9854ee16e57992df8d8562e2a4348cd918a
