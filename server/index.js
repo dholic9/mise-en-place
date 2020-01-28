@@ -223,21 +223,21 @@ app.get('/api/mealplan', (req, res, next) => {
 
 /*    DELETE from MEAL PLAN    */
 
-app.delete('/api/mealplan', (req, res, next) => {
+app.delete('/api/mealplan/:recipeId', (req, res, next) => {
 
   if (!req.session.userId) {
-    res.json({ error: 'User is not logged in' });
+    return res.json({ error: 'User is not logged in' });
   } else {
-    const recipeId = req.body.recipeId;
+    const { recipeId } = req.params;
     const values = [req.session.userId, recipeId];
     const sql = `
         DELETE FROM "MealPlan"
               WHERE "userId" = $1
               AND "recipeId" = $2
+              returning *;
     `;
     db.query(sql, values)
       .then(result => {
-        console.log('deleted');
         res.status(200).json(result.rows);
       });
   }
@@ -261,16 +261,16 @@ app.get('/api/shoppinglist', (req, res, next) => {
           throw new ClientError(`no userId found at userId ${req.session.userId}`, 400);
         } else {
           const sql = `
-      select "i"."ingredientName",
-        "ri"."recipeId",
-        "ri"."quantity",
-        "ri"."unit",
-        "r"."recipeName"
-        from "RecipeIngredients" as "ri"
-        join "MealPlan" as "m" using ("recipeId")
-        join "Recipes" as "r" using ("recipeId")
-        join "Ingredients" as "i" using ("ingredientId")
-        where "m"."userId" = $1`;
+              select "i"."ingredientName",
+                "ri"."recipeId",
+                "ri"."quantity",
+                "ri"."unit",
+                "r"."recipeName"
+                from "RecipeIngredients" as "ri"
+                join "MealPlan" as "m" using ("recipeId")
+                join "Recipes" as "r" using ("recipeId")
+                join "Ingredients" as "i" using ("ingredientId")
+                where "m"."userId" = $1`;
 
           return db.query(sql, params)
             .then(response => {
