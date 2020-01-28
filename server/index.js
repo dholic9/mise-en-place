@@ -232,9 +232,9 @@ app.delete('/api/mealplan/:recipeId', (req, res, next) => {
     const values = [req.session.userId, recipeId];
     const sql = `
         DELETE FROM "MealPlan"
-              WHERE "userId" = $1
-              AND "recipeId" = $2
-              returning *;
+                WHERE "userId" = $1
+                AND "recipeId" = $2
+                RETURNING *;
     `;
     db.query(sql, values)
       .then(result => {

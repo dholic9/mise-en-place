@@ -110,8 +110,6 @@ function Item(props) {
       <div className="row">
         <NavBar />
       </div>
-
     </div>
-
   );
 }

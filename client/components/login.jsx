@@ -2,10 +2,7 @@ import React from 'react';
 import AppContext from '../lib/context';
 import {
   BrowserRouter as Router,
-  Switch,
-  Route,
-  Link,
-  useParams
+  Link
 } from 'react-router-dom';
 
 export default class Login extends React.Component {
