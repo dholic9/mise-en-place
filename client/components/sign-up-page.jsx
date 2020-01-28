@@ -99,7 +99,7 @@ export default class SignUp extends React.Component {
                 <div className="input-group  w-100 flex-row">
                   <div className="input-group-prepend">
                     <span className="input-group-text">
-                      <i className="far fa-user" />
+                      <i className="fas fa-user" />
                     </span>
                   </div>
                   <input

@@ -5,6 +5,8 @@ const db = require('./database');
 const ClientError = require('./client-error');
 const staticMiddleware = require('./static-middleware');
 const sessionMiddleware = require('./session-middleware');
+const bcrypt = require('bcrypt');
+const saltRounds = 10;
 
 const app = express();
 
@@ -21,25 +23,31 @@ app.get('/api/health-check', (req, res, next) => {
 
 /*     USERS login    */
 app.post('/api/users', (req, res, next) => {
+  console.log('req.body', req.body);
   const userName = req.body.userName;
   const password = req.body.password;
-  const values = [userName, password];
+  const values = [userName];
   const sql = `
           SELECT *
           FROM "Users"
-          WHERE "userName" = $1
-            AND "password" = $2;
+          WHERE "userName" = $1;
   `;
 
   db.query(sql, values)
     .then(result => {
-      if (result.rows.length < 1) {
-        throw (new ClientError('User Name of Password is incorrect', 400));
-      }
+      const hash = result.rows[0].password;
 
-      req.session.userId = result.rows[0].userId;
-
-      return res.status(200).json(result.rows[0].userId);
+      return bcrypt.compare(password, hash).then(
+        matches => {
+          if (matches === true) {
+            req.session.userId = result.rows[0].userId;
+            res.status(200).json(result.rows[0].userId);
+          } else {
+            res.send('Incorrect Username or Password');
+            res.redirect('/');
+          }
+        }
+      );
     })
     .catch(err => next(err));
 });
@@ -51,47 +59,53 @@ app.post('/api/users/create', (req, res, next) => {
   if (!req.body.name || !req.body.userName || !req.body.email || !req.body.password) {
     return res.status(401).json({ error: 'invalid user inputs' });
   }
-  const user = {
-    name: req.body.name,
-    userName: req.body.userName,
-    password: req.body.password,
-    email: req.body.email,
-    image: req.body.image
-  };
-  const sql = `
+
+  bcrypt.hash(req.body.password, saltRounds, function (err, hash) {
+    var user = {
+      name: req.body.name,
+      userName: req.body.userName,
+      password: hash,
+      email: req.body.email,
+      image: req.body.image
+    };
+    if (err) { console.error(err); }
+
+    console.log('user', user);
+
+    const sql = `
       SELECT *
       FROM  "Users"
   `;
-  db.query(sql)
-    .then(result => {
-      const usersDb = result.rows;
-      usersDb.map(index => {
-        if (index.userName === user.userName || index.email === user.email) {
-          return res.status(402).json({ error: 'User already exists' });
-        }
-      });
-      const values = [
-        user.name,
-        user.userName,
-        user.email,
-        user.password,
-        user.image
-      ];
-      const creatingSQL = `
+    db.query(sql)
+      .then(result => {
+        const usersDb = result.rows;
+        usersDb.map(index => {
+          if (index.userName === user.userName || index.email === user.email) {
+            return res.status(402).json({ error: 'User already exists' });
+          }
+        });
+        const values = [
+          user.name,
+          user.userName,
+          user.email,
+          user.password,
+          user.image
+        ];
+        const creatingSQL = `
               INSERT INTO "Users" ("name", "userName", "email", "password", "image")
                   VALUES ($1, $2, $3, $4, $5)
                   RETURNING *
       `;
-      return (
-        db.query(creatingSQL, values)
-          .then(result => {
-            res.status(201).json(result.rows[0]);
-          })
-          .catch(err => next(err))
-      );
-    })
-    .catch(err => next(err));
-
+        return (
+          db.query(creatingSQL, values)
+            .then(result => {
+              res.status(201).json(result.rows[0]);
+            })
+            .catch(err => next(err))
+        );
+      })
+      .catch(err => next(err));
+  });
 });
 
 /*   MAIN FEATURED PAGE  GET METHOD */

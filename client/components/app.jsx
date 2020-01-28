@@ -41,8 +41,9 @@ export default class App extends React.Component {
       },
       body: JSON.stringify(user)
     })
-      .then(res => res.ok ? res.json() : Promise.reject(new Error('Incorrect login information')))
+      .then(res => res.json())
       .then(data => {
+        console.log('data', data);
         if (typeof data !== 'number') {
           return console.log('error');
         }
