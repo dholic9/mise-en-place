@@ -37,13 +37,15 @@ export default class App extends React.Component {
       },
       body: JSON.stringify(user)
     })
-      .then(res => res.json())
+      .then(res => res.ok ? res.json() : Promise.reject(new Error('User Name or Password was invalid')))
       .then(data => {
         if (typeof data !== 'number') {
           return console.error('error');
         }
         this.setState({ user: data });
-      }));
+      })
+
+    );
   }
 
   handleUserSignup(user) {
