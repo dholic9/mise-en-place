@@ -33,7 +33,6 @@ export default class App extends React.Component {
   }
 
   handleUserLogin(user) {
-    console.log('user passed in: ', user);
     return (fetch('api/users', {
       method: 'POST',
       headers: {
@@ -41,7 +40,7 @@ export default class App extends React.Component {
       },
       body: JSON.stringify(user)
     })
-      .then(res => res.ok ? res.json() : Promise.reject(new Error('Incorrect login information')))
+      .then(res => res.json())
       .then(data => {
         if (typeof data !== 'number') {
           return console.log('error');
@@ -52,7 +51,6 @@ export default class App extends React.Component {
   }
 
   handleUserSignup(user) {
-    console.log('sign up user: ', user);
     return fetch('api/users/create', {
       method: 'POST',
       headers: {

@@ -5,6 +5,8 @@ const db = require('./database');
 const ClientError = require('./client-error');
 const staticMiddleware = require('./static-middleware');
 const sessionMiddleware = require('./session-middleware');
+const bcrypt = require('bcrypt');
+const saltRounds = 10;
 
 const app = express();
 
@@ -23,23 +25,28 @@ app.get('/api/health-check', (req, res, next) => {
 app.post('/api/users', (req, res, next) => {
   const userName = req.body.userName;
   const password = req.body.password;
-  const values = [userName, password];
+  const values = [userName];
   const sql = `
           SELECT *
           FROM "Users"
-          WHERE "userName" = $1
-            AND "password" = $2;
+          WHERE "userName" = $1;
   `;
 
   db.query(sql, values)
     .then(result => {
-      if (result.rows.length < 1) {
-        throw (new ClientError('User Name of Password is incorrect', 400));
-      }
+      const hash = result.rows[0].password;
 
-      req.session.userId = result.rows[0].userId;
-
-      return res.status(200).json(result.rows[0].userId);
+      return bcrypt.compare(password, hash).then(
+        matches => {
+          if (matches === true) {
+            req.session.userId = result.rows[0].userId;
+            res.status(200).json(result.rows[0].userId);
+          } else {
+            res.send('Incorrect Username or Password');
+            res.redirect('/');
+          }
+        }
+      );
     })
     .catch(err => next(err));
 });
@@ -51,47 +58,50 @@ app.post('/api/users/create', (req, res, next) => {
   if (!req.body.name || !req.body.userName || !req.body.email || !req.body.password) {
     return res.status(401).json({ error: 'invalid user inputs' });
   }
-  const user = {
-    name: req.body.name,
-    userName: req.body.userName,
-    password: req.body.password,
-    email: req.body.email,
-    image: req.body.image
-  };
-  const sql = `
+
+  bcrypt.hash(req.body.password, saltRounds, function (err, hash) {
+    var user = {
+      name: req.body.name,
+      userName: req.body.userName,
+      password: hash,
+      email: req.body.email,
+      image: req.body.image
+    };
+    if (err) { console.error(err); }
+    const sql = `
       SELECT *
       FROM  "Users"
-  `;
-  db.query(sql)
-    .then(result => {
-      const usersDb = result.rows;
-      usersDb.map(index => {
-        if (index.userName === user.userName || index.email === user.email) {
-          return res.status(402).json({ error: 'User already exists' });
-        }
-      });
-      const values = [
-        user.name,
-        user.userName,
-        user.email,
-        user.password,
-        user.image
-      ];
-      const creatingSQL = `
+      `;
+    db.query(sql)
+      .then(result => {
+        const usersDb = result.rows;
+        usersDb.map(index => {
+          if (index.userName === user.userName || index.email === user.email) {
+            return res.status(402).json({ error: 'User already exists' });
+          }
+        });
+        const values = [
+          user.name,
+          user.userName,
+          user.email,
+          user.password,
+          user.image
+        ];
+        const creatingSQL = `
               INSERT INTO "Users" ("name", "userName", "email", "password", "image")
                   VALUES ($1, $2, $3, $4, $5)
                   RETURNING *
-      `;
-      return (
-        db.query(creatingSQL, values)
-          .then(result => {
-            res.status(201).json(result.rows[0]);
-          })
-          .catch(err => next(err))
-      );
-    })
-    .catch(err => next(err));
-
+              `;
+        return (
+          db.query(creatingSQL, values)
+            .then(result => {
+              res.status(201).json(result.rows[0]);
+            })
+            .catch(err => next(err))
+        );
+      })
+      .catch(err => next(err));
+  });
 });
 
 /*   MAIN FEATURED PAGE  GET METHOD */
@@ -140,6 +150,7 @@ app.get('/api/fav', (req, res, next) => {
 });
 
 /*  POST MEAL PLAN  */
+
 app.post('/api/mealplan', (req, res, next) => {
   const { userId } = req.session;
   const { recipeId } = req.body;
@@ -192,11 +203,11 @@ app.get('/api/mealplan', (req, res, next) => {
   } else {
     const params = [req.session.userId];
     const sql = `
-      select  "r"."recipeName",
-              "r"."recipeId",
-            "r"."image",
-            "r"."category",
-            "r"."numberOfServings"
+                    select  "r"."recipeName",
+                            "r"."recipeId",
+                            "r"."image",
+                            "r"."category",
+                            "r"."numberOfServings"
           from "Recipes" as "r"
           join "MealPlan" as "f" using ("recipeId")
           where "f"."userId" = $1;`;
@@ -206,6 +217,28 @@ app.get('/api/mealplan', (req, res, next) => {
       })
       .catch(err => {
         next(err);
+      });
+  }
+});
+
+/*    DELETE from MEAL PLAN    */
+
+app.delete('/api/mealplan/:recipeId', (req, res, next) => {
+
+  if (!req.session.userId) {
+    return res.json({ error: 'User is not logged in' });
+  } else {
+    const { recipeId } = req.params;
+    const values = [req.session.userId, recipeId];
+    const sql = `
+        DELETE FROM "MealPlan"
+              WHERE "userId" = $1
+              AND "recipeId" = $2
+              returning *;
+    `;
+    db.query(sql, values)
+      .then(result => {
+        res.status(200).json(result.rows);
       });
   }
 });
@@ -228,16 +261,16 @@ app.get('/api/shoppinglist', (req, res, next) => {
           throw new ClientError(`no userId found at userId ${req.session.userId}`, 400);
         } else {
           const sql = `
-      select "i"."ingredientName",
-        "ri"."recipeId",
-        "ri"."quantity",
-        "ri"."unit",
-        "r"."recipeName"
-        from "RecipeIngredients" as "ri"
-        join "MealPlan" as "m" using ("recipeId")
-        join "Recipes" as "r" using ("recipeId")
-        join "Ingredients" as "i" using ("ingredientId")
-        where "m"."userId" = $1`;
+              select "i"."ingredientName",
+                "ri"."recipeId",
+                "ri"."quantity",
+                "ri"."unit",
+                "r"."recipeName"
+                from "RecipeIngredients" as "ri"
+                join "MealPlan" as "m" using ("recipeId")
+                join "Recipes" as "r" using ("recipeId")
+                join "Ingredients" as "i" using ("ingredientId")
+                where "m"."userId" = $1`;
 
           return db.query(sql, params)
             .then(response => {
@@ -254,7 +287,7 @@ app.get('/api/shoppinglist', (req, res, next) => {
   }
 });
 
-/* RECIPE DETIAL PAGE */
+/* RECIPE DETAIL PAGE */
 app.get('/api/recipe-detail-page/:recipeId', (req, res, next) => {
   const sql = `
   select "r"."recipeName",
@@ -295,7 +328,6 @@ app.get('/api/recipe-detail-page/:recipeId', (req, res, next) => {
 app.post('/api/fav', (req, res, next) => {
   const { recipeId } = req.body;
   const { userId } = req.session;
-  // const userId = 1;
   if (!userId) {
     next(new ClientError('please sign in to add to favorites', 400));
   } else {
@@ -338,33 +370,6 @@ app.post('/api/fav', (req, res, next) => {
 
 /* ADD A NEW RECIPE */
 /* RECIPENAME, INGREDIENTS, SERVINGSIZE, CATEGORY, INSTRUCTION, IMAGE */
-
-const recipe = {
-  recipeName: 'Hashbrown',
-  createdBy: 'Star',
-  category: 'Breakfast',
-  numberOfServings: 4,
-  image: '/images/hashbrown.jpg',
-  ingredients: [
-    { unit: 'cups', quantity: 4, ingredientName: 'potatoes' },
-    { unit: 'tbsp', quantity: 1, ingredientName: 'salt' },
-    { unit: 'cup', quantity: 1, ingredientName: 'ice' },
-    { unit: 'tbsp', quantity: 1, ingredientName: 'vegetable oil' }
-  ],
-  instructions: [
-    { instructionDetail: 'Place the shredded potatoes in a 2 quart bowl.', instructionOrder: 1 },
-    { instructionDetail: 'Add the salt and ice and enough water to cover the potatoes and stir to mix in the salt.', instructionOrder: 2 },
-    { instructionDetail: 'Place the soaked potatoes in a colander and rinse with cold water then drain completely.', instructionOrder: 3 },
-    { instructionDetail: 'Heat a large, cast iron skillet over medium heat and add enough vegetable oil to lightly coat the bottom of the pan.', instructionOrder: 4 },
-    { instructionDetail: 'When the skillet is hot, add the drained potatoes to the skillet and evenly spread them around (do not press them down or they will get mushy).', instructionOrder: 5 },
-    { instructionDetail: 'Fry, without stirring, until crisp on the bottom, about 12-15 minutes. When browned, carefully flip them over and cook for 3-5 more minutes. Do not cover the hash browns while cooking.', instructionOrder: 6 }
-  ]
-
-};
-
-// insert into recipe table, return recipeID
-// insert into instructions
-// insert
 
 app.post('/api/recipe', (req, res, next) => {
   if (recipe) {

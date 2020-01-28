@@ -8,6 +8,7 @@ export default class MealPlan extends React.Component {
     this.state = {
       mealPlan: []
     };
+    this.deleteMealPlan = this.deleteMealPlan.bind(this);
   }
 
   componentDidMount() {
@@ -25,17 +26,40 @@ export default class MealPlan extends React.Component {
       });
   }
 
+  deleteMealPlan(recipeId) {
+    console.log('recipeId', recipeId);
+    const init = {
+      method: 'DELETE',
+      body: {
+        recipeId: JSON.stringify(recipeId)
+      }
+    };
+    fetch(`/api/mealplan/${recipeId}`, init)
+      .then(response => response.json())
+      .then(data => {
+        const tempState = [...this.state.mealPlan];
+        for (let i = 0; i < tempState.length; i++) {
+          if (tempState[i].recipeId === recipeId) {
+            tempState.splice(i, 1);
+          }
+        }
+        this.setState({ mealPlan: tempState });
+
+      });
+  }
+
   render() {
     const data = this.state.mealPlan;
     const display = data.map(element =>
       (<MealPlanRecipe
         key={element.recipeId}
         recipe={element}
+        delete={this.deleteMealPlan}
       />));
     return (
       <React.Fragment>
-        <TopBar displayIcon={false} title={'Meal Plan'}/>
-        <div className="recipes-container">
+        <TopBar displayIcon={true} title={'Meal Plan'}/>
+        <div className="recipes-container fadeIn">
           {display}
         </div>
         <NavBar/>
@@ -46,21 +70,26 @@ export default class MealPlan extends React.Component {
 
 function MealPlanRecipe(props) {
   return (
-    <Link to={`/recipe-detail-page/${props.recipe.recipeId}`}>
-      <div className="card">
-        <div className="card-body row">
-          <div className="col-6">
-            <h5 className="card-title">{props.recipe.recipeName}</h5>
-            <div className="card-text">
-              <div className="category-serving">
-                <p>Category: {props.recipe.category}</p>
-                <p>Serving: {props.recipe.numberOfServings}</p>
-              </div>
+
+    <div className="card">
+      <button type="button" onClick={() => { props.delete(props.recipe.recipeId); }} className="close" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+      <div className="card-body row">
+        <div className="col-6">
+          <Link to={`/recipe-detail-page/${props.recipe.recipeId}`}>
+            <h5 className="card-title text-primary">{props.recipe.recipeName}</h5>
+          </Link>
+          <div className="card-text">
+            <div className="category-serving">
+              <p>Category: {props.recipe.category}</p>
+              <p>Serving: {props.recipe.numberOfServings}</p>
             </div>
           </div>
-          <img className="picture col-6" src={props.recipe.image} />
         </div>
-      </div >
-    </Link>
+        <img className="picture col-6" src={props.recipe.image} />
+      </div>
+    </div >
+
   );
 }

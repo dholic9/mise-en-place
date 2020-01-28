@@ -30,7 +30,7 @@ a{
   width: fit-content;
 }
 .featured{
-  padding-top: 68px;
+  padding-top: 67px;
   padding-bottom: 67px;
 
 }
@@ -55,7 +55,7 @@ a{
   width: 100%;
   font-size: 1.5rem;
   font-weight: bold;
-  background-color: rgba(219, 219, 219, 0.993);
+  background-color: rgb(14, 14, 14);
 }
 .nav-bar {
   bottom: -2px;
@@ -86,12 +86,16 @@ a{
   font-size: 3rem;
   color: rgb(61, 153, 214);
 }
+.shoppinglist-container{
+  margin-bottom: 17%;
+}
 
 .recipes-container, .shoppinglist-container{
   display: flex;
   flex-direction: column;
   text-align: center;
   margin-top: 20%;
+  margin-bottom: 66px;
 }
 .recipeContainer{
   top: 68px;
@@ -107,15 +111,10 @@ a{
 
 .ratatouille{
   background-image: url("/images/ratatouille.jpg");
-  background-position: center;
   background-size: cover;
-  background-repeat: no-repeat;
-  background-position-x: 75%;
-  object-fit: cover;
   height: 100vh;
   width:100%;
 }
-
 
 .ingredient{
   display: flex;
@@ -125,9 +124,7 @@ a{
 .quantity{
   text-align: center;
 }
-.login-title{
-  background-color: rgba(230, 230, 230, 0.459);
-}
+
 .ing{
   width: 99%;
 }
@@ -164,4 +161,45 @@ a{
 }
 .clickable{
   cursor: pointer;
+}
+
+
+.fadeIn{
+  animation: fadein 1s ease-in-out;
+}
+.longFadeIn{
+  animation: fadein 2s ease-in-out;
+}
+@keyframes fadein {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+.nav-bar > a:hover {
+  border-bottom: 3px solid black;
+}
+.black{
+  color: black;
+}
+
+.blue{
+  color: blue;
+}
+.signup{
+  color: whitesmoke;
+  text-shadow: -1px 1px 0 #000,
+				  1px 1px 0 #000,
+				 1px -1px 0 #000,
+				-1px -1px 0 #000;
+}
+
+.checkbox{
+  height: 24px;
+  width: 24px;
+}
+
+.close{
+  position: absolute;
+  right: 1%;
+  width: 20px;
 }
