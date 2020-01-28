@@ -48,7 +48,7 @@ class RecipeDetailPage extends React.Component {
   render() {
     const recipe = this.state.recipe;
     return (
-      <div className="recipeContainer">
+      <div className="recipeContainer fadeIn">
         <TopBar displayIcon={true} title={this.state.recipe.recipeName} />
         <div className="recipeInfo text-center">
           <div className="category">Category: {recipe.category}</div>
