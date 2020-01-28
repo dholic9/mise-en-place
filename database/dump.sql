@@ -20,6 +20,7 @@ ALTER TABLE ONLY public."Users" DROP CONSTRAINT "Users_pkey";
 ALTER TABLE ONLY public."Recipes" DROP CONSTRAINT "Recipes_pkey";
 ALTER TABLE ONLY public."Instructions" DROP CONSTRAINT "Instructions_pkey";
 ALTER TABLE ONLY public."Ingredients" DROP CONSTRAINT "Ingredients_pkey";
+ALTER TABLE ONLY public."Ingredients" DROP CONSTRAINT "Ingredients_ingredientName_key";
 ALTER TABLE public."Users" ALTER COLUMN "userId" DROP DEFAULT;
 ALTER TABLE public."Recipes" ALTER COLUMN "recipeId" DROP DEFAULT;
 ALTER TABLE public."Instructions" ALTER COLUMN "instructionId" DROP DEFAULT;
@@ -455,7 +456,7 @@ COPY public."Recipes" ("recipeId", "recipeName", category, "numberOfServings", "
 4	Crepes	Breakfast	4	Patrick	/images/Crepes.jpg	2020-01-22 00:34:02.745628+00
 3	Scrambled Eggs	Breakfast	2	Patrick	/images/scrambleEggs.jpeg	2020-01-23 08:00:00+00
 5	Fluffy Pancake	Breakfast	4	David	/images/Fluffy-Pancake.png	2020-01-24 23:25:16.890037+00
-6	Ratatouille	Lunch/Dinner	8	SpongeBob	/images/ratatouille.jpg	2020-01-27 23:27:47.756103+00
+6	Hashbrown	Breakfast	4	Star	/images/hashbrown.jpg	2020-01-28 19:10:03.107054+00
 \.
 
 
@@ -474,21 +475,21 @@ COPY public."Users" ("userId", name, "userName", email, password, image, "create
 -- Name: Ingredients_ingredientId_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('public."Ingredients_ingredientId_seq"', 4, true);
+SELECT pg_catalog.setval('public."Ingredients_ingredientId_seq"', 24, true);
 
 
 --
 -- Name: Instructions_instructionId_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('public."Instructions_instructionId_seq"', 1, false);
+SELECT pg_catalog.setval('public."Instructions_instructionId_seq"', 35, true);
 
 
 --
 -- Name: Recipes_recipeId_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('public."Recipes_recipeId_seq"', 2, true);
+SELECT pg_catalog.setval('public."Recipes_recipeId_seq"', 6, true);
 
 
 --
@@ -496,6 +497,14 @@ SELECT pg_catalog.setval('public."Recipes_recipeId_seq"', 2, true);
 --
 
 SELECT pg_catalog.setval('public."Users_userId_seq"', 19, true);
+
+
+--
+-- Name: Ingredients Ingredients_ingredientName_key; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public."Ingredients"
+    ADD CONSTRAINT "Ingredients_ingredientName_key" UNIQUE ("ingredientName");
 
 
 --
@@ -540,4 +549,3 @@ GRANT ALL ON SCHEMA public TO PUBLIC;
 --
 -- PostgreSQL database dump complete
 --
-

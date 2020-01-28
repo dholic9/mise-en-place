@@ -368,7 +368,131 @@ app.post('/api/fav', (req, res, next) => {
   }
 });
 
-/* USER CAN ADD RECIPES */
+/* ADD A NEW RECIPE */
+/* RECIPENAME, INGREDIENTS, SERVINGSIZE, CATEGORY, INSTRUCTION, IMAGE */
+app.post('/api/recipe', (req, res, next) => {
+  const recipe = req.body.recipe;
+  if (recipe) {
+    let newRecipeId = null;
+    const params = [recipe.recipeName, recipe.category, recipe.numberOfServings, recipe.createdBy, recipe.image];
+    const sql = `
+      insert into "Recipes"("recipeName", "category", "numberOfServings", "createdBy", "image")
+      values($1, $2, $3, $4, $5)
+      returning "recipeId";`;
+    db.query(sql, params)
+      .then(response => {
+        const recipeId = response.rows[0].recipeId;
+        return recipeId;
+      })
+      .then(recipeId => {
+        const insertValue = recipe.ingredients.map(ingredient => {
+          return `('${ingredient.ingredientName}')`;
+        }).join(',');
+        const sql = `
+        insert into "Ingredients" ("ingredientName")
+        values ${insertValue}
+        on conflict ("ingredientName")
+        do nothing
+        `;
+        return db.query(sql)
+          .then(response => {
+            return recipeId;
+          });
+      })
+      .then(recipeId => {
+        const searchValue = recipe.ingredients.map(ingredient => {
+          return `'${ingredient.ingredientName}'`;
+        }).join(',');
+        const sql = `
+       select *
+          from "Ingredients"
+          where "ingredientName" in (${searchValue})
+       `;
+        return db.query(sql)
+          .then(response => {
+            newRecipeId = recipeId;
+            return response.rows;
+          });
+      })
+      .then(ingredientAndId => {
+        ingredientAndId.forEach(element => {
+          recipe.ingredients.forEach(ingredient => {
+            if (ingredient.ingredientName === element.ingredientName) {
+              const { unit, quantity } = ingredient;
+              element.unit = unit;
+              element.quantity = quantity;
+              element.recipeId = newRecipeId;
+              delete element.ingredientName;
+            }
+          });
+        });
+        const insertValueForIngredients = ingredientAndId.map(element => {
+          return `(${element.ingredientId},${element.recipeId},${element.quantity},'${element.unit}')`;
+        }).join(',');
+        const sql = `
+        insert into "RecipeIngredients"("ingredientId", "recipeId", "quantity", "unit")
+        values ${insertValueForIngredients}
+        returning "recipeId"`;
+        return db.query(sql)
+          .then(response => {
+            return response.rows[0].recipeId;
+          });
+      })
+      .then(recipeId => {
+        const insertValueForInstructions = recipe.instructions.map(instruction => {
+          return `(${recipeId},'${instruction.instructionDetail}',${instruction.instructionOrder})`;
+        }).join(',');
+        const sql = `
+        insert into "Instructions"("recipeId", "instructionDetail", "instructionOrder")
+        values ${insertValueForInstructions}
+        returning "instructionId"`;
+        return db.query(sql)
+          .then(response => {
+            return recipeId;
+          });
+      })
+      .then(recipeId => {
+        const sql = `
+        select "r"."recipeName",
+         "r"."category",
+         "r"."numberOfServings",
+         "r"."image",
+         "r"."recipeId",
+         to_json(array(
+           select "ingredientsArray"
+           from (select "ri"."unit",
+                        "ri"."quantity",
+                        "ri"."ingredientId",
+                        "i"."ingredientName"
+                   from "RecipeIngredients" as "ri"
+                   join "Ingredients" as "i" using ("ingredientId")
+                  where "ri"."recipeId" = "r"."recipeId") as "ingredientsArray"
+         )) as "ingredients",
+         to_json(array(
+           select "instructionsArray"
+           from (select "in"."instructionDetail",
+                        "in"."instructionOrder"
+                  from "Instructions" as "in"
+                  where "in"."recipeId" = "r"."recipeId") as "instructionsArray"
+                  order by "instructionOrder" ASC
+         )) as "instructions"
+         from "Recipes" as "r"
+         where "r"."recipeId" = $1
+         group by "r"."recipeId"`;
+        const params = [recipeId];
+        db.query(sql, params)
+          .then(response => {
+            if (response.rows.length !== 0) {
+              res.json(response.rows);
+            }
+          });
+      })
+      .catch(err => { next(err); });
+
+  } else {
+    next(new ClientError('please log in or sign up to post a new recipe', 400));
+  }
+});
 
 app.use('/api', (req, res, next) => {
   next(new ClientError(`cannot ${req.method} ${req.originalUrl}`, 404));
