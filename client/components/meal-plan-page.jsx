@@ -34,7 +34,7 @@ export default class MealPlan extends React.Component {
       />));
     return (
       <React.Fragment>
-        <TopBar displayIcon={false} title={'Meal Plan'}/>
+        <TopBar displayIcon={true} title={'Meal Plan'}/>
         <div className="recipes-container fadeIn">
           {display}
         </div>

@@ -23,7 +23,6 @@ app.get('/api/health-check', (req, res, next) => {
 
 /*     USERS login    */
 app.post('/api/users', (req, res, next) => {
-  console.log('req.body', req.body);
   const userName = req.body.userName;
   const password = req.body.password;
   const values = [userName];

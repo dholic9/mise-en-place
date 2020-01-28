@@ -19,7 +19,7 @@ class RecipeDetailPage extends React.Component {
   getRecipe() {
     fetch(`/api/recipe-detail-page/${this.props.match.params.recipeId}`)
       .then(response => response.json())
-      .then(recipe => this.setState({ recipe }))
+      .then(recipe => this.setState({ recipe: recipe }))
       .catch(err => console.error(err));
   }
 
