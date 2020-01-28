@@ -26,7 +26,7 @@ export default class TopBar extends React.Component {
         <div className="title-text col-12 p-0 text-center">
           {this.props.title}
         </div>
-        <Link to={'/mealplan'}>
+        <Link to={'/shoppingList'}>
           {iconDisplay}
         </Link>
       </div>

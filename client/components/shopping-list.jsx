@@ -1,6 +1,6 @@
 import React from 'react';
 import TopBar from './top-bar';
-import { Link } from 'react-router-dom';
+import NavBar from './nav-bar';
 
 export default class ShoppingList extends React.Component {
   constructor(props) {
@@ -90,6 +90,10 @@ function Item(props) {
 
         </div>
       </div>
+      <div className="row">
+        <NavBar />
+      </div>
+
     </div>
 
   );

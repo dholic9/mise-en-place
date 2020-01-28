@@ -336,6 +336,52 @@ app.post('/api/fav', (req, res, next) => {
   }
 });
 
+/* ADD A NEW RECIPE */
+/* RECIPENAME, INGREDIENTS, SERVINGSIZE, CATEGORY, INSTRUCTION, IMAGE */
+
+const recipe = {
+  recipeName: 'Hashbrown',
+  createdBy: 'Star',
+  category: 'Breakfast',
+  numberOfServings: 4,
+  image: '/images/hashbrown.jpg',
+  ingredients: [
+    { unit: 'cups', quantity: 4, ingredientName: 'potatoes' },
+    { unit: 'tbsp', quantity: 1, ingredientName: 'salt' },
+    { unit: 'cup', quantity: 1, ingredientName: 'ice' },
+    { unit: 'tbsp', quantity: 1, ingredientName: 'vegetable oil' }
+  ],
+  instructions: [
+    { instructionDetail: 'Place the shredded potatoes in a 2 quart bowl.', instructionOrder: 1 },
+    { instructionDetail: 'Add the salt and ice and enough water to cover the potatoes and stir to mix in the salt.', instructionOrder: 2 },
+    { instructionDetail: 'Place the soaked potatoes in a colander and rinse with cold water then drain completely.', instructionOrder: 3 },
+    { instructionDetail: 'Heat a large, cast iron skillet over medium heat and add enough vegetable oil to lightly coat the bottom of the pan.', instructionOrder: 4 },
+    { instructionDetail: 'When the skillet is hot, add the drained potatoes to the skillet and evenly spread them around (do not press them down or they will get mushy).', instructionOrder: 5 },
+    { instructionDetail: 'Fry, without stirring, until crisp on the bottom, about 12-15 minutes. When browned, carefully flip them over and cook for 3-5 more minutes. Do not cover the hash browns while cooking.', instructionOrder: 6 }
+  ]
+
+};
+
+// insert into recipe table, return recipeID
+// insert into instructions
+// insert
+
+app.post('/api/recipe', (req, res, next) => {
+  if (recipe) {
+    const sql = `
+      insert into "Recipes"("recipeName", "category", "numberOfServings", "createdBy", "image")
+      values('cupcake', 'dessert', 4, 'Weilin', '/image/cupcake.jpg')
+      returning "recipeId";`;
+    db.query(sql)
+      .then(response => {
+        console.log(response.rows);
+      })
+      .catch(err => { next(err); });
+  } else {
+    next(new ClientError('please log in or sign up to post a new recipe', 400));
+  }
+});
+
 app.use('/api', (req, res, next) => {
   next(new ClientError(`cannot ${req.method} ${req.originalUrl}`, 404));
 });
