@@ -26,9 +26,12 @@ export default class MealPlan extends React.Component {
       });
   }
 
-  deleteMealPlan() {
+  deleteMealPlan(recipeId) {
     const init = {
-      method: 'DELETE'
+      method: 'DELETE',
+      body: {
+        recipeId: recipeId
+      }
     };
     fetch('/api/mealplan', init)
       .then(response => response.json())
@@ -69,7 +72,7 @@ function MealPlanRecipe(props) {
   return (
 
     <div className="card">
-      <button type="button" onClick={props.delete} className="close" aria-label="Close">
+      <button type="button" onClick={() => { props.delete(props.recipe.recipeId); }} className="close" aria-label="Close">
         <span aria-hidden="true">&times;</span>
       </button>
       <div className="card-body row">
