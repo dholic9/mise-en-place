@@ -13,7 +13,7 @@ function renderListItem(recipe, index) {
 }
 
 function RecipeList({ recipes }) {
-
+  recipes = recipes.sort(() => Math.random() - 0.5);
   return (
     <div className="my-recipe">
       {recipes.map(renderListItem)}

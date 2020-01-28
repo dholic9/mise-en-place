@@ -70,6 +70,17 @@ export default class ShoppingList extends React.Component {
 
 }
 
+function capitalizeWords(string) {
+  return string
+    .toLowerCase()
+    .split(' ')
+    .map(function (word) {
+      return word[0].toUpperCase() + word.substr(1);
+    })
+    .join(' ');
+
+}
+
 function Item(props) {
   const details = props.ingredient.recipe.map((element, index) => {
     const unit = element.unit === '-' ? '' : element.unit;
@@ -77,11 +88,14 @@ function Item(props) {
       <p className="text-left" key={index}>{`${element.quantity} ${unit} for ${element.recipeName}`}</p>)
     ;
   });
+
+  const tempName = props.ingredient.ingredientName;
+
   return (
 
     <div className="card mb-1">
       <div className="card-body">
-        <h5 className="card-title text-center">{props.ingredient.ingredientName}</h5>
+        <h5 className="card-title text-center">{<u>{capitalizeWords(tempName)}</u>}</h5>
         <div className="card-text row">
           <div className="col-3 align-items-center justify-content-center d-flex">
             <i className="fas fa-times" onClick={() => { props.remove(props.ingredient.ingredientName); }}></i>
