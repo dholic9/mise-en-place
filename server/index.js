@@ -338,45 +338,125 @@ app.post('/api/fav', (req, res, next) => {
 
 /* ADD A NEW RECIPE */
 /* RECIPENAME, INGREDIENTS, SERVINGSIZE, CATEGORY, INSTRUCTION, IMAGE */
-
-const recipe = {
-  recipeName: 'Hashbrown',
-  createdBy: 'Star',
-  category: 'Breakfast',
-  numberOfServings: 4,
-  image: '/images/hashbrown.jpg',
-  ingredients: [
-    { unit: 'cups', quantity: 4, ingredientName: 'potatoes' },
-    { unit: 'tbsp', quantity: 1, ingredientName: 'salt' },
-    { unit: 'cup', quantity: 1, ingredientName: 'ice' },
-    { unit: 'tbsp', quantity: 1, ingredientName: 'vegetable oil' }
-  ],
-  instructions: [
-    { instructionDetail: 'Place the shredded potatoes in a 2 quart bowl.', instructionOrder: 1 },
-    { instructionDetail: 'Add the salt and ice and enough water to cover the potatoes and stir to mix in the salt.', instructionOrder: 2 },
-    { instructionDetail: 'Place the soaked potatoes in a colander and rinse with cold water then drain completely.', instructionOrder: 3 },
-    { instructionDetail: 'Heat a large, cast iron skillet over medium heat and add enough vegetable oil to lightly coat the bottom of the pan.', instructionOrder: 4 },
-    { instructionDetail: 'When the skillet is hot, add the drained potatoes to the skillet and evenly spread them around (do not press them down or they will get mushy).', instructionOrder: 5 },
-    { instructionDetail: 'Fry, without stirring, until crisp on the bottom, about 12-15 minutes. When browned, carefully flip them over and cook for 3-5 more minutes. Do not cover the hash browns while cooking.', instructionOrder: 6 }
-  ]
-
-};
-
-// insert into recipe table, return recipeID
-// insert into instructions
-// insert
-
 app.post('/api/recipe', (req, res, next) => {
+  const recipe = req.body.recipe;
   if (recipe) {
+    let newRecipeId = null;
+    const params = [recipe.recipeName, recipe.category, recipe.numberOfServings, recipe.createdBy, recipe.image];
     const sql = `
       insert into "Recipes"("recipeName", "category", "numberOfServings", "createdBy", "image")
-      values('cupcake', 'dessert', 4, 'Weilin', '/image/cupcake.jpg')
+      values($1, $2, $3, $4, $5)
       returning "recipeId";`;
-    db.query(sql)
+    db.query(sql, params)
       .then(response => {
-        console.log(response.rows);
+        const recipeId = response.rows[0].recipeId;
+        return recipeId;
+      })
+      .then(recipeId => {
+        const insertValue = recipe.ingredients.map(ingredient => {
+          return `('${ingredient.ingredientName}')`;
+        }).join(',');
+        const sql = `
+        insert into "Ingredients" ("ingredientName")
+        values ${insertValue}
+        on conflict ("ingredientName")
+        do nothing
+        `;
+        return db.query(sql)
+          .then(response => {
+            return recipeId;
+          });
+      })
+      .then(recipeId => {
+        const searchValue = recipe.ingredients.map(ingredient => {
+          return `'${ingredient.ingredientName}'`;
+        }).join(',');
+        const sql = `
+       select *
+          from "Ingredients"
+          where "ingredientName" in (${searchValue})
+       `;
+        return db.query(sql)
+          .then(response => {
+            newRecipeId = recipeId;
+            return response.rows;
+          });
+      })
+      .then(ingredientAndId => {
+        ingredientAndId.forEach(element => {
+          recipe.ingredients.forEach(ingredient => {
+            if (ingredient.ingredientName === element.ingredientName) {
+              const { unit, quantity } = ingredient;
+              element.unit = unit;
+              element.quantity = quantity;
+              element.recipeId = newRecipeId;
+              delete element.ingredientName;
+            }
+          });
+        });
+        const insertValueForIngredients = ingredientAndId.map(element => {
+          return `(${element.ingredientId},${element.recipeId},${element.quantity},'${element.unit}')`;
+        }).join(',');
+        const sql = `
+        insert into "RecipeIngredients"("ingredientId", "recipeId", "quantity", "unit")
+        values ${insertValueForIngredients}
+        returning "recipeId"`;
+        return db.query(sql)
+          .then(response => {
+            return response.rows[0].recipeId;
+          });
+      })
+      .then(recipeId => {
+        const insertValueForInstructions = recipe.instructions.map(instruction => {
+          return `(${recipeId},'${instruction.instructionDetail}',${instruction.instructionOrder})`;
+        }).join(',');
+        const sql = `
+        insert into "Instructions"("recipeId", "instructionDetail", "instructionOrder")
+        values ${insertValueForInstructions}
+        returning "instructionId"`;
+        return db.query(sql)
+          .then(response => {
+            return recipeId;
+          });
+      })
+      .then(recipeId => {
+        const sql = `
+        select "r"."recipeName",
+         "r"."category",
+         "r"."numberOfServings",
+         "r"."image",
+         "r"."recipeId",
+         to_json(array(
+           select "ingredientsArray"
+           from (select "ri"."unit",
+                        "ri"."quantity",
+                        "ri"."ingredientId",
+                        "i"."ingredientName"
+                   from "RecipeIngredients" as "ri"
+                   join "Ingredients" as "i" using ("ingredientId")
+                  where "ri"."recipeId" = "r"."recipeId") as "ingredientsArray"
+         )) as "ingredients",
+         to_json(array(
+           select "instructionsArray"
+           from (select "in"."instructionDetail",
+                        "in"."instructionOrder"
+                  from "Instructions" as "in"
+                  where "in"."recipeId" = "r"."recipeId") as "instructionsArray"
+                  order by "instructionOrder" ASC
+         )) as "instructions"
+         from "Recipes" as "r"
+         where "r"."recipeId" = $1
+         group by "r"."recipeId"`;
+        const params = [recipeId];
+        db.query(sql, params)
+          .then(response => {
+            if (response.rows.length !== 0) {
+              res.json(response.rows);
+            }
+          });
       })
       .catch(err => { next(err); });
+
   } else {
     next(new ClientError('please log in or sign up to post a new recipe', 400));
   }
