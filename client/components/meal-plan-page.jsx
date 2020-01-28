@@ -27,7 +27,6 @@ export default class MealPlan extends React.Component {
   }
 
   deleteMealPlan(recipeId) {
-    console.log('recipeId', recipeId);
     const init = {
       method: 'DELETE',
       body: {
@@ -44,7 +43,6 @@ export default class MealPlan extends React.Component {
           }
         }
         this.setState({ mealPlan: tempState });
-
       });
   }
 

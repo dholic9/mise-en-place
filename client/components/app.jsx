@@ -43,11 +43,10 @@ export default class App extends React.Component {
       .then(res => res.json())
       .then(data => {
         if (typeof data !== 'number') {
-          return console.log('error');
+          return console.error('error');
         }
         this.setState({ user: data });
       }));
-
   }
 
   handleUserSignup(user) {

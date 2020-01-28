@@ -1,6 +1,9 @@
 .recipe{
   height: 100vmin;
 }
+.body{
+  width: 100%;
+}
 
 a{
   text-decoration: none;

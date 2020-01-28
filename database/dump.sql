@@ -277,6 +277,9 @@ COPY public."FavoriteRecipes" ("userId", "recipeId") FROM stdin;
 11	5
 11	4
 1	2
+19	6
+19	5
+20	6
 \.
 
 
@@ -468,6 +471,7 @@ COPY public."Users" ("userId", name, "userName", email, password, image, "create
 17	davidd	hello	somewher@gmail.com	$2b$10$t3QEU1s0k24Xr7LshXVyZ.jS5MTPfX/H5FoQoTYrF8S7TzxjFegDK	\N	2020-01-28 00:24:20.993495+00
 18	Patrick	Star	thisispatrick@gmail.com	$2b$10$VJvq2l2Q45QJCCM13TLdo.UoMyh2KPwpmVz15A85epCGfLawZ.FEu	\N	2020-01-28 00:52:55.168322+00
 19	David	neow	nope	$2b$10$yCBIU1rcyfDdKnGcHtJCoeEa7zjY1.ZOs//FN/65B/EhH/krrbX9O	\N	2020-01-28 00:53:33.567692+00
+20	weilin	weilin	thisisweilin@gmail.com	$2b$10$QNvqawWafKd6QBSZPLfQvu3aKPf4043NH/K0HCgsZb4feXsynuVKi	\N	2020-01-28 19:43:59.577698+00
 \.
 
 
@@ -496,7 +500,7 @@ SELECT pg_catalog.setval('public."Recipes_recipeId_seq"', 6, true);
 -- Name: Users_userId_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('public."Users_userId_seq"', 19, true);
+SELECT pg_catalog.setval('public."Users_userId_seq"', 20, true);
 
 
 --
@@ -549,3 +553,4 @@ GRANT ALL ON SCHEMA public TO PUBLIC;
 --
 -- PostgreSQL database dump complete
 --
+
