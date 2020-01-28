@@ -34,21 +34,23 @@ app.post('/api/users', (req, res, next) => {
 
   db.query(sql, values)
     .then(result => {
-      const hash = result.rows[0].password;
+      if (!result.rows[0]) {
+        return next(new ClientError('Incorrect User Name or Password', 400));
+      } else {
+        const hash = result.rows[0].password;
 
-      return bcrypt.compare(password, hash).then(
-        matches => {
-          if (matches === true) {
-            req.session.userId = result.rows[0].userId;
-            res.status(200).json(result.rows[0].userId);
-          } else {
-            res.send('Incorrect Username or Password');
-            res.redirect('/');
-          }
-        }
-      );
-    })
-    .catch(err => next(err));
+        return bcrypt.compare(password, hash)
+          .then(matches => {
+            if (matches === true) {
+              req.session.userId = result.rows[0].userId;
+              return res.status(200).json(result.rows[0].userId);
+            } else {
+              res.json({ error: 'Incorrect Username or Password' });
+              res.redirect('/login');
+            }
+          });
+      }
+    });
 });
 
 /*     POST USERS Sign Up  */
@@ -232,9 +234,9 @@ app.delete('/api/mealplan/:recipeId', (req, res, next) => {
     const values = [req.session.userId, recipeId];
     const sql = `
         DELETE FROM "MealPlan"
-              WHERE "userId" = $1
-              AND "recipeId" = $2
-              returning *;
+                WHERE "userId" = $1
+                AND "recipeId" = $2
+                RETURNING *;
     `;
     db.query(sql, values)
       .then(result => {
