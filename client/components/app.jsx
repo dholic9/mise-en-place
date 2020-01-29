@@ -1,10 +1,7 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
 import {
   BrowserRouter as Router,
-  Switch,
   Route,
-  Link,
   Redirect
 } from 'react-router-dom';
 import MyRecipes from './my-recipes';
@@ -40,13 +37,15 @@ export default class App extends React.Component {
       },
       body: JSON.stringify(user)
     })
-      .then(res => res.json())
+      .then(res => res.ok ? res.json() : Promise.reject(new Error('User Name or Password was invalid')))
       .then(data => {
         if (typeof data !== 'number') {
           return console.error('error');
         }
         this.setState({ user: data });
-      }));
+      })
+
+    );
   }
 
   handleUserSignup(user) {

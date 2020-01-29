@@ -45,6 +45,7 @@ a{
   height: 100vmin;
   object-fit: cover;
 }
+
 .outline{
   text-shadow:
     -1px -1px 0 #000,

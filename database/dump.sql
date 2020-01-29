@@ -436,7 +436,6 @@ COPY public."RecipeIngredients" ("ingredientId", "recipeId", quantity, unit, "cr
 26	6	6	-	2020-01-27 23:30:30.505633+00
 27	6	2	-	2020-01-27 23:30:42.101907+00
 28	6	2	-	2020-01-27 23:30:54.216941+00
-28	6	2	-	2020-01-27 23:31:11.242776+00
 29	6	2	-	2020-01-27 23:31:23.053351+00
 30	6	6	tbsp	2020-01-27 23:31:53.386625+00
 31	6	6	tsp	2020-01-27 23:32:47.042349+00
@@ -459,7 +458,7 @@ COPY public."Recipes" ("recipeId", "recipeName", category, "numberOfServings", "
 4	Crepes	Breakfast	4	Patrick	/images/Crepes.jpg	2020-01-22 00:34:02.745628+00
 3	Scrambled Eggs	Breakfast	2	Patrick	/images/scrambleEggs.jpeg	2020-01-23 08:00:00+00
 5	Fluffy Pancake	Breakfast	4	David	/images/Fluffy-Pancake.png	2020-01-24 23:25:16.890037+00
-6	Hashbrown	Breakfast	4	Star	/images/hashbrown.jpg	2020-01-28 19:10:03.107054+00
+6	Ratatouille	Lunch/Dinner	8	Patrick	/images/ratatouille.jpg	2020-01-28 19:59:53.676632+00
 \.
 
 
@@ -493,7 +492,7 @@ SELECT pg_catalog.setval('public."Instructions_instructionId_seq"', 35, true);
 -- Name: Recipes_recipeId_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('public."Recipes_recipeId_seq"', 6, true);
+SELECT pg_catalog.setval('public."Recipes_recipeId_seq"', 7, true);
 
 
 --
