@@ -210,11 +210,11 @@ a{
 }
 
 .fadeIn{
-  animation: fadein 1s ease-in-out;
+  animation: fadein 0.75s ease-in-out;
 }
 
 .longFadeIn{
-  animation: fadein 2s ease-in-out;
+  animation: fadein 1s ease-in-out;
 }
 
 @keyframes fadein {
