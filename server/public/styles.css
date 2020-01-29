@@ -10,9 +10,11 @@ a{
 .my-recipe{
   width: 100%;
 }
+
 .row{
   margin: 0;
 }
+
 .logo{
   height: 80px;
   width: 80px;
@@ -20,6 +22,7 @@ a{
   top: -8px;
   left: 2px;
 }
+
 .recipeName{
   bottom: 50px;
   font-size: x-large;
@@ -29,16 +32,18 @@ a{
   left: 25px;
   width: fit-content;
 }
+
 .featured{
   padding-top: 67px;
   padding-bottom: 67px;
-
 }
+
 .image{
   width: 100%;
   height: 100vmin;
   object-fit: cover;
 }
+
 .outline{
   text-shadow:
     -1px -1px 0 #000,
@@ -57,6 +62,7 @@ a{
   font-weight: bold;
   background-color: rgb(14, 14, 14);
 }
+
 .nav-bar {
   bottom: -2px;
   right:0;
@@ -65,23 +71,29 @@ a{
   color: white;
   background-color: rgb(197, 197, 197);
 }
+
 .white{
   color: white
 }
+
 .black{
   color:black
 }
+
 .picture{
   height: 150px;
   width: 30px;
   object-fit: cover;
 }
+
 .fa-utensils, .fa-times{
   cursor: pointer;
 }
+
 .shoppinglist-container .card-title{
   font-size: 2rem;
 }
+
 .fa-times{
   font-size: 3rem;
   color: rgb(61, 153, 214);
@@ -93,14 +105,17 @@ a{
   text-align: center;
   margin-top: 20%;
 }
+
 .recipeContainer{
   top: 68px;
   position: absolute;
   padding-bottom: 66px;
 }
+
 .button-container{
   font-size: 2rem;
 }
+
 .button-container .fas{
  cursor: pointer;
 }
@@ -149,31 +164,28 @@ a{
   font-size: xx-large;
 }
 
-.icon{
-  cursor: pointer;
-  position: absolute;
-  right:0;
-  top: 2.5vh;
-}
+
 .clickable{
   cursor: pointer;
 }
 
-
 .fadeIn{
   animation: fadein 1s ease-in-out;
 }
+
 .longFadeIn{
   animation: fadein 2s ease-in-out;
 }
+
 @keyframes fadein {
-    from { opacity: 0; }
-    to   { opacity: 1; }
+  from { opacity: 0; }
+  to   { opacity: 1; }
 }
 
 .nav-bar > a:hover {
   border-bottom: 3px solid black;
 }
+
 .black{
   color: black;
 }
@@ -181,10 +193,103 @@ a{
 .blue{
   color: blue;
 }
+
 .signup{
   color: whitesmoke;
   text-shadow: -1px 1px 0 #000,
-				  1px 1px 0 #000,
-				 1px -1px 0 #000,
-				-1px -1px 0 #000;
+  1px 1px 0 #000,
+  1px -1px 0 #000,
+  -1px -1px 0 #000;
+}
+        
+.mealPlanIcon{
+  position: absolute;
+  right: 25px;
+  top: 22px;
+}
+.addRecipeIcon{
+  position: absolute;
+  left: 25px;
+  top: 22px;
+}
+
+.newRecipeContainer{
+  margin-top: 68px;
+  flex-wrap: wrap;
+}
+
+.servingsInputField{
+  margin-bottom: 10px;
+}
+
+.newRecipeLabel{
+ width: 100%;
+ font-size: x-large;
+}
+
+.newRecipeInput{
+  border-radius: 25px;
+  text-align: center;
+  font-size: x-large;
+  display: block;
+  margin: auto;
+}
+
+.addNewIngredientField{
+  display: flex;
+}
+
+.ingredientsHeader{
+  font-size: xx-large;
+  background-color: tomato;
+  text-align: center;
+}
+
+.newIngredientLabel{
+  font-size: x-large;
+  width: 50%;
+}
+
+.newIngredientInput{
+  border-radius: 25px;
+  width: 50%;
+}
+
+.ingredientContainer{
+  display: flex;
+}
+
+.addedQuantity{
+  width: 20%;
+  text-align: center;
+}
+
+.addedUnit{
+  width: 20%;
+}
+
+.addedIngredient{
+  width: 60%;
+  text-align: center;
+}
+
+.newIngredientInput{
+  text-align: center;
+  font-size: x-large;
+}
+
+.addNewIngredientField{
+  margin-top:5px;
+  margin-bottom: 5px;
+}
+
+.newInstructionInput{
+  width: 80%;
+  border-radius: 25px;
+  margin: auto;
+  height: auto;
+}
+
+.addIngredent{
+  justify-content: center;
 }

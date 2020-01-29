@@ -59,7 +59,7 @@ export default class ShoppingList extends React.Component {
     const display = data.map((element, index) => (<Item key={index} remove={this.removeItem}ingredient={element}/>));
     return (
       <React.Fragment>
-        <TopBar title={'Shopping List'} displayIcon={false}/>
+        <TopBar title={'Shopping List'} mealPlanIcon={false} addRecipeIcon={false}/>
         <div className="shoppinglist-container">
           {display}
         </div>

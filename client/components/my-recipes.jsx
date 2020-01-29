@@ -53,7 +53,7 @@ export default class MyRecipe extends React.Component {
     return (
       <React.Fragment>
         <div className="container-fluid mb-4 pb-4 p-0 w-100 fadeIn">
-          <TopBar displayIcon={true} title={'My Recipes'}/>
+          <TopBar mealPlanIcon={true} addRecipeIcon={true} title={'My Recipes'}/>
           <div className="recipes-container">
             {display}
           </div>
