@@ -85,7 +85,7 @@ export default class MyRecipe extends React.Component {
 function FavRecipe(props) {
   return (
     <div className="card fadeIn">
-      <button type="button" className="close" aria-label="Close">
+      <button type="button" className="close" onClick={() => { props.delete(props.recipe.recipeId); }}aria-label="Close">
         <span aria-hidden="true">&times;</span>
       </button>
       <div className="card-body row">
