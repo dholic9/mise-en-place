@@ -78,7 +78,7 @@ export default class SignUp extends React.Component {
           <h1 className="pink">Sign Up</h1>
           <div className="col-12 col-md-10">
             <form onSubmit={this.handleUserSubmit} className="input-group  flex-column">
-              <div className="form-group my-4">
+              <div className="form-group py-2">
                 <div className="input-group  w-100 flex-row">
                   <input
                     type="text"
@@ -90,7 +90,7 @@ export default class SignUp extends React.Component {
                   />
                 </div>
               </div>
-              <div className="form-group my-4">
+              <div className="form-group py-2">
                 <div className="input-group  w-100 flex-row">
                   <input
                     type="text"
@@ -102,7 +102,7 @@ export default class SignUp extends React.Component {
                   />
                 </div>
               </div>
-              <div className="form-group my-4">
+              <div className="form-group py-2">
                 <div className="input-group  w-100 flex-row">
                   <input
                     type="text"
@@ -114,7 +114,7 @@ export default class SignUp extends React.Component {
                   />
                 </div>
               </div>
-              <div className="form-group my-4 ">
+              <div className="form-group py-2 ">
                 <div className="input-group  w-100 flex-row">
                   <input
                     type="password"
@@ -125,7 +125,7 @@ export default class SignUp extends React.Component {
                     onChange={this.handlePasswordChange} />
                 </div>
               </div>
-              <div className="form-group my-4">
+              <div className="form-group py-2">
                 <div className="input-group text-center w-100 flex-row">
                   <input
                     type="password"
