@@ -65,7 +65,7 @@ a{
   width: 100%;
   font-size: 1.5rem;
   font-weight: bold;
-  background-color: rgb(14, 14, 14);
+  background-color:#feb2a8;
 }
 
 .nav-bar {
@@ -74,7 +74,7 @@ a{
   height: 69px;
   font-size: 2em;
   color: white;
-  background-color: rgb(197, 197, 197);
+  background-color: #d11141 ;
 }
 
 .white{
@@ -244,8 +244,8 @@ a{
 
 .mealPlanIcon{
   position: absolute;
-  right: 25px;
-  top: 22px;
+  right: 16px;
+  top: 6px;
 }
 .addRecipeIcon{
   position: absolute;
