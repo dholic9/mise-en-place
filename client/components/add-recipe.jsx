@@ -9,8 +9,8 @@ class AddRecipe extends React.Component {
       recipeName: '',
       createdBy: '',
       category: '',
-      numberOfServings: 4,
-      image: '',
+      numberOfServings: '',
+      image: null,
       ingredients: [],
       instructions: [],
       ingredientInProgress: {
@@ -126,8 +126,10 @@ class AddRecipe extends React.Component {
     this.setState({ instructionInProgress: instructionCopy });
   }
 
-  handleFile(e) {
-    this.setState({ image: e.target.files[0] });
+  handleFile(event) {
+    event.preventDefault();
+    const imageData = new FormData();
+    imageData.append('recipeImage', this.fileInput.current.files[0]);
   }
 
   render() {
@@ -144,7 +146,7 @@ class AddRecipe extends React.Component {
             <input type="text" value={this.state.category} onChange={this.handleCategory} className="newRecipeInput" />
           </div>
           <div className="servingsInputField">
-            <label htmlFor="category" className="newRecipeLabel">Number of Servings:</label>
+            <label htmlFor="unit" className="newRecipeLabel">Number of Servings:</label>
             <input type="text" value={this.state.numberofservings} onChange={this.handleServings} className="newRecipeInput" />
           </div>
           <form className="addIngredients" onSubmit={this.handleAddIngredient}>
@@ -173,7 +175,14 @@ class AddRecipe extends React.Component {
           </div>
           <button className="addIngredientButton">Add Instruction</button>
         </form>
-        <input type="file" onChange={this.handleFile}/>
+        <form onSubmit={this.handleFile}>
+          <label>
+            Upload Image:
+            <input type="file" ref={this.fileInput} />
+          </label>
+          <br/>
+          <button type="submit">Submit</button>
+        </form>
       </>
     );
   }
