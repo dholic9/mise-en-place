@@ -2,6 +2,7 @@ import React from 'react';
 import TopBar from './top-bar';
 import { Link } from 'react-router-dom';
 import NavBar from './nav-bar';
+import Swal from 'sweetalert2';
 export default class MealPlan extends React.Component {
   constructor(props) {
     super(props);
@@ -28,20 +29,17 @@ export default class MealPlan extends React.Component {
 
   deleteMealPlan(recipeId) {
     const init = {
-      method: 'DELETE',
-      body: {
-        recipeId: JSON.stringify(recipeId)
-      }
+      method: 'DELETE'
     };
     fetch(`/api/mealplan/${recipeId}`, init)
-      .then(response => response.json())
-      .then(data => {
+      .then(() => {
         const tempState = [...this.state.mealPlan];
         for (let i = 0; i < tempState.length; i++) {
           if (tempState[i].recipeId === recipeId) {
             tempState.splice(i, 1);
           }
         }
+        Swal.fire('Meal plan successfully deleted!');
         this.setState({ mealPlan: tempState });
       });
   }

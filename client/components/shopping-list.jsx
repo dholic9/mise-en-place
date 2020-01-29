@@ -1,11 +1,12 @@
 import React from 'react';
 import TopBar from './top-bar';
 import NavBar from './nav-bar';
+import Swal from 'sweetalert2';
 
 export default class ShoppingList extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { shoppingList: [] };
+    this.state = { shoppingList: [], errorMessage: '' };
     this.removeItem = this.removeItem.bind(this);
   }
 
@@ -20,7 +21,11 @@ export default class ShoppingList extends React.Component {
     fetch('/api/shoppinglist', init)
       .then(response => response.json())
       .then(shoppingList => {
-        this.setState({ shoppingList });
+        if (!shoppingList.error) {
+          this.setState({ shoppingList });
+        } else {
+          this.setState(state => ({ shoppingList: [], errorMessage: shoppingList.error }), () => { Swal.fire(this.state.errorMessage); });
+        }
       });
   }
 

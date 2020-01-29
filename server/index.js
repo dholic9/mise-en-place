@@ -182,7 +182,7 @@ app.post('/api/mealplan', (req, res, next) => {
   const { userId } = req.session;
   const { recipeId } = req.body;
   if (!userId) {
-    next(new ClientError('please sign in to add to meal plan', 400));
+    next(new ClientError('Please sign in to add to meal plan', 400));
   } else {
     const sql = `
       select "recipeId"
@@ -192,7 +192,7 @@ app.post('/api/mealplan', (req, res, next) => {
     db.query(sql, params)
       .then(response => {
         if (!response.rows.length) {
-          throw new ClientError('cannot add to meal plan with a non-existing recipe', 400);
+          throw new ClientError('Cannot add to meal plan with a non-existing recipe', 400);
         } else {
           const sql = `
           select "recipeId"
@@ -202,7 +202,7 @@ app.post('/api/mealplan', (req, res, next) => {
           db.query(sql, params)
             .then(response => {
               if (response.rows.length) {
-                throw new ClientError('meal plan already exists', 400);
+                throw new ClientError('Item already in your meal plan!', 400);
               } else {
                 const sql = `
                     insert into "MealPlan"("userId", "recipeId")
@@ -265,8 +265,29 @@ app.delete('/api/mealplan/:recipeId', (req, res, next) => {
     `;
     db.query(sql, values)
       .then(result => {
-        res.status(200).json(result.rows);
-      });
+        res.status(204).json(result.rows);
+      })
+      .catch(err => { next(err); });
+  }
+});
+
+/*    DELETE from MY RECIPES    */
+app.delete('/api/myrecipes/:recipeId', (req, res, next) => {
+  if (!req.session.userId) {
+    next(new ClientError('Please log in or sign up first!'), 400);
+  } else {
+    const { recipeId } = req.params;
+    const sql = `
+        delete from "FavoriteRecipes"
+              where "userId" = $1
+              and "recipeId" = $2
+              returning *`;
+    const params = [req.session.userId, recipeId];
+    db.query(sql, params)
+      .then(response => {
+        res.status(204).json(response.rows);
+      })
+      .catch(err => { next(err); });
   }
 });
 
@@ -301,6 +322,7 @@ app.get('/api/shoppinglist', (req, res, next) => {
 
           return db.query(sql, params)
             .then(response => {
+              console.log(response.rows);
               if (!response.rows.length) {
                 throw new ClientError('Please add recipes to your meal plan to see shopping list', 400);
               } else {
@@ -399,7 +421,7 @@ app.post('/api/fav', (req, res, next) => {
 /* RECIPENAME, INGREDIENTS, SERVINGSIZE, CATEGORY, INSTRUCTION, IMAGE */
 app.post('/api/recipe', (req, res, next) => {
   const recipe = req.body.recipe;
-  if (recipe) {
+  if (req.session.userId) {
     let newRecipeId = null;
     const params = [recipe.recipeName, recipe.category, recipe.numberOfServings, recipe.createdBy, recipe.image];
     const sql = `
@@ -471,9 +493,17 @@ app.post('/api/recipe', (req, res, next) => {
         }).join(',');
         const sql = `
         insert into "Instructions"("recipeId", "instructionDetail", "instructionOrder")
-        values ${insertValueForInstructions}
-        returning "instructionId"`;
+        values ${insertValueForInstructions}`;
         return db.query(sql)
+          .then(response => {
+            return recipeId;
+          });
+      })
+      .then(recipeId => {
+        const sql = `insert into "FavoriteRecipes" ("userId", "recipeId")
+                      values ($1, $2)`;
+        const value = [req.session.userId, recipeId];
+        return db.query(sql, value)
           .then(response => {
             return recipeId;
           });
