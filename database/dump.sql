@@ -280,6 +280,9 @@ COPY public."FavoriteRecipes" ("userId", "recipeId") FROM stdin;
 19	6
 19	5
 20	6
+18	3
+18	4
+18	6
 \.
 
 
@@ -390,6 +393,9 @@ COPY public."MealPlan" ("userId", "recipeId") FROM stdin;
 4	3
 1	1
 11	5
+19	6
+18	4
+20	6
 \.
 
 
@@ -467,10 +473,11 @@ COPY public."Recipes" ("recipeId", "recipeName", category, "numberOfServings", "
 --
 
 COPY public."Users" ("userId", name, "userName", email, password, image, "createdAt") FROM stdin;
-17	davidd	hello	somewher@gmail.com	$2b$10$t3QEU1s0k24Xr7LshXVyZ.jS5MTPfX/H5FoQoTYrF8S7TzxjFegDK	\N	2020-01-28 00:24:20.993495+00
-18	Patrick	Star	thisispatrick@gmail.com	$2b$10$VJvq2l2Q45QJCCM13TLdo.UoMyh2KPwpmVz15A85epCGfLawZ.FEu	\N	2020-01-28 00:52:55.168322+00
-19	David	neow	nope	$2b$10$yCBIU1rcyfDdKnGcHtJCoeEa7zjY1.ZOs//FN/65B/EhH/krrbX9O	\N	2020-01-28 00:53:33.567692+00
-20	weilin	weilin	thisisweilin@gmail.com	$2b$10$QNvqawWafKd6QBSZPLfQvu3aKPf4043NH/K0HCgsZb4feXsynuVKi	\N	2020-01-28 19:43:59.577698+00
+18	Patrick	Star	thisispatrick@gmail.com	$2b$10$VJvq2l2Q45QJCCM13TLdo.UoMyh2KPwpmVz15A85epCGfLawZ.FEu	/images/patrickstar.jpg	2020-01-28 00:52:55.168322+00
+17	davidd	hello	somewher@gmail.com	$2b$10$t3QEU1s0k24Xr7LshXVyZ.jS5MTPfX/H5FoQoTYrF8S7TzxjFegDK	/images/scottishfold.jpg	2020-01-28 00:24:20.993495+00
+21	spongebob	bob	thisisspongebob@gmail.com	$2b$10$m/d1vDpP9iTgmDARpaXdPO/RtEbNRvXV8REhromdFqx6i4yWeyqn2	/images/spongebob.gif	2020-01-29 00:16:48.061811+00
+20	weilin	weilin	thisisweilin@gmail.com	$2b$10$QNvqawWafKd6QBSZPLfQvu3aKPf4043NH/K0HCgsZb4feXsynuVKi	/images/weilin.gif	2020-01-28 19:43:59.577698+00
+19	David	neow	nope	$2b$10$yCBIU1rcyfDdKnGcHtJCoeEa7zjY1.ZOs//FN/65B/EhH/krrbX9O	/images/sadPatrick.gif	2020-01-28 00:53:33.567692+00
 \.
 
 
@@ -499,7 +506,7 @@ SELECT pg_catalog.setval('public."Recipes_recipeId_seq"', 7, true);
 -- Name: Users_userId_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('public."Users_userId_seq"', 20, true);
+SELECT pg_catalog.setval('public."Users_userId_seq"', 21, true);
 
 
 --
