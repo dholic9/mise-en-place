@@ -70,25 +70,20 @@ export default class SignUp extends React.Component {
 
   render() {
     return (
-      <div className="container-fluid d-flex ratatouille flex-column fadeIn">
-        <div className="row justify-content-center  mt-2 mb-3">
+      <div className="container-fluid align-items-center d-flex login-background flex-column fadeIn">
+        <div className="row justify-content-center  mt-2 ">
           <img src="/images/logo1.png" height="150" width="200" alt="loading" />
         </div>
-        <div className="row justify-content-around text-light ">
-          <h1 className="signup">Sign Up</h1>
+        <div className="row text-center p-2 flex-row intro-card card justify-content-around text-light ">
+          <h1 className="pink">Sign Up</h1>
           <div className="col-12 col-md-10">
             <form onSubmit={this.handleUserSubmit} className="input-group  flex-column">
               <div className="form-group my-4">
                 <div className="input-group  w-100 flex-row">
-                  <div className="input-group-prepend">
-                    <span className="input-group-text">
-                      <i className="fas fa-user" />
-                    </span>
-                  </div>
                   <input
                     type="text"
                     placeholder="Name"
-                    className="form-control w-70"
+                    className="form-control text-center input-rounding w-70"
                     required
                     autoFocus
                     onChange={this.handleNameChange}
@@ -97,15 +92,10 @@ export default class SignUp extends React.Component {
               </div>
               <div className="form-group my-4">
                 <div className="input-group  w-100 flex-row">
-                  <div className="input-group-prepend">
-                    <span className="input-group-text">
-                      <i className="fas fa-user" />
-                    </span>
-                  </div>
                   <input
                     type="text"
                     placeholder="User Name"
-                    className="form-control w-70"
+                    className="form-control text-center input-rounding w-70"
                     required
                     autoFocus
                     onChange={this.handleUserNameChange}
@@ -114,15 +104,10 @@ export default class SignUp extends React.Component {
               </div>
               <div className="form-group my-4">
                 <div className="input-group  w-100 flex-row">
-                  <div className="input-group-prepend">
-                    <span className="input-group-text">
-                      <i className="fas fa-envelope" />
-                    </span>
-                  </div>
                   <input
                     type="text"
                     placeholder="Email"
-                    className="form-control w-70"
+                    className="form-control text-center input-rounding w-70"
                     required
                     autoFocus
                     onChange={this.handleEmailChange}
@@ -131,31 +116,21 @@ export default class SignUp extends React.Component {
               </div>
               <div className="form-group my-4 ">
                 <div className="input-group  w-100 flex-row">
-                  <div className="input-group-prepend">
-                    <span className="input-group-text">
-                      <i className="fas fa-key" />
-                    </span>
-                  </div>
                   <input
                     type="password"
                     placeholder="Password"
-                    className="form-control w-70"
+                    className="form-control text-center input-rounding w-70"
                     required
                     autoFocus
                     onChange={this.handlePasswordChange} />
                 </div>
               </div>
               <div className="form-group my-4">
-                <div className="input-group  w-100 flex-row">
-                  <div className="input-group-prepend">
-                    <span className="input-group-text">
-                      <i className="fas fa-lock" />
-                    </span>
-                  </div>
+                <div className="input-group text-center w-100 flex-row">
                   <input
                     type="password"
                     placeholder="Re-enter Password"
-                    className="form-control w-70"
+                    className="form-control text-center input-rounding w-70"
                     required
                     autoFocus
                     onChange={this.handleVerifypasswordChange}
@@ -165,13 +140,13 @@ export default class SignUp extends React.Component {
               <div className="input-group-append flex-column w-100 justify-content-center align-items-center">
                 <button
                   type="submit"
-                  className="btn btn-primary rounded my-2">
+                  className="btn login-button rounded my-2">
                     Create Account
                 </button>
                 <Link to="/login">
                   <button
                     type="button"
-                    className="btn btn-light rounded my-2">
+                    className="btn signup-button rounded my-2">
                   Back to Login Page
                   </button>
                 </Link>
