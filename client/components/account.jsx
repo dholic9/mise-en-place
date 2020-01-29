@@ -1,9 +1,8 @@
 import React from 'react';
 import AppContext from '../lib/context';
-import Link from 'react-router-dom';
 import TopBar from './top-bar';
 import NavBar from './nav-bar';
-
+import Swal from 'sweetalert2';
 export default class Account extends React.Component {
   constructor(props) {
     super(props);
@@ -25,7 +24,7 @@ export default class Account extends React.Component {
     fetch('/api/users/logout')
       .then(response => response.json())
       .then(data => {
-
+        Swal.fire('You have logged out!');
         this.props.history.push('/login');
       });
   }
