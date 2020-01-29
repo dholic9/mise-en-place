@@ -3,6 +3,7 @@ import IngredientListItem from './ingredient-list-item';
 import InstructionListItem from './instruction-list-item';
 import TopBar from './top-bar';
 import NavBar from './nav-bar';
+import Swal from 'sweetalert2';
 
 class RecipeDetailPage extends React.Component {
   constructor(props) {
@@ -82,9 +83,9 @@ function addToFav(recipeId) {
     .then(response => response.json())
     .then(result => {
       if (!result.error) {
-        window.alert('added to My Recipes');
+        Swal.fire('Added to your recipes!');
       } else {
-        window.alert(result.error);
+        Swal.fire(result.error);
       }
     });
 }

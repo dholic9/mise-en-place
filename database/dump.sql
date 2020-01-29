@@ -20,6 +20,7 @@ ALTER TABLE ONLY public."Users" DROP CONSTRAINT "Users_pkey";
 ALTER TABLE ONLY public."Recipes" DROP CONSTRAINT "Recipes_pkey";
 ALTER TABLE ONLY public."Instructions" DROP CONSTRAINT "Instructions_pkey";
 ALTER TABLE ONLY public."Ingredients" DROP CONSTRAINT "Ingredients_pkey";
+ALTER TABLE ONLY public."Ingredients" DROP CONSTRAINT "Ingredients_ingredientName_key";
 ALTER TABLE public."Users" ALTER COLUMN "userId" DROP DEFAULT;
 ALTER TABLE public."Recipes" ALTER COLUMN "recipeId" DROP DEFAULT;
 ALTER TABLE public."Instructions" ALTER COLUMN "instructionId" DROP DEFAULT;
@@ -276,6 +277,12 @@ COPY public."FavoriteRecipes" ("userId", "recipeId") FROM stdin;
 11	5
 11	4
 1	2
+19	6
+19	5
+20	6
+18	3
+18	4
+18	6
 \.
 
 
@@ -386,6 +393,9 @@ COPY public."MealPlan" ("userId", "recipeId") FROM stdin;
 4	3
 1	1
 11	5
+19	6
+18	4
+20	6
 \.
 
 
@@ -432,7 +442,6 @@ COPY public."RecipeIngredients" ("ingredientId", "recipeId", quantity, unit, "cr
 26	6	6	-	2020-01-27 23:30:30.505633+00
 27	6	2	-	2020-01-27 23:30:42.101907+00
 28	6	2	-	2020-01-27 23:30:54.216941+00
-28	6	2	-	2020-01-27 23:31:11.242776+00
 29	6	2	-	2020-01-27 23:31:23.053351+00
 30	6	6	tbsp	2020-01-27 23:31:53.386625+00
 31	6	6	tsp	2020-01-27 23:32:47.042349+00
@@ -455,7 +464,7 @@ COPY public."Recipes" ("recipeId", "recipeName", category, "numberOfServings", "
 4	Crepes	Breakfast	4	Patrick	/images/Crepes.jpg	2020-01-22 00:34:02.745628+00
 3	Scrambled Eggs	Breakfast	2	Patrick	/images/scrambleEggs.jpeg	2020-01-23 08:00:00+00
 5	Fluffy Pancake	Breakfast	4	David	/images/Fluffy-Pancake.png	2020-01-24 23:25:16.890037+00
-6	Ratatouille	Lunch/Dinner	8	SpongeBob	/images/ratatouille.jpg	2020-01-27 23:27:47.756103+00
+6	Ratatouille	Lunch/Dinner	8	Patrick	/images/ratatouille.jpg	2020-01-28 19:59:53.676632+00
 \.
 
 
@@ -464,9 +473,11 @@ COPY public."Recipes" ("recipeId", "recipeName", category, "numberOfServings", "
 --
 
 COPY public."Users" ("userId", name, "userName", email, password, image, "createdAt") FROM stdin;
-17	davidd	hello	somewher@gmail.com	$2b$10$t3QEU1s0k24Xr7LshXVyZ.jS5MTPfX/H5FoQoTYrF8S7TzxjFegDK	\N	2020-01-28 00:24:20.993495+00
-18	Patrick	Star	thisispatrick@gmail.com	$2b$10$VJvq2l2Q45QJCCM13TLdo.UoMyh2KPwpmVz15A85epCGfLawZ.FEu	\N	2020-01-28 00:52:55.168322+00
-19	David	neow	nope	$2b$10$yCBIU1rcyfDdKnGcHtJCoeEa7zjY1.ZOs//FN/65B/EhH/krrbX9O	\N	2020-01-28 00:53:33.567692+00
+18	Patrick	Star	thisispatrick@gmail.com	$2b$10$VJvq2l2Q45QJCCM13TLdo.UoMyh2KPwpmVz15A85epCGfLawZ.FEu	/images/patrickstar.jpg	2020-01-28 00:52:55.168322+00
+17	davidd	hello	somewher@gmail.com	$2b$10$t3QEU1s0k24Xr7LshXVyZ.jS5MTPfX/H5FoQoTYrF8S7TzxjFegDK	/images/scottishfold.jpg	2020-01-28 00:24:20.993495+00
+21	spongebob	bob	thisisspongebob@gmail.com	$2b$10$m/d1vDpP9iTgmDARpaXdPO/RtEbNRvXV8REhromdFqx6i4yWeyqn2	/images/spongebob.gif	2020-01-29 00:16:48.061811+00
+20	weilin	weilin	thisisweilin@gmail.com	$2b$10$QNvqawWafKd6QBSZPLfQvu3aKPf4043NH/K0HCgsZb4feXsynuVKi	/images/weilin.gif	2020-01-28 19:43:59.577698+00
+19	David	neow	nope	$2b$10$yCBIU1rcyfDdKnGcHtJCoeEa7zjY1.ZOs//FN/65B/EhH/krrbX9O	/images/sadPatrick.gif	2020-01-28 00:53:33.567692+00
 \.
 
 
@@ -474,28 +485,36 @@ COPY public."Users" ("userId", name, "userName", email, password, image, "create
 -- Name: Ingredients_ingredientId_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('public."Ingredients_ingredientId_seq"', 4, true);
+SELECT pg_catalog.setval('public."Ingredients_ingredientId_seq"', 24, true);
 
 
 --
 -- Name: Instructions_instructionId_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('public."Instructions_instructionId_seq"', 1, false);
+SELECT pg_catalog.setval('public."Instructions_instructionId_seq"', 35, true);
 
 
 --
 -- Name: Recipes_recipeId_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('public."Recipes_recipeId_seq"', 2, true);
+SELECT pg_catalog.setval('public."Recipes_recipeId_seq"', 7, true);
 
 
 --
 -- Name: Users_userId_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('public."Users_userId_seq"', 19, true);
+SELECT pg_catalog.setval('public."Users_userId_seq"', 21, true);
+
+
+--
+-- Name: Ingredients Ingredients_ingredientName_key; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public."Ingredients"
+    ADD CONSTRAINT "Ingredients_ingredientName_key" UNIQUE ("ingredientName");
 
 
 --

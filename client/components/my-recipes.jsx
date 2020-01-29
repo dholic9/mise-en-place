@@ -2,6 +2,7 @@ import React from 'react';
 import TopBar from './top-bar';
 import { Link } from 'react-router-dom';
 import NavBar from './nav-bar';
+import Swal from 'sweetalert2';
 
 export default class MyRecipe extends React.Component {
   constructor(props) {
@@ -10,6 +11,7 @@ export default class MyRecipe extends React.Component {
       favoriteRecipes: []
     };
     this.addToMealPlan = this.addToMealPlan.bind(this);
+    this.deleteFavRecipes = this.deleteFavRecipes.bind(this);
   }
 
   componentDidMount() {
@@ -28,6 +30,24 @@ export default class MyRecipe extends React.Component {
       });
   }
 
+  deleteFavRecipes(recipeId) {
+    const init = {
+      method: 'DELETE'
+    };
+    fetch(`/api/myrecipes/${recipeId}`, init)
+      .then(() => {
+        const newFavRecipes = [...this.state.favoriteRecipes];
+        newFavRecipes.forEach((recipe, index) => {
+          if (recipe.recipeId === recipeId) {
+            newFavRecipes.splice(index, 1);
+          }
+        });
+        Swal.fire('Successfully removed from your favorite recipes!');
+        this.setState({ favoriteRecipes: newFavRecipes });
+      });
+
+  }
+
   addToMealPlan(recipeId) {
     const userId = 4;
     const reqBody = { recipeId, userId };
@@ -40,16 +60,16 @@ export default class MyRecipe extends React.Component {
       .then(response => response.json())
       .then(result => {
         if (!result.error) {
-          window.alert('added to meal plan');
+          Swal.fire('Added to meal plan!');
         } else {
-          window.alert(result.error);
+          Swal.fire(result.error);
         }
       });
   }
 
   render() {
     const data = this.state.favoriteRecipes;
-    const display = data.map(element => (<FavRecipe key={element.recipeId} recipe={element} addToMealPlan={this.addToMealPlan}/>));
+    const display = data.map(element => (<FavRecipe key={element.recipeId} recipe={element} delete={this.deleteFavRecipes} addToMealPlan={this.addToMealPlan}/>));
     return (
       <React.Fragment>
         <div className="container-fluid mb-4 pb-4 p-0 w-100 fadeIn">
@@ -59,6 +79,7 @@ export default class MyRecipe extends React.Component {
           </div>
           <NavBar />
         </div>
+        <NavBar />
       </React.Fragment>
     );
   }
@@ -66,11 +87,14 @@ export default class MyRecipe extends React.Component {
 
 function FavRecipe(props) {
   return (
-    <div className="card ">
+    <div className="card fadeIn">
+      <button type="button" className="close" onClick={() => { props.delete(props.recipe.recipeId); }}aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
       <div className="card-body row">
         <div className="col-6">
           <Link to={`/recipe-detail-page/${props.recipe.recipeId}`}>
-            <h5 className="card-title">{props.recipe.recipeName}</h5>
+            <h5 className="card-title text-primary">{props.recipe.recipeName}</h5>
           </Link>
           <div className="card-text">
             <div className="category-serving">

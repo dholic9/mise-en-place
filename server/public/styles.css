@@ -1,6 +1,12 @@
 .recipe{
   height: 100vmin;
 }
+body{
+  width: 100%;
+  font-family: 'Kalam', cursive;
+  font-size: 1.5rem;
+  font-weight: bold;
+}
 
 a{
   text-decoration: none;
@@ -98,12 +104,16 @@ a{
   font-size: 3rem;
   color: rgb(61, 153, 214);
 }
+.shoppinglist-container{
+  margin-bottom: 17%;
+}
 
 .recipes-container, .shoppinglist-container{
   display: flex;
   flex-direction: column;
   text-align: center;
   margin-top: 20%;
+  margin-bottom: 66px;
 }
 
 .recipeContainer{
@@ -164,7 +174,18 @@ a{
   font-size: xx-large;
 }
 
-
+.icon{
+  cursor: pointer;
+  position: absolute;
+  right:0;
+  top: 2.5vh;
+}
+.account-icon{
+  width: 50%;
+  height: 70%;
+  object-fit: cover;
+  border-radius: 50%;
+}
 .clickable{
   cursor: pointer;
 }
@@ -292,4 +313,17 @@ a{
 
 .addIngredent{
   justify-content: center;
+}
+.checkbox{
+  height: 24px;
+  width: 24px;
+}
+
+.close{
+  position: absolute;
+  right: 1%;
+  width: 20px;
+}
+.logoutButton{
+  bottom: 10%
 }
