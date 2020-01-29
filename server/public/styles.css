@@ -1,8 +1,11 @@
 .recipe{
   height: 100vmin;
 }
-.body{
+body{
   width: 100%;
+  font-family: 'Kalam', cursive;
+  font-size: 1.5rem;
+  font-weight: bold;
 }
 
 a{
