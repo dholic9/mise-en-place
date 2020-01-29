@@ -68,7 +68,7 @@ class AddRecipe extends React.Component {
   handleCurrentInstructions() {
     const instructions = this.state.instructions;
     if (!instructions.length) {
-      return <div>Add First Ingredient</div>;
+      return <div>Add First Instruction</div>;
     } else {
       const instructionList = instructions.map(listInstructions);
       return instructionList;
@@ -82,7 +82,7 @@ class AddRecipe extends React.Component {
     this.setState({ ingredientInProgress: stateCopy });
   }
 
-  handleNewQuantity(evet) {
+  handleNewQuantity(event) {
     event.preventDefault();
     const stateCopy = { ...this.state.ingredientInProgress };
     stateCopy.quantity = event.target.value;
