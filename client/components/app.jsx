@@ -13,6 +13,7 @@ import PublicPage from './public-page';
 import Account from './account';
 import RecipeDetailPage from './recipe-detail-page';
 import SignUp from './sign-up-page';
+import AddRecipe from './add-recipe';
 
 export default class App extends React.Component {
   constructor(props) {
@@ -90,6 +91,7 @@ export default class App extends React.Component {
           <Route exact path="/public-page" component={PublicPage}/>
           <Route exact path="/account" component={Account}/>
           <Route path="/recipe-detail-page/:recipeId" component={RecipeDetailPage}/>
+          <Route exact path="/add-recipe" component={AddRecipe}/>
         </Router>
       </AppContext.Provider>
     );

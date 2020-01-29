@@ -1,6 +1,6 @@
 import React from 'react';
 import TopBar from './top-bar';
-import RecipeList from './RecipeList';
+import RecipeList from './recipe-list';
 import NavBar from './nav-bar';
 
 class PublicPage extends React.Component {
@@ -27,7 +27,7 @@ class PublicPage extends React.Component {
       <React.Fragment>
         <div className="container-fluid w-100 p-0 fadeIn">
           <div className="row w-100">
-            <TopBar title={'Featured'} displayIcon={true}/>
+            <TopBar title={'Featured'} mealPlanIcon={true} addRecipeIcon={false}/>
           </div>
           <div className="row longFadeIn text-center featured">
             <RecipeList recipes={this.state.recipes}/>

@@ -72,9 +72,12 @@ export default class MyRecipe extends React.Component {
     const display = data.map(element => (<FavRecipe key={element.recipeId} recipe={element} delete={this.deleteFavRecipes} addToMealPlan={this.addToMealPlan}/>));
     return (
       <React.Fragment>
-        <TopBar displayIcon={true} title={'My Recipes'}/>
-        <div className="recipes-container">
-          {display}
+        <div className="container-fluid mb-4 pb-4 p-0 w-100 fadeIn">
+          <TopBar mealPlanIcon={true} addRecipeIcon={true} title={'My Recipes'}/>
+          <div className="recipes-container">
+            {display}
+          </div>
+          <NavBar />
         </div>
         <NavBar />
       </React.Fragment>
