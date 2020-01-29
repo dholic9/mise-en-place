@@ -157,13 +157,13 @@ export default class SignUp extends React.Component {
               <div className="input-group-append flex-column w-100 justify-content-center align-items-center">
                 <button
                   type="submit"
-                  className="btn login-button rounded ">
+                  className="glow-on-hover  rounded ">
                     Create Account
                 </button>
                 <Link to="/login">
                   <button
                     type="button"
-                    className="btn signup-button rounded ">
+                    className="btn my-2 signup-button rounded ">
                   Back to Login Page
                   </button>
                 </Link>
