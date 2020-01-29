@@ -8,8 +8,11 @@ export default class TopBar extends React.Component {
   }
 
   render() {
-    const iconDisplay = this.props.displayIcon
-      ? <i className="fas icon fa-list-alt cartIcon col-2 text-right text-light"/>
+    const mealPlanIcon = this.props.mealPlanIcon
+      ? <i className="fas fa-list-alt mealPlanIcon"/>
+      : null;
+    const addRecipeIcon = this.props.addRecipeIcon
+      ? <i className="fas fa-plus-circle addRecipeIcon"/>
       : null;
     return (
       <div className="
@@ -23,12 +26,14 @@ export default class TopBar extends React.Component {
         align-items-center
         "
       >
-        {/* <img src="/images/logo1.png" className="logo" alt=""/> */}
-        <div className="title-text col-12 p-0 text-center">
+        <Link to={'/add-recipe'}>
+          {addRecipeIcon}
+        </Link>
+        <div>
           {this.props.title}
         </div>
         <Link to={'/shoppingList'}>
-          {iconDisplay}
+          {mealPlanIcon}
         </Link>
       </div>
     );
