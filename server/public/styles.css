@@ -30,8 +30,7 @@ a{
   bottom: 50px;
   font-size: x-large;
   position: relative;
-  color: black;
-  text-shadow: -1px 0 white, 0 1px white, 1px 0 white, 0 -1px white;
+  color:white;
   left: 25px;
   width: fit-content;
 }
@@ -115,14 +114,34 @@ a{
 .button-container .fas{
  cursor: pointer;
 }
-
-.ratatouille{
-  background-image: url("/images/ratatouille.jpg");
+.signup{
+  color: rgb(255, 129, 202);
+}
+.login-background{
+  background-image: url("https://images.unsplash.com/photo-1502975631699-c937e68715ec?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=668&q=80");
   background-size: cover;
+  background-repeat: no-repeat;
   height: 100vh;
   width:100%;
 }
-
+.intro-card{
+  background-color: rgb(255, 255, 255);
+  width: 85%;
+  padding: 10%;
+  border-radius: 1.5em;
+  box-shadow: 0px 11px 35px 2px rgba(0,0,0,0.14)
+}
+.login-button{
+  color: white;
+  background: linear-gradient(to right, rgb(216, 68, 191), rgb(255, 129, 202));
+}
+.signup-button{
+  color: rgb(255, 129, 202)
+}
+.input-rounding{
+  background-color: rgba(136,126,126,0.04);
+  border-radius: 20px;
+}
 .ingredient{
   display: flex;
   justify-content: space-evenly;
@@ -137,11 +156,11 @@ a{
 }
 
 .oddIngredient{
-  background-color: violet;
+  background-color: rgb(76, 167, 228);
 }
 
 .evenIngredient{
-  background-color: yellowgreen;
+  background-color: rgb(219, 219, 219);
 }
 
 .instructionOrder{
@@ -198,13 +217,7 @@ a{
 .blue{
   color: blue;
 }
-.signup{
-  color: whitesmoke;
-  text-shadow: -1px 1px 0 #000,
-				  1px 1px 0 #000,
-				 1px -1px 0 #000,
-				-1px -1px 0 #000;
-}
+
 
 .checkbox{
   height: 24px;

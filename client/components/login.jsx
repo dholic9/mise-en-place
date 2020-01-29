@@ -42,25 +42,20 @@ export default class Login extends React.Component {
 
   render() {
     return (
-      <div className="container-fluid fadeIn p-0 d-flex align-items-center ratatouille flex-column ">
+      <div className="container-fluid login-background fadeIn  p-0 d-flex align-items-center  flex-column ">
         <div className="row justify-content-center login-title  w-100 mb-5">
           <img src="/images/logo1.png" height="150" width="200" alt="loading"/>
         </div>
-        <div className="row  mt-4 justify-content-around text-light ">
-          <h1 className="signup">Login</h1>
+        <div className="row card intro-card flex-row justify-content-around text-light ">
+          <h1 className=" text-center signup">Sign In</h1>
           <div className="col-12 ">
             <form onSubmit={this.handleUserSubmit} className="input-group  flex-column">
               <div className="form-group my-4">
                 <div className="input-group  w-100 flex-row justify-content-center ">
-                  <div className="input-group-prepend">
-                    <span className="input-group-text">
-                      <i className="fas fa-user" />
-                    </span>
-                  </div>
                   <input
                     type="text"
                     placeholder="User Name"
-                    className="form-control w-70"
+                    className="form-control text-center input-rounding  w-70"
                     required
                     autoFocus
                     onChange={this.handleUserNameChange}
@@ -69,32 +64,25 @@ export default class Login extends React.Component {
               </div>
               <div className="form-group my-4 ">
                 <div className="input-group w-100 flex-row justify-content-center">
-                  <div className="input-group-prepend">
-                    <span className="input-group-text">
-                      <i className="fas fa-key" />
-                    </span>
-                  </div>
                   <input
                     type="password"
                     placeholder="Password"
-                    className="form-control w-70"
+                    className="form-control text-center input-rounding w-70"
                     required
                     autoFocus
                     onChange={this.handlePasswordChange}/>
                 </div>
               </div>
               <div className="input-group-append flex-column w-100 justify-content-center align-items-center">
-                {/* <Link to="/public-page"> */}
                 <button
                   type="submit"
-                  className="btn btn-primary rounded my-2">
+                  className="btn login-button rounded my-2">
                     Log In
                 </button>
-                {/* </Link> */}
                 <Link to="/sign-up">
                   <button
                     type="button"
-                    className="btn btn-light rounded my-2">
+                    className="btn signup-button rounded my-2">
                       Sign Up
                   </button>
                 </Link>
