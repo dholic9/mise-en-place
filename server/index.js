@@ -322,7 +322,6 @@ app.get('/api/shoppinglist', (req, res, next) => {
 
           return db.query(sql, params)
             .then(response => {
-              console.log(response.rows);
               if (!response.rows.length) {
                 throw new ClientError('Please add recipes to your meal plan to see shopping list', 400);
               } else {
