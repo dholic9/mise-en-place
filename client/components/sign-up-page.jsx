@@ -75,7 +75,7 @@ export default class SignUp extends React.Component {
           <img src="/images/logo1.png" height="150" width="200" alt="loading" />
         </div>
         <div className="row text-center p-2 flex-row intro-card card justify-content-around text-light ">
-          <h1 className="signup">Sign Up</h1>
+          <h1 className="pink">Sign Up</h1>
           <div className="col-12 col-md-10">
             <form onSubmit={this.handleUserSubmit} className="input-group  flex-column">
               <div className="form-group my-4">
