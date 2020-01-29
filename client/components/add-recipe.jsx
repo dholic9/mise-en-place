@@ -114,8 +114,8 @@ class AddRecipe extends React.Component {
     instructionCopy.push(this.state.instructionInProgress);
     this.setState({ instructions: instructionCopy });
     const instOrdCopy = this.state.instructionInProgress;
-    instOrdCopy.instructionOrder++
-    this.setState({instructionInProgress: instOrdCopy})
+    instOrdCopy.instructionOrder++;
+    this.setState({ instructionInProgress: instOrdCopy });
 
   }
 
