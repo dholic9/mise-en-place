@@ -163,6 +163,12 @@ a{
   right:0;
   top: 2.5vh;
 }
+.account-icon{
+  width: 50%;
+  height: 70%;
+  object-fit: cover;
+  border-radius: 50%;
+}
 .clickable{
   cursor: pointer;
 }
@@ -206,4 +212,7 @@ a{
   position: absolute;
   right: 1%;
   width: 20px;
+}
+.logoutButton{
+  bottom: 10%
 }

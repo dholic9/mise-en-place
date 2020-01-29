@@ -106,7 +106,32 @@ app.post('/api/users/create', (req, res, next) => {
   });
 });
 
-/*   MAIN FEATURED PAGE  GET METHOD */
+/*    GET  from   USERS   */
+
+app.get('/api/users', (req, res, next) => {
+  const { userId } = req.session;
+  const values = [userId];
+  const sql = `
+        Select *
+        FROM "Users"
+        WHERE "userId" = $1
+  `;
+  db.query(sql, values)
+    .then(result => {
+      res.status(200).json(result.rows[0]);
+    })
+    .catch(err => next(err));
+
+});
+
+/*    GET  USER  LOGOUT    */
+
+app.get('/api/users/logout', (req, res, next) => {
+  delete req.session;
+  res.status(200).json({ success: 'User has logged out successfully' });
+});
+
+/*   MAIN FEATURED PAGE  GET METHOD   */
 
 app.get('/api/recipes', (req, res, next) => {
   const sql = `

@@ -14,7 +14,7 @@ const tabs = [{
   path: '/mealplan',
   icon: 'fa-clipboard-list'
 }, {
-  path: '/',
+  path: '/account',
   icon: 'fa-user'
 }
 ];
