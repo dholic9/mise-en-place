@@ -4,6 +4,7 @@ import {
   BrowserRouter as Router,
   Link
 } from 'react-router-dom';
+import Swal from 'sweetalert2';
 
 export default class SignUp extends React.Component {
   constructor(props) {
@@ -56,7 +57,7 @@ export default class SignUp extends React.Component {
   handleUserSubmit() {
     event.preventDefault();
     if (this.state.password !== this.state.passwordVerify) {
-      return window.alert('Passwords do not Match');
+      return Swal.fire('Passwords do not Match');
     }
     const user = {
       name: this.state.name,
@@ -64,8 +65,19 @@ export default class SignUp extends React.Component {
       email: this.state.email,
       password: this.state.password
     };
-    this.context.handleUserSignup(user)
+    const lowerCase = /[a-z]/g;
+    const upperCase = /[A-Z]/g;
+    const numbers = /[0-9]/g
+    if(!user.password.match(lowerCase)){
+      return Swal.fire('Password must contain a lowercased letter')
+    } else if(!user.password.match(upperCase)){
+      return Swal.fire('Password must contain an uppercased letter')
+    } else if(!user.password.match(numbers)){
+      return Swal.fire('Password must contain a number')
+    } else {
+      this.context.handleUserSignup(user)
       .then(() => { this.props.history.push('/login'); });
+    }
   }
 
   render() {
@@ -78,7 +90,7 @@ export default class SignUp extends React.Component {
           <h1 className="pink">Sign Up</h1>
           <div className="col-12 col-md-10">
             <form onSubmit={this.handleUserSubmit} className="input-group  flex-column">
-              <div className="form-group py-2">
+              <div className="form-group ">
                 <div className="input-group  w-100 flex-row">
                   <input
                     type="text"
@@ -90,7 +102,7 @@ export default class SignUp extends React.Component {
                   />
                 </div>
               </div>
-              <div className="form-group py-2">
+              <div className="form-group ">
                 <div className="input-group  w-100 flex-row">
                   <input
                     type="text"
@@ -102,7 +114,7 @@ export default class SignUp extends React.Component {
                   />
                 </div>
               </div>
-              <div className="form-group py-2">
+              <div className="form-group ">
                 <div className="input-group  w-100 flex-row">
                   <input
                     type="text"
@@ -114,7 +126,7 @@ export default class SignUp extends React.Component {
                   />
                 </div>
               </div>
-              <div className="form-group py-2 ">
+              <div className="form-group  ">
                 <div className="input-group  w-100 flex-row">
                   <input
                     type="password"
@@ -125,7 +137,7 @@ export default class SignUp extends React.Component {
                     onChange={this.handlePasswordChange} />
                 </div>
               </div>
-              <div className="form-group py-2">
+              <div className="form-group ">
                 <div className="input-group text-center w-100 flex-row">
                   <input
                     type="password"
@@ -137,16 +149,21 @@ export default class SignUp extends React.Component {
                   />
                 </div>
               </div>
+              <ul className="passwordList text-left"><u>Password must contain:</u>
+                <li>Lowercased Letter</li>
+                <li>Uppercased Letter</li>
+                <li>A Number</li>
+              </ul>
               <div className="input-group-append flex-column w-100 justify-content-center align-items-center">
                 <button
                   type="submit"
-                  className="btn login-button rounded my-2">
+                  className="btn login-button rounded ">
                     Create Account
                 </button>
                 <Link to="/login">
                   <button
                     type="button"
-                    className="btn signup-button rounded my-2">
+                    className="btn signup-button rounded ">
                   Back to Login Page
                   </button>
                 </Link>
