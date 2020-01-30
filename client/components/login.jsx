@@ -44,7 +44,7 @@ export default class Login extends React.Component {
     return (
       <div className="container-fluid login-background fadeIn  p-0 d-flex align-items-center  flex-column ">
         <div className="row justify-content-center login-title  w-100 mb-5">
-          <img src="/images/logo1.png" height="150" width="200" alt="loading"/>
+          <img src="/images/new-logo.png" className = "mt-3" height="150" width="200" alt="loading"/>
         </div>
         <div className="row card intro-card flex-row justify-content-around text-light ">
           <h1 className=" text-center pink">Sign In</h1>
@@ -82,7 +82,7 @@ export default class Login extends React.Component {
                 <Link to="/sign-up">
                   <button
                     type="button"
-                    className=" glow-on-hover signup-button rounded my-2">
+                    className=" btn signup-button rounded my-2">
                       Sign Up
                   </button>
                 </Link>

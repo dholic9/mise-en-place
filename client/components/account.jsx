@@ -57,7 +57,7 @@ export default class Account extends React.Component {
           </div>
           <div className="row">
             <div className="col-12 logoutButton text-center ">
-              <button type="button" onClick={this.logout} className="logoutButton btn btn-danger">Log Out</button>
+              <button type="button" onClick={this.logout} className="logoutButton glow-on-hover">Log Out</button>
 
             </div>
           </div>

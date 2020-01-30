@@ -176,7 +176,7 @@ CREATE TABLE public."Recipes" (
     category text NOT NULL,
     "numberOfServings" numeric NOT NULL,
     "createdBy" text NOT NULL,
-    image text NOT NULL,
+    image text,
     "createdAt" timestamp(6) with time zone DEFAULT now() NOT NULL
 );
 
@@ -283,6 +283,7 @@ COPY public."FavoriteRecipes" ("userId", "recipeId") FROM stdin;
 18	3
 18	4
 18	6
+19	2
 \.
 
 
@@ -396,6 +397,7 @@ COPY public."MealPlan" ("userId", "recipeId") FROM stdin;
 19	6
 18	4
 20	6
+19	5
 \.
 
 
@@ -476,8 +478,8 @@ COPY public."Users" ("userId", name, "userName", email, password, image, "create
 18	Patrick	Star	thisispatrick@gmail.com	$2b$10$VJvq2l2Q45QJCCM13TLdo.UoMyh2KPwpmVz15A85epCGfLawZ.FEu	/images/patrickstar.jpg	2020-01-28 00:52:55.168322+00
 17	davidd	hello	somewher@gmail.com	$2b$10$t3QEU1s0k24Xr7LshXVyZ.jS5MTPfX/H5FoQoTYrF8S7TzxjFegDK	/images/scottishfold.jpg	2020-01-28 00:24:20.993495+00
 21	spongebob	bob	thisisspongebob@gmail.com	$2b$10$m/d1vDpP9iTgmDARpaXdPO/RtEbNRvXV8REhromdFqx6i4yWeyqn2	/images/spongebob.gif	2020-01-29 00:16:48.061811+00
-20	weilin	weilin	thisisweilin@gmail.com	$2b$10$QNvqawWafKd6QBSZPLfQvu3aKPf4043NH/K0HCgsZb4feXsynuVKi	/images/weilin.gif	2020-01-28 19:43:59.577698+00
 19	David	neow	nope	$2b$10$yCBIU1rcyfDdKnGcHtJCoeEa7zjY1.ZOs//FN/65B/EhH/krrbX9O	/images/sadPatrick.gif	2020-01-28 00:53:33.567692+00
+20	Weilin	weilin	Why@gmail.com	$2b$10$QNvqawWafKd6QBSZPLfQvu3aKPf4043NH/K0HCgsZb4feXsynuVKi	/images/weilin.gif	2020-01-28 19:43:59.577698+00
 \.
 
 
@@ -506,7 +508,7 @@ SELECT pg_catalog.setval('public."Recipes_recipeId_seq"', 7, true);
 -- Name: Users_userId_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('public."Users_userId_seq"', 21, true);
+SELECT pg_catalog.setval('public."Users_userId_seq"', 22, true);
 
 
 --
