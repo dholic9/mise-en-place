@@ -33,7 +33,6 @@ class AddRecipe extends React.Component {
     this.handleAddIngredient = this.handleAddIngredient.bind(this);
     this.handleNewinstruction = this.handleNewinstruction.bind(this);
     this.handleAddInstruction = this.handleAddInstruction.bind(this);
-    this.handleFile = this.handleFile.bind(this);
     this.fileInput = React.createRef();
   }
 
@@ -214,10 +213,10 @@ class AddRecipe extends React.Component {
           </div>
           <button className="addIngredientButton">Add Instruction</button>
         </form>
-        <form action='/add-recipe' method="post" encType="multipart/form-data">
+        <form action='/upload' method="POST" encType="multipart/form-data">
           <label>
             Upload Image:
-            <input type="file" accept="image/png, image/jpeg" name="image"/>
+            <input type="file" accept="image/png, image/jpeg" name="foodImage"/>
           </label>
           <br />
           <button type="submit">Submit Image</button>
