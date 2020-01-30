@@ -79,7 +79,6 @@ export default class MyRecipe extends React.Component {
           </div>
           <NavBar />
         </div>
-        <NavBar />
       </React.Fragment>
     );
   }
