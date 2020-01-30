@@ -175,12 +175,11 @@ class AddRecipe extends React.Component {
           </div>
           <button className="addIngredientButton">Add Instruction</button>
         </form>
-        <form action="/images" method="post" encType="multipart/form-data" onSubmit={this.handleFile}>
+        <form onSubmit={this.handleFile}>
           <label>
             Upload Image:
-            <input type="file" name="image" ref={this.fileInput} />
+            <input type="file" ref={this.fileInput} />
           </label>
-        </form>
           <br/>
           <button type="submit">Submit</button>
         </form>

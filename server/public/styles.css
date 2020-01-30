@@ -129,7 +129,7 @@ a{
  cursor: pointer;
 }
 .pink{
-  color: rgb(255, 129, 202);
+  color: #0e9aa7;
 }
 .login-background{
   background-image: url("https://images.unsplash.com/photo-1502975631699-c937e68715ec?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=668&q=80");
@@ -147,10 +147,10 @@ a{
 }
 .login-button{
   color: white;
-  background: linear-gradient(to right, rgb(216, 68, 191), rgb(255, 129, 202));
+  background: linear-gradient(to right, #63ace5,  #0e9aa7);
 }
 .signup-button{
-  color: rgb(255, 129, 202)
+  color: #0e9aa7
 }
 .input-rounding{
   background-color: rgba(136,126,126,0.04);
