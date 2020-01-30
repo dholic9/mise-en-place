@@ -22,7 +22,7 @@ export default class TopBar extends React.Component {
         justify-content-center
         d-flex
         row
-        text-light
+
         align-items-center
         "
       >

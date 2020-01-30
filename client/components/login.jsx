@@ -82,7 +82,7 @@ export default class Login extends React.Component {
                 <Link to="/sign-up">
                   <button
                     type="button"
-                    className=" glow-on-hover signup-button rounded my-2">
+                    className=" btn signup-button rounded my-2">
                       Sign Up
                   </button>
                 </Link>

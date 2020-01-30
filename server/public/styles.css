@@ -65,7 +65,8 @@ a{
   width: 100%;
   font-size: 1.5rem;
   font-weight: bold;
-  background-color:#feb2a8;
+  background-color:#ffffff;
+  color: #16c2d1;
 }
 
 .nav-bar {
@@ -74,7 +75,7 @@ a{
   height: 69px;
   font-size: 2em;
   color: white;
-  background-color: #d11141 ;
+  background-color: #16c2d1 ;
 }
 
 .white{
@@ -129,10 +130,10 @@ a{
  cursor: pointer;
 }
 .pink{
-  color: #0e9aa7;
+  color: #4b86b4;
 }
 .login-background{
-  background-image: url("https://images.unsplash.com/photo-1502975631699-c937e68715ec?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=668&q=80");
+  background-image: url("images/cupcakes.jpeg");
   background-size: cover;
   background-repeat: no-repeat;
   height: 100vh;
@@ -150,7 +151,8 @@ a{
   background: linear-gradient(to right, #63ace5,  #0e9aa7);
 }
 .signup-button{
-  color: #0e9aa7
+  color: #4b86b4;
+  font-size: 1em;
 }
 .input-rounding{
   background-color: rgba(136,126,126,0.04);
@@ -401,7 +403,7 @@ a{
     position: absolute;
     width: 100%;
     height: 100%;
-    background: #fe8a71;
+    background: #16c2d1;
     left: 0;
     top: 0;
     border-radius: 10px;
