@@ -8,7 +8,6 @@ class AddRecipe extends React.Component {
     super(props);
     this.state = {
       recipeName: '',
-      createdBy: '',
       category: '',
       numberOfServings: '',
       image: null,
@@ -34,10 +33,6 @@ class AddRecipe extends React.Component {
     this.handleNewinstruction = this.handleNewinstruction.bind(this);
     this.handleAddInstruction = this.handleAddInstruction.bind(this);
     this.fileInput = React.createRef();
-  }
-
-  componentDidMount() {
-    this.setState({ createdBy: this.context.user });
   }
 
   handleRecipeName(event) {
@@ -103,7 +98,7 @@ class AddRecipe extends React.Component {
     this.setState({ ingredients: ingredientCopy });
     const newIngCopy = { ...this.state.ingredientInProgress };
     newIngCopy.ingredientName = '';
-    newIngCopy.quantity = 0;
+    newIngCopy.quantity = '';
     newIngCopy.unit = '';
     this.setState({ ingredientInProgress: newIngCopy });
   }
@@ -131,7 +126,6 @@ class AddRecipe extends React.Component {
   handleCancel() {
     this.setState({
       recipeName: '',
-      createdBy: '',
       category: '',
       numberOfServings: '',
       image: null,
@@ -153,18 +147,18 @@ class AddRecipe extends React.Component {
     const data = this.state;
     const recipe = {
       recipeName: data.recipeName,
-      createdBy: data.createdBy,
       category: data.category,
       numberOfServings: data.numberOfServings,
       ingredients: data.ingredients,
       instructions: data.instructions
     };
-    console.log(recipe);
+    const reqBody = { recipe };
     const req = {
       method: 'POST',
-      body: recipe
+      body: JSON.stringify(reqBody),
+      headers: { 'Content-type': 'application/json' }
     };
-    fetch('/api/recipe', req)
+    fetch('api/recipe', req)
       .then(response => response.json())
       .then(data => console.log(data))
       .catch(err => console.error(err));

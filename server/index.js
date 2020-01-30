@@ -423,18 +423,19 @@ app.post('/api/fav', (req, res, next) => {
 /* ADD A NEW RECIPE */
 /* RECIPENAME, INGREDIENTS, SERVINGSIZE, CATEGORY, INSTRUCTION, IMAGE */
 app.post('/api/recipe', (req, res, next) => {
-  const recipe = req.body.recipe;
+  const { recipe } = req.body;
   if (req.session.userId) {
     let newRecipeId = null;
     const findUserNameSql = `
       select "userName"
       from "Users"
       where "userId" = $1`;
-    const userParams = [recipe.createdBy];
+    const userParams = [req.session.userId];
     db.query(findUserNameSql, userParams)
       .then(response => {
+        console.log(response.rows[0]);
         const createdBy = response.rows[0].userName;
-        const params = [recipe.recipeName, recipe.category, recipe.numberOfServings, createdBy, recipe.image];
+        const params = [recipe.recipeName, recipe.category, recipe.numberOfServings, createdBy, 'some image'];
         const sql = `
       insert into "Recipes"("recipeName", "category", "numberOfServings", "createdBy", "image")
       values($1, $2, $3, $4, $5)
@@ -464,7 +465,7 @@ app.post('/api/recipe', (req, res, next) => {
               return `'${ingredient.ingredientName}'`;
             }).join(',');
             const sql = `
-       select *
+          select *
           from "Ingredients"
           where "ingredientName" in (${searchValue})
        `;
