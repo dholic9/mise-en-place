@@ -27,7 +27,7 @@ class PublicPage extends React.Component {
       <React.Fragment>
         <div className="container-fluid w-100 p-0 fadeIn">
           <div className="row w-100">
-            <TopBar title={'Featured'} mealPlanIcon={true} addRecipeIcon={false}/>
+            <TopBar title={'Featured'} mealPlanIcon={true} addRecipeIcon={true}/>
           </div>
           <div className="row longFadeIn text-center featured">
             <RecipeList recipes={this.state.recipes}/>
