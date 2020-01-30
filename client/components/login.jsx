@@ -50,7 +50,7 @@ export default class Login extends React.Component {
           <h1 className=" text-center pink">Sign In</h1>
           <div className="col-12 ">
             <form onSubmit={this.handleUserSubmit} className="input-group  flex-column">
-              <div className="form-group my-4">
+              <div className="form-group py-3">
                 <div className="input-group  w-100 flex-row justify-content-center ">
                   <input
                     type="text"
@@ -62,7 +62,7 @@ export default class Login extends React.Component {
                   />
                 </div>
               </div>
-              <div className="form-group my-4 ">
+              <div className="form-group py-2 ">
                 <div className="input-group w-100 flex-row justify-content-center">
                   <input
                     type="password"
@@ -76,13 +76,13 @@ export default class Login extends React.Component {
               <div className="input-group-append flex-column w-100 justify-content-center align-items-center">
                 <button
                   type="submit"
-                  className="btn login-button rounded my-2">
+                  className=" glow-on-hover  rounded my-2">
                     Log In
                 </button>
                 <Link to="/sign-up">
                   <button
                     type="button"
-                    className="btn signup-button rounded my-2">
+                    className=" glow-on-hover signup-button rounded my-2">
                       Sign Up
                   </button>
                 </Link>
