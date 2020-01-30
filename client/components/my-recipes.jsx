@@ -23,7 +23,7 @@ export default class MyRecipe extends React.Component {
       method: 'GET'
 
     };
-    fetch('/api/fav', init)
+    fetch('api/fav', init)
       .then(response => response.json())
       .then(data => {
         this.setState(state => ({ favoriteRecipes: data }));
@@ -86,6 +86,7 @@ export default class MyRecipe extends React.Component {
 }
 
 function FavRecipe(props) {
+  const image = props.recipe.image ? props.recipe.image : '/images/new-logo.png';
   return (
     <div className="card fadeIn">
       <button type="button" className="close" onClick={() => { props.delete(props.recipe.recipeId); }}aria-label="Close">
@@ -107,7 +108,7 @@ function FavRecipe(props) {
             </div>
           </div>
         </div>
-        <img className="picture col-6" src={props.recipe.image} />
+        <img className="picture col-6" src={image} />
       </div>
     </div >
   );

@@ -65,6 +65,7 @@ export default class MealPlan extends React.Component {
 }
 
 function MealPlanRecipe(props) {
+  const image = props.recipe.image ? props.recipe.image : '/images/new-logo.png';
   return (
 
     <div className="card">
@@ -83,7 +84,7 @@ function MealPlanRecipe(props) {
             </div>
           </div>
         </div>
-        <img className="picture col-6" src={props.recipe.image} />
+        <img className="picture col-6" src={image} />
       </div>
     </div >
 

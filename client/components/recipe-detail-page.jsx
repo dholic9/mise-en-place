@@ -48,6 +48,7 @@ class RecipeDetailPage extends React.Component {
 
   render() {
     const recipe = this.state.recipe;
+    const image = recipe.image ? recipe.image : '/images/new-logo.png';
     return (
       <div className="recipeContainer fadeIn">
         <TopBar mealPlanIcon={true} addRecipeIcon={false} title={this.state.recipe.recipeName} />
@@ -56,7 +57,7 @@ class RecipeDetailPage extends React.Component {
           <div className="servings">Servings: {recipe.numberOfServings}</div>
         </div>
         <i className="fas fa-star favStar" onClick={() => addToFav(recipe.recipeId)}></i>
-        <img src={recipe.image} alt={recipe.recipeName} className="image" />
+        <img src={image} alt={recipe.recipeName} className="image" />
         <div className="ingredientList">
           <div className="text-center border-bottom border-dark m-0">Ingredients</div>
           {this.generateIngredients()}

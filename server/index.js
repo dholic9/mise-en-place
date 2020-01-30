@@ -435,7 +435,7 @@ app.post('/api/recipe', (req, res, next) => {
       .then(response => {
         console.log(response.rows[0]);
         const createdBy = response.rows[0].userName;
-        const params = [recipe.recipeName, recipe.category, recipe.numberOfServings, createdBy, 'some image'];
+        const params = [recipe.recipeName, recipe.category, recipe.numberOfServings, createdBy, ''];
         const sql = `
       insert into "Recipes"("recipeName", "category", "numberOfServings", "createdBy", "image")
       values($1, $2, $3, $4, $5)
