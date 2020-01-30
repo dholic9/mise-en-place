@@ -159,11 +159,12 @@ class AddRecipe extends React.Component {
       ingredients: data.ingredients,
       instructions: data.instructions
     };
+    console.log(recipe)
     const req = {
       method: 'POST',
       body: recipe
     };
-    fetch('/api/upload', req)
+    fetch('/api/recipe', req)
       .then(response => response.json())
       .then(data => console.log(data))
       .catch(err => console.error(err));
