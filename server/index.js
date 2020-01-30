@@ -12,8 +12,6 @@ const saltRounds = 10;
 
 const app = express();
 
-const upload = multer({ dest: 'uploads/' });
-
 app.use(staticMiddleware);
 app.use(sessionMiddleware);
 
@@ -23,6 +21,27 @@ app.get('/api/health-check', (req, res, next) => {
   db.query('select \'successfully connected\' as "message"')
     .then(result => res.json(result.rows[0]))
     .catch(err => next(err));
+});
+
+/* photo upload */
+const storage = multer.diskStorage({
+  destination: './server/public/images',
+  filename: (req, file, cb) => {
+    cb(null, path.basename(file.originalname, path.extname(file.originalname)) + '-' + Date.now() + path.extname(file.originalname));
+  }
+});
+
+const upload = multer({ storage: storage }).single('photo');
+
+app.post('/api/recipe-photos', (req, res, next) => {
+  console.log('req.file:', req.file);
+  upload(req, res, err => {
+    if (err) {
+      next(err);
+    } else {
+      res.json(`/images/${req.file.filename}`);
+    }
+  });
 });
 
 /*     USERS login    */
