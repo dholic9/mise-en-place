@@ -36,9 +36,12 @@ const upload = multer({ storage: storage }).single('photo');
 app.post('/api/recipe-photos', (req, res, next) => {
   upload(req, res, err => {
     if (err) {
-      next(new ClientError('error', 400));
+      next(err);
+      return false;
     } else {
       console.log(req.file.filename);
+
+      return true;
     }
   });
 });
