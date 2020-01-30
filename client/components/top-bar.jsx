@@ -18,7 +18,7 @@ export default class TopBar extends React.Component {
       <div className="
         title
         py-3
-       mb-3
+        mb-3
         justify-content-center
         d-flex
         row
