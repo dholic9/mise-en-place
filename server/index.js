@@ -550,7 +550,6 @@ app.post('/api/recipe', (req, res, next) => {
   }
 });
 
-
 app.use('/api', (req, res, next) => {
   next(new ClientError(`cannot ${req.method} ${req.originalUrl}`, 404));
 });
