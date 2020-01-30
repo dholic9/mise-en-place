@@ -43,8 +43,8 @@ export default class Login extends React.Component {
   render() {
     return (
       <div className="container-fluid login-background fadeIn  p-0 d-flex align-items-center  flex-column ">
-        <div className="row justify-content-center login-title  w-100 mb-5">
-          <img src="/images/new-logo.png" className = "mt-3" height="150" width="200" alt="loading"/>
+        <div className="row justify-content-center login-title  w-100 my-5">
+          <img src="/images/new-logo.png" className = "" height="150" width="200" alt="loading"/>
         </div>
         <div className="row card intro-card flex-row justify-content-around text-light ">
           <h1 className=" text-center pink">Sign In</h1>

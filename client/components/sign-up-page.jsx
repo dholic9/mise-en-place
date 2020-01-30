@@ -83,8 +83,8 @@ export default class SignUp extends React.Component {
   render() {
     return (
       <div className="container-fluid align-items-center d-flex login-background flex-column fadeIn">
-        <div className="row justify-content-center  mt-2 ">
-          <img src="/images/logo1.png" height="150" width="200" alt="loading" />
+        <div className="row justify-content-center  mt-5 mb-2">
+          <img src="/images/new-logo.png" height="150" width="200" alt="loading" />
         </div>
         <div className="row text-center p-2 flex-row intro-card card justify-content-around text-light ">
           <h1 className="pink">Sign Up</h1>
