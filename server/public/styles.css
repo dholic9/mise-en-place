@@ -172,11 +172,11 @@ a{
 }
 
 .oddIngredient{
-  background-color: rgb(76, 167, 228);
+  background-color: #dddddd;
 }
 
 .evenIngredient{
-  background-color: rgb(219, 219, 219);
+  background-color: rgb(255, 255, 255);
 }
 
 .instructionOrder{
