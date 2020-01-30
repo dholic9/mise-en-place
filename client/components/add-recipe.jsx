@@ -161,9 +161,21 @@ class AddRecipe extends React.Component {
     };
     fetch('api/recipe', req)
       .then(response => response.json())
-      .then(data => console.log(data))
       .catch(err => console.error(err));
     this.handleCancel();
+  }
+
+  handlePhotoSubmit(event) {
+    event.preventDefault();
+    const data = new FormData();
+    data.append('photo', document.querySelector('#photoInput').files[0]);
+    fetch('/api/recipe-photos', {
+      method: 'POST',
+      body: data
+    })
+      .then(res => {
+        return res.json();
+      });
   }
 
   render() {
@@ -216,10 +228,10 @@ class AddRecipe extends React.Component {
             </div>
 
           </form>
-          <form action='/upload' method="POST" encType="multipart/form-data">
+          <form onSubmit={this.handlePhotoSubmit}>
             <label className="w-100">
             Upload Image:
-              <input className="fileInput" type="file" accept="image/png, image/jpeg, image/jpg" name="foodImage"/>
+              <input id="photoInput" className="fileInput" type="file" accept="image/png, image/jpeg, image/jpg" name="myImage"/>
             </label>
             <br />
             <div className="mb-2 pb-2 text-center border-bottom border-dark">
