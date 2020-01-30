@@ -12,7 +12,7 @@ const saltRounds = 10;
 
 const app = express();
 
-const upload = multer({dest: 'uploads/'})
+const upload = multer({ dest: 'uploads/' });
 
 app.use(staticMiddleware);
 app.use(sessionMiddleware);
@@ -563,8 +563,6 @@ app.post('/api/recipe', (req, res, next) => {
     next(new ClientError('please log in or sign up to post a new recipe', 400));
   }
 });
-
-
 
 app.use('/api', (req, res, next) => {
   next(new ClientError(`cannot ${req.method} ${req.originalUrl}`, 404));

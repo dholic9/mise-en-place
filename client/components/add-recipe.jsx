@@ -159,7 +159,7 @@ class AddRecipe extends React.Component {
       ingredients: data.ingredients,
       instructions: data.instructions
     };
-    console.log(recipe)
+    console.log(recipe);
     const req = {
       method: 'POST',
       body: recipe
