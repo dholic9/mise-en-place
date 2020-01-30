@@ -65,8 +65,8 @@ a{
   width: 100%;
   font-size: 1.75rem;
   font-weight: bold;
-  background-color:#ffffff;
-  color: #16c2d1;
+  background-color: #ffffff;
+  color: black;
 }
 
 .nav-bar {
@@ -75,7 +75,7 @@ a{
   height: 69px;
   font-size: 2em;
   color: white;
-  background-color: #16c2d1 ;
+  background-color: #5ab9ea ;
 }
 
 .white{
