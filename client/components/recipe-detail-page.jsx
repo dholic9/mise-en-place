@@ -51,12 +51,12 @@ class RecipeDetailPage extends React.Component {
     const image = recipe.image ? recipe.image : '/images/new-logo.png';
     return (
       <div className="recipeContainer fadeIn">
-        <TopBar mealPlanIcon={true} addRecipeIcon={false} title={this.state.recipe.recipeName} />
+        <TopBar mealPlanIcon={false} addRecipeIcon={false} title={this.state.recipe.recipeName} />
         <div className="recipeInfo  text-center">
           <div className="category pt-2">Category: {recipe.category}</div>
           <div className="servings">Servings: {recipe.numberOfServings}</div>
         </div>
-        <i className="fas fa-star favStar" onClick={() => addToFav(recipe.recipeId)}></i>
+        <img src="https://img.icons8.com/emoji/48/000000/star-emoji.png" className="star" onClick={() => addToFav(recipe.recipeId)}></img>
         <img src={image} alt={recipe.recipeName} className="image" />
         <div className="ingredientList">
           <div className="text-center border-bottom border-dark m-0">Ingredients</div>

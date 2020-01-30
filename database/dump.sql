@@ -286,6 +286,7 @@ COPY public."FavoriteRecipes" ("userId", "recipeId") FROM stdin;
 19	2
 19	8
 19	9
+19	10
 \.
 
 
@@ -342,6 +343,24 @@ COPY public."Ingredients" ("ingredientId", "ingredientName") FROM stdin;
 54	scallion
 55	honey
 56	hazelnuts
+57	Rice noodles
+58	Chicken breasts
+59	Shrimp
+60	Vegetable oil
+61	Brown sugar
+62	Soy sauce
+63	Rice vinegar
+64	Lime juice
+65	Fish sauce
+66	Vegetables
+68	Peanuts
+69	salt and pepper
+70	fettuccine
+72	chicken breast
+73	unsalted butter
+74	heavy cream
+75	freshly grated nutmeg
+76	freshly grated Parmigiano-Reggiano 
 \.
 
 
@@ -398,6 +417,13 @@ COPY public."Instructions" ("instructionId", "recipeId", "instructionDetail", "i
 46	8	Remove from pan, and drain on paper towels. Season with a little extra salt and pepper, if desired, and serve immediately.	4	2020-01-30 20:00:43.300541+00
 47	9	Put a baking sheet on the middle oven rack and preheat to 450 degrees F. Toss the Brussels sprouts with the olive oil, 1/2 teaspoon salt and a few grinds of pepper in a large bowl. Spread on the hot baking sheet and roast, tossing halfway through, until tender and charred in spots, 20 to 30 minutes.	1	2020-01-30 20:13:04.831701+00
 48	9	Meanwhile, melt the butter in a large skillet over medium-high heat. Add the grapes and thyme and cook, tossing, until the grapes start to burst, about 4 minutes. Add the scallions and honey. Increase the heat to high and bring to a boil. Reduce the heat to medium low and simmer until the juices thicken and the grapes are glazed, 1 to 2 minutes. Season with salt and pepper. Transfer the Brussels sprouts to a serving dish; spoon the grapes over the top and sprinkle with the hazelnuts	2	2020-01-30 20:13:04.831701+00
+49	10	Prepare rice noodles according to directions listed on package. This usually includes soaking in very hot water or boiling noodles, until al dente. Then rinsing briefly to prevent sticking.	1	2020-01-30 20:58:49.336146+00
+50	10	In a mixing bowl, whisk together brown sugar, soy sauce, rice vinegar, lime juice and fish sauce, set aside.	2	2020-01-30 20:58:49.336146+00
+51	10	Heat oil in a wok or a 12-inch deep saute pan set over medium-high heat.\nAdd chicken and saute until cooked through, about 6 minutes.\nIf using shrimp cook about 1 1/2 minutes per side or until opaque.\nTransfer to a plate, leaving oil in pan.	3	2020-01-30 20:58:49.336146+00
+52	10	Add bell pepper and carrots saute 1 – 2 minutes then add garlic, green onions and bean sprouts saute 1 minute longer.	4	2020-01-30 20:58:49.336146+00
+53	10	Push veggies to edges of pan and crack eggs into center.\nCook and scramble until eggs have just set.	5	2020-01-30 20:58:49.336146+00
+54	10	Add in chicken, noodles and sauce and toss everything together and cook 1 – 2 minutes.	6	2020-01-30 20:58:49.336146+00
+55	10	Serve warm topped with cilantro, peanuts and optional red pepper flakes and sesame seeds.	7	2020-01-30 20:58:49.336146+00
 \.
 
 
@@ -491,6 +517,18 @@ COPY public."RecipeIngredients" ("ingredientId", "recipeId", quantity, unit, "cr
 54	9	1	bunch	2020-01-30 20:13:04.828113+00
 55	9	2	tbsp	2020-01-30 20:13:04.828113+00
 56	9	0.25	cups	2020-01-30 20:13:04.828113+00
+2	10	2	-	2020-01-30 20:58:49.326382+00
+57	10	1	Pack	2020-01-30 20:58:49.326382+00
+58	10	4	oz	2020-01-30 20:58:49.326382+00
+59	10	4	oz	2020-01-30 20:58:49.326382+00
+60	10	1	tbsp	2020-01-30 20:58:49.326382+00
+61	10	1	tbsp	2020-01-30 20:58:49.326382+00
+62	10	2	tbsp	2020-01-30 20:58:49.326382+00
+63	10	1	tbsp	2020-01-30 20:58:49.326382+00
+64	10	1	tbsp	2020-01-30 20:58:49.326382+00
+65	10	2	drops	2020-01-30 20:58:49.326382+00
+66	10	1	Pack	2020-01-30 20:58:49.326382+00
+68	10	1	Pack	2020-01-30 20:58:49.326382+00
 \.
 
 
@@ -507,6 +545,7 @@ COPY public."Recipes" ("recipeId", "recipeName", category, "numberOfServings", "
 6	Ratatouille	Lunch/Dinner	8	Patrick	/images/ratatouille.jpg	2020-01-28 19:59:53.676632+00
 8	Hashbrown Patties	Breakfast	2	neow	/images/hashbrown.jpg	2020-01-30 20:00:43.290163+00
 9	Roasted Brussels Sprouts	Lunch/Dinner	6	neow	/images/brussel-sprouts.jpeg	2020-01-30 20:13:04.814919+00
+10	Pad Thai	Street Food	2	Weilin	/images/pad-thai.jpg	2020-01-30 20:58:49.296152+00
 \.
 
 
@@ -527,21 +566,21 @@ COPY public."Users" ("userId", name, "userName", email, password, image, "create
 -- Name: Ingredients_ingredientId_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('public."Ingredients_ingredientId_seq"', 56, true);
+SELECT pg_catalog.setval('public."Ingredients_ingredientId_seq"', 76, true);
 
 
 --
 -- Name: Instructions_instructionId_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('public."Instructions_instructionId_seq"', 48, true);
+SELECT pg_catalog.setval('public."Instructions_instructionId_seq"', 55, true);
 
 
 --
 -- Name: Recipes_recipeId_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('public."Recipes_recipeId_seq"', 9, true);
+SELECT pg_catalog.setval('public."Recipes_recipeId_seq"', 11, true);
 
 
 --
