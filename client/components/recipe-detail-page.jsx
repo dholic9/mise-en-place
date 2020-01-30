@@ -52,8 +52,8 @@ class RecipeDetailPage extends React.Component {
     return (
       <div className="recipeContainer fadeIn">
         <TopBar mealPlanIcon={true} addRecipeIcon={false} title={this.state.recipe.recipeName} />
-        <div className="recipeInfo text-center">
-          <div className="category">Category: {recipe.category}</div>
+        <div className="recipeInfo  text-center">
+          <div className="category pt-2">Category: {recipe.category}</div>
           <div className="servings">Servings: {recipe.numberOfServings}</div>
         </div>
         <i className="fas fa-star favStar" onClick={() => addToFav(recipe.recipeId)}></i>

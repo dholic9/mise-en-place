@@ -284,6 +284,8 @@ COPY public."FavoriteRecipes" ("userId", "recipeId") FROM stdin;
 18	4
 18	6
 19	2
+19	8
+19	9
 \.
 
 
@@ -329,6 +331,17 @@ COPY public."Ingredients" ("ingredientId", "ingredientName") FROM stdin;
 35	fresh basil
 36	parsely
 37	thyme
+38	potatoes
+39	egg
+41	chives
+44	chile powder
+45	basil
+46	cumin
+49	brussel sprouts
+52	red grapes
+54	scallion
+55	honey
+56	hazelnuts
 \.
 
 
@@ -379,6 +392,12 @@ COPY public."Instructions" ("instructionId", "recipeId", "instructionDetail", "i
 40	6	Make the herb seasoning: In a small bowl, mix together the basil, garlic, parsley, thyme, salt, pepper, and olive oil. Spoon the herb seasoning over the vegetables.	5	2020-01-27 23:39:17.130042+00
 41	6	Cover the pan with foil and bake for 40 minutes. Uncover, then bake for another 20 minutes, until the vegetables are softened.	6	2020-01-27 23:39:33.559585+00
 42	6	Serve while hot as a main dish or side. The ratatouille is also excellent the next day--cover with foil and reheat in a 350˚F (180˚C) oven for 15 minutes, or simply microwave to desired temperature.	7	2020-01-27 23:39:57.610362+00
+43	8	Rinse shredded potatoes until water is clear, then drain and squeeze dry. Place shreds in a large bowl.	1	2020-01-30 20:00:43.300541+00
+44	8	In a small bowl, whisk together egg, parmesan, chives, flour, seasoned salt, chile powder, basil, cumin, and pepper. Add to shredded potatoes and mix until evenly distributed.	2	2020-01-30 20:00:43.300541+00
+45	8	Heat about 1/4 inch of oil in a large heavy skillet over medium-high heat. When oil is sizzling hot, scoops out 1/4 cup potato mixture into the pan and flatten to a 1/2 inch thick layer. Cook until nicely browned on the bottom, then flip over and brown on the other side. It should take at least 5 minutes per side.	3	2020-01-30 20:00:43.300541+00
+46	8	Remove from pan, and drain on paper towels. Season with a little extra salt and pepper, if desired, and serve immediately.	4	2020-01-30 20:00:43.300541+00
+47	9	Put a baking sheet on the middle oven rack and preheat to 450 degrees F. Toss the Brussels sprouts with the olive oil, 1/2 teaspoon salt and a few grinds of pepper in a large bowl. Spread on the hot baking sheet and roast, tossing halfway through, until tender and charred in spots, 20 to 30 minutes.	1	2020-01-30 20:13:04.831701+00
+48	9	Meanwhile, melt the butter in a large skillet over medium-high heat. Add the grapes and thyme and cook, tossing, until the grapes start to burst, about 4 minutes. Add the scallions and honey. Increase the heat to high and bring to a boil. Reduce the heat to medium low and simmer until the juices thicken and the grapes are glazed, 1 to 2 minutes. Season with salt and pepper. Transfer the Brussels sprouts to a serving dish; spoon the grapes over the top and sprinkle with the hazelnuts	2	2020-01-30 20:13:04.831701+00
 \.
 
 
@@ -453,6 +472,25 @@ COPY public."RecipeIngredients" ("ingredientId", "recipeId", quantity, unit, "cr
 35	6	4	tbsp	2020-01-27 23:34:06.355683+00
 36	6	2	tbsp	2020-01-27 23:34:23.486292+00
 37	6	2	tsp	2020-01-27 23:34:33.980932+00
+10	8	0.25	cup	2020-01-30 20:00:43.297236+00
+12	8	2	tbsp	2020-01-30 20:00:43.297236+00
+16	8	2	tsp	2020-01-30 20:00:43.297236+00
+17	8	0.25	tsp	2020-01-30 20:00:43.297236+00
+18	8	1	cup	2020-01-30 20:00:43.297236+00
+38	8	2	-	2020-01-30 20:00:43.297236+00
+39	8	1	-	2020-01-30 20:00:43.297236+00
+41	8	3	tbsp	2020-01-30 20:00:43.297236+00
+44	8	0.5	tsp	2020-01-30 20:00:43.297236+00
+45	8	0.5	tsp	2020-01-30 20:00:43.297236+00
+46	8	0.25	tsp	2020-01-30 20:00:43.297236+00
+5	9	3	tbsp	2020-01-30 20:13:04.828113+00
+30	9	3	tbsp	2020-01-30 20:13:04.828113+00
+37	9	2	tsp	2020-01-30 20:13:04.828113+00
+49	9	2	pounds	2020-01-30 20:13:04.828113+00
+52	9	2	cups	2020-01-30 20:13:04.828113+00
+54	9	1	bunch	2020-01-30 20:13:04.828113+00
+55	9	2	tbsp	2020-01-30 20:13:04.828113+00
+56	9	0.25	cups	2020-01-30 20:13:04.828113+00
 \.
 
 
@@ -467,6 +505,8 @@ COPY public."Recipes" ("recipeId", "recipeName", category, "numberOfServings", "
 3	Scrambled Eggs	Breakfast	2	Patrick	/images/scrambleEggs.jpeg	2020-01-23 08:00:00+00
 5	Fluffy Pancake	Breakfast	4	David	/images/Fluffy-Pancake.png	2020-01-24 23:25:16.890037+00
 6	Ratatouille	Lunch/Dinner	8	Patrick	/images/ratatouille.jpg	2020-01-28 19:59:53.676632+00
+8	Hashbrown Patties	Breakfast	2	neow	/images/hashbrown.jpg	2020-01-30 20:00:43.290163+00
+9	Roasted Brussels Sprouts	Lunch/Dinner	6	neow	/images/brussel-sprouts.jpeg	2020-01-30 20:13:04.814919+00
 \.
 
 
@@ -487,21 +527,21 @@ COPY public."Users" ("userId", name, "userName", email, password, image, "create
 -- Name: Ingredients_ingredientId_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('public."Ingredients_ingredientId_seq"', 37, true);
+SELECT pg_catalog.setval('public."Ingredients_ingredientId_seq"', 56, true);
 
 
 --
 -- Name: Instructions_instructionId_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('public."Instructions_instructionId_seq"', 42, true);
+SELECT pg_catalog.setval('public."Instructions_instructionId_seq"', 48, true);
 
 
 --
 -- Name: Recipes_recipeId_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('public."Recipes_recipeId_seq"', 7, true);
+SELECT pg_catalog.setval('public."Recipes_recipeId_seq"', 9, true);
 
 
 --

@@ -65,8 +65,9 @@ a{
   width: 100%;
   font-size: 1.75rem;
   font-weight: bold;
-  background-color:#ffffff;
-  color: #16c2d1;
+  background-color: #ffffff;
+  color: black;
+  box-shadow: 0px 11px 35px 2px rgba(0,0,0,0.14)
 }
 
 .nav-bar {
@@ -75,7 +76,7 @@ a{
   height: 69px;
   font-size: 2em;
   color: white;
-  background-color: #16c2d1 ;
+  background-color: #5ab9ea ;
 }
 
 .white{
@@ -172,11 +173,11 @@ a{
 }
 
 .oddIngredient{
-  background-color: rgb(76, 167, 228);
+  background-color: #dddddd;
 }
 
 .evenIngredient{
-  background-color: rgb(219, 219, 219);
+  background-color: rgb(255, 255, 255);
 }
 
 .instructionOrder{
@@ -189,7 +190,7 @@ a{
 
 .favStar{
   text-shadow: -1px 0 white, 0 1px white, 1px 0 white, 0 -1px white;
-  top: 70px;
+  top: 94px;
   position: absolute;
   left: 20px;
   font-size: xx-large;
