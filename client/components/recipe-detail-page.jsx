@@ -51,7 +51,7 @@ class RecipeDetailPage extends React.Component {
     const image = recipe.image ? recipe.image : '/images/new-logo.png';
     return (
       <div className="recipeContainer fadeIn">
-        <TopBar mealPlanIcon={true} addRecipeIcon={false} title={this.state.recipe.recipeName} />
+        <TopBar mealPlanIcon={false} addRecipeIcon={false} title={this.state.recipe.recipeName} />
         <div className="recipeInfo  text-center">
           <div className="category pt-2">Category: {recipe.category}</div>
           <div className="servings">Servings: {recipe.numberOfServings}</div>
