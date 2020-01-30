@@ -487,14 +487,14 @@ COPY public."Users" ("userId", name, "userName", email, password, image, "create
 -- Name: Ingredients_ingredientId_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('public."Ingredients_ingredientId_seq"', 24, true);
+SELECT pg_catalog.setval('public."Ingredients_ingredientId_seq"', 37, true);
 
 
 --
 -- Name: Instructions_instructionId_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('public."Instructions_instructionId_seq"', 35, true);
+SELECT pg_catalog.setval('public."Instructions_instructionId_seq"', 42, true);
 
 
 --
