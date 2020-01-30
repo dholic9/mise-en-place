@@ -1,6 +1,7 @@
 import React from 'react';
 import TopBar from './top-bar';
 import AppContext from '../lib/context';
+import { Link } from 'react-router-dom';
 
 class AddRecipe extends React.Component {
   constructor(props) {
@@ -32,7 +33,6 @@ class AddRecipe extends React.Component {
     this.handleAddIngredient = this.handleAddIngredient.bind(this);
     this.handleNewinstruction = this.handleNewinstruction.bind(this);
     this.handleAddInstruction = this.handleAddInstruction.bind(this);
-    this.handleFile = this.handleFile.bind(this);
     this.fileInput = React.createRef();
   }
 
@@ -52,7 +52,7 @@ class AddRecipe extends React.Component {
 
   handleServings(event) {
     event.preventDefault();
-    this.setState({ numberofservings: event.target.value });
+    this.setState({ numberOfServings: event.target.value });
   }
 
   handleCurrentIngredients() {
@@ -112,11 +112,13 @@ class AddRecipe extends React.Component {
     event.preventDefault();
     const instructionCopy = [...this.state.instructions];
     instructionCopy.push(this.state.instructionInProgress);
-    this.setState({ instructions: instructionCopy });
-    const instOrdCopy = this.state.instructionInProgress;
-    instOrdCopy.instructionOrder++;
-    this.setState({ instructionInProgress: instOrdCopy });
-
+    this.setState({
+      instructions: instructionCopy,
+      instructionInProgress: {
+        instructionOrder: this.state.instructionInProgress.instructionOrder + 1,
+        instructionDetail: ''
+      }
+    });
   }
 
   handleNewinstruction(event) {
@@ -126,10 +128,47 @@ class AddRecipe extends React.Component {
     this.setState({ instructionInProgress: instructionCopy });
   }
 
-  handleFile(event) {
-    event.preventDefault();
-    const imageData = new FormData();
-    imageData.append('recipeImage', this.fileInput.current.files[0]);
+  handleCancel() {
+    this.setState({
+      recipeName: '',
+      createdBy: '',
+      category: '',
+      numberOfServings: '',
+      image: null,
+      ingredients: [],
+      instructions: [],
+      ingredientInProgress: {
+        unit: '',
+        quantity: '',
+        ingredientName: ''
+      },
+      instructionInProgress: {
+        instructionOrder: 1,
+        instructionDetail: ''
+      }
+    });
+  }
+
+  handleSubmitNewRecipe() {
+    const data = this.state;
+    const recipe = {
+      recipeName: data.recipeName,
+      createdBy: data.createdBy,
+      category: data.category,
+      numberOfServings: data.numberOfServings,
+      ingredients: data.ingredients,
+      instructions: data.instructions
+    };
+    console.log(recipe);
+    const req = {
+      method: 'POST',
+      body: recipe
+    };
+    fetch('/api/recipe', req)
+      .then(response => response.json())
+      .then(data => console.log(data))
+      .catch(err => console.error(err));
+    this.handleCancel();
   }
 
   render() {
@@ -147,7 +186,7 @@ class AddRecipe extends React.Component {
           </div>
           <div className="servingsInputField">
             <label htmlFor="unit" className="newRecipeLabel">Number of Servings:</label>
-            <input type="text" value={this.state.numberofservings} onChange={this.handleServings} className="newRecipeInput" />
+            <input type="text" value={this.state.numberOfServings} onChange={this.handleServings} className="newRecipeInput" />
           </div>
           <form className="addIngredients" onSubmit={this.handleAddIngredient}>
             <div className="ingredientsHeader">Add Ingredients</div>
@@ -175,14 +214,19 @@ class AddRecipe extends React.Component {
           </div>
           <button className="addIngredientButton">Add Instruction</button>
         </form>
-        <form onSubmit={this.handleFile}>
+        <form action='/upload' method="POST" encType="multipart/form-data">
           <label>
             Upload Image:
-            <input type="file" ref={this.fileInput} />
+            <input type="file" accept="image/png, image/jpeg" name="foodImage"/>
           </label>
-          <br/>
-          <button type="submit">Submit</button>
+          <br />
+          <button type="submit">Submit Image</button>
         </form>
+
+        <Link to='/myRecipes'>
+          <button className="submitRecipe" type="button" onClick={() => this.handleSubmitNewRecipe()}>Submit Recipe</button>
+          <button className="CancelButton" type="button" onClick={() => this.handleCancel()}>Cancel</button>
+        </Link>
       </>
     );
   }

@@ -1,5 +1,7 @@
 require('dotenv/config');
 const express = require('express');
+const multer = require('multer');
+const path = require('path');
 
 const db = require('./database');
 const ClientError = require('./client-error');
@@ -9,6 +11,8 @@ const bcrypt = require('bcrypt');
 const saltRounds = 10;
 
 const app = express();
+
+const upload = multer({ dest: 'uploads/' });
 
 app.use(staticMiddleware);
 app.use(sessionMiddleware);
