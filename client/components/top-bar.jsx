@@ -9,7 +9,7 @@ export default class TopBar extends React.Component {
 
   render() {
     const mealPlanIcon = this.props.mealPlanIcon
-      ? <img src="https://img.icons8.com/dusk/64/000000/vegetarian-food.png" className="mealPlanIcon"/>
+      ? <img src="/images/tomato-milk.png" className="mealPlanIcon"/>
       : null;
     const addRecipeIcon = this.props.addRecipeIcon
       ? <i className="fas fa-plus-circle addRecipeIcon"/>
