@@ -172,7 +172,10 @@ class AddRecipe extends React.Component {
         <TopBar title={'Add Recipe'} mealPlanIcon={true} addRecipeIcon={false} />
         <div className="addRecipe-container fadeIn">
           <div className="newRecipeContainer">
-            <div className="recipeNameInputField ">
+            <div className="recipeNameInputField">
+              <div className="text-center add-recipe-title">
+                <h2><u>Add Recipe Details</u></h2>
+              </div>
               <label htmlFor="Recipe Name" className="newRecipeLabel "><u>Recipe Name:</u></label>
               <input type="text" value={this.state.recipeName} onChange={this.handleRecipeName} className="newRecipeInput" />
             </div>
@@ -184,6 +187,7 @@ class AddRecipe extends React.Component {
               <label htmlFor="unit" className="newRecipeLabel"><u>Number of Servings:</u></label>
               <input type="text" value={this.state.numberOfServings} onChange={this.handleServings} className="newRecipeInput" />
             </div>
+
             <form className="addIngredients" onSubmit={this.handleAddIngredient}>
               <div className="ingredientsHeader ">Add Ingredients</div>
               {this.handleCurrentIngredients()}
@@ -202,8 +206,8 @@ class AddRecipe extends React.Component {
               <div className="text-center py-2 ">
                 <button className="addIngredientButton glow-on-hover">Add Ingredient</button>
               </div>
-
             </form>
+
           </div>
           <form className="addInstruction" onSubmit={this.handleAddInstruction}>
             <div className="ingredientsHeader">Add Instructions</div>
@@ -214,8 +218,8 @@ class AddRecipe extends React.Component {
             <div className="text-center py-2 border-bottom border-dark">
               <button className="addIngredientButton glow-on-hover  ">Add Instruction</button>
             </div>
-
           </form>
+
           <form action='/upload' method="POST" encType="multipart/form-data">
             <label className="w-100">
             Upload Image:
@@ -225,7 +229,6 @@ class AddRecipe extends React.Component {
             <div className="mb-2 pb-2 text-center border-bottom border-dark">
               <button type="submit" className="glow-on-hover">Submit Image</button>
             </div>
-
           </form>
           <div className="submit-container text-center">
             <Link to='/myRecipes'>

@@ -28,11 +28,6 @@ a{
   top: -8px;
   left: 2px;
 }
-
-.category{
-
-}
-
 .recipeName{
   bottom: 50px;
   font-size: x-large;
@@ -288,7 +283,8 @@ a{
 
 .ingredientsHeader{
   font-size: xx-large;
-  background-color: tomato;
+  background-color: rgb(168, 168, 168);
+  color: white;
   text-align: center;
 }
 
