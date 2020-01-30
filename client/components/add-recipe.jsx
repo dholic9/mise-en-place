@@ -2,6 +2,7 @@ import React from 'react';
 import TopBar from './top-bar';
 import AppContext from '../lib/context';
 import { Link } from 'react-router-dom';
+import NavBar from './nav-bar';
 
 class AddRecipe extends React.Component {
   constructor(props) {
@@ -168,59 +169,63 @@ class AddRecipe extends React.Component {
   render() {
     return (
       <>
-        <TopBar mealPlanIcon={false} addRecipeIcon={false} title={'Add Recipe'} />
-        <div className="newRecipeContainer">
-          <div className="recipeNameInputField">
-            <label htmlFor="Recipe Name" className="newRecipeLabel">Recipe Name:</label>
-            <input type="text" value={this.state.recipeName} onChange={this.handleRecipeName} className="newRecipeInput" />
-          </div>
-          <div className="categoryInputField">
-            <label htmlFor="category" className="newRecipeLabel">Category:</label>
-            <input type="text" value={this.state.category} onChange={this.handleCategory} className="newRecipeInput" />
-          </div>
-          <div className="servingsInputField">
-            <label htmlFor="unit" className="newRecipeLabel">Number of Servings:</label>
-            <input type="text" value={this.state.numberOfServings} onChange={this.handleServings} className="newRecipeInput" />
-          </div>
-          <form className="addIngredients" onSubmit={this.handleAddIngredient}>
-            <div className="ingredientsHeader">Add Ingredients</div>
-            {this.handleCurrentIngredients()}
-            <div className="addNewIngredientField">
-              <label htmlFor="Ingredient" className="newIngredientLabel">Ingredient:</label>
-              <input type="text" value={this.state.ingredientInProgress.ingredientName} onChange={this.handleNewIngredient} className="newIngredientInput" />
+        <TopBar title={'Add Recipe'} mealPlanIcon={true} addRecipeIcon={false} />
+        <div className="addRecipe-container fadeIn">
+          <div className="newRecipeContainer">
+            <div className="recipeNameInputField">
+              <label htmlFor="Recipe Name" className="newRecipeLabel">Recipe Name:</label>
+              <input type="text" value={this.state.recipeName} onChange={this.handleRecipeName} className="newRecipeInput" />
             </div>
-            <div className="addNewIngredientField">
-              <label htmlFor="qunatity" className="newIngredientLabel">Quantity:</label>
-              <input type="text" value={this.state.ingredientInProgress.quantity} onChange={this.handleNewQuantity} className="newIngredientInput" />
+            <div className="categoryInputField">
+              <label htmlFor="category" className="newRecipeLabel">Category:</label>
+              <input type="text" value={this.state.category} onChange={this.handleCategory} className="newRecipeInput" />
             </div>
-            <div className="addNewIngredientField">
-              <label htmlFor="unit" className="newIngredientLabel">Unit:</label>
-              <input type="text" value={this.state.ingredientInProgress.unit} onChange={this.handleNewUnit} className="newIngredientInput" />
+            <div className="servingsInputField">
+              <label htmlFor="unit" className="newRecipeLabel">Number of Servings:</label>
+              <input type="text" value={this.state.numberOfServings} onChange={this.handleServings} className="newRecipeInput" />
             </div>
-            <button className="addIngredientButton">Add Ingredient</button>
+            <form className="addIngredients" onSubmit={this.handleAddIngredient}>
+              <div className="ingredientsHeader">Add Ingredients</div>
+              {this.handleCurrentIngredients()}
+              <div className="addNewIngredientField">
+                <label htmlFor="Ingredient" className="newIngredientLabel">Ingredient:</label>
+                <input type="text" value={this.state.ingredientInProgress.ingredientName} onChange={this.handleNewIngredient} className="newIngredientInput" />
+              </div>
+              <div className="addNewIngredientField">
+                <label htmlFor="qunatity" className="newIngredientLabel">Quantity:</label>
+                <input type="text" value={this.state.ingredientInProgress.quantity} onChange={this.handleNewQuantity} className="newIngredientInput" />
+              </div>
+              <div className="addNewIngredientField">
+                <label htmlFor="unit" className="newIngredientLabel">Unit:</label>
+                <input type="text" value={this.state.ingredientInProgress.unit} onChange={this.handleNewUnit} className="newIngredientInput" />
+              </div>
+              <button className="addIngredientButton">Add Ingredient</button>
+            </form>
+          </div>
+          <form className="addInstruction" onSubmit={this.handleAddInstruction}>
+            <div className="ingredientsHeader">Add Instructions</div>
+            {this.handleCurrentInstructions()}
+            <div className="addNewIngredientField">
+              <textarea type="text" value={this.state.instructionInProgress.instructionDetail} onChange={this.handleNewinstruction} className="newInstructionInput newIngredientInput" />
+            </div>
+            <button className="addIngredientButton">Add Instruction</button>
           </form>
-        </div>
-        <form className="addInstruction" onSubmit={this.handleAddInstruction}>
-          <div className="ingredientsHeader">Add Instructions</div>
-          {this.handleCurrentInstructions()}
-          <div className="addNewIngredientField">
-            <textarea type="text" value={this.state.instructionInProgress.instructionDetail} onChange={this.handleNewinstruction} className="newInstructionInput newIngredientInput" />
-          </div>
-          <button className="addIngredientButton">Add Instruction</button>
-        </form>
-        <form action='/upload' method="POST" encType="multipart/form-data">
-          <label>
+          <form action='/upload' method="POST" encType="multipart/form-data">
+            <label>
             Upload Image:
-            <input type="file" accept="image/png, image/jpeg" name="foodImage"/>
-          </label>
-          <br />
-          <button type="submit">Submit Image</button>
-        </form>
-
-        <Link to='/myRecipes'>
-          <button className="submitRecipe" type="button" onClick={() => this.handleSubmitNewRecipe()}>Submit Recipe</button>
-          <button className="CancelButton" type="button" onClick={() => this.handleCancel()}>Cancel</button>
-        </Link>
+              <input type="file" accept="image/png, image/jpeg" name="foodImage"/>
+            </label>
+            <br />
+            <button type="submit">Submit Image</button>
+          </form>
+          <div className="submit-container">
+            <Link to='/myRecipes'>
+              <button className="submitRecipe glow-on-hover mr-2" type="button" onClick={() => this.handleSubmitNewRecipe()}>Submit</button>
+              <button className="CancelButton glow-on-hover" type="button" onClick={() => this.handleCancel()}>Cancel</button>
+            </Link>
+          </div>
+        </div>
+        <NavBar />
       </>
     );
   }
