@@ -69,8 +69,8 @@ function MealPlanRecipe(props) {
   return (
 
     <div className="card">
-      <button type="button" onClick={() => { props.delete(props.recipe.recipeId); }} className="close" aria-label="Close">
-        <span aria-hidden="true">&times;</span>
+      <button type="button" onClick={() => { props.delete(props.recipe.recipeId); }} className="meal-plan-close" aria-label="Close">
+        <img src="https://img.icons8.com/ultraviolet/40/000000/close-window.png" alt="" />
       </button>
       <div className="card-body row">
         <div className="col-6">
