@@ -14,6 +14,7 @@ import Account from './account';
 import RecipeDetailPage from './recipe-detail-page';
 import SignUp from './sign-up-page';
 import AddRecipe from './add-recipe';
+import Swal from 'sweetalert2';
 
 export default class App extends React.Component {
   constructor(props) {
@@ -39,7 +40,10 @@ export default class App extends React.Component {
       },
       body: JSON.stringify(user)
     })
-      .then(res => res.ok ? res.json() : Promise.reject(new Error('User Name or Password was invalid')))
+      .then(res => res.ok ? res.json() : (
+        Swal.fire('User Name or Password was invalid'),
+        Promise.reject(new Error('User Name or Password was invalid'))
+        ))
       .then(data => {
         if (typeof data !== 'number') {
           return console.error('error');
@@ -58,7 +62,10 @@ export default class App extends React.Component {
       },
       body: JSON.stringify(user)
     })
-      .then(res => res.ok ? res.json() : Promise.reject(new Error('Failed to Create User')))
+      .then(res => res.ok ? res.json() : (
+        Swal.fire('One or more inputs were invalid'),
+        Promise.reject(new Error('Failed to Create User'))
+      ))
       .then(data => {
         console.log('data returned:', data);
       });
