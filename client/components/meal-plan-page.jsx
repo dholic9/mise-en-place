@@ -72,7 +72,7 @@ function MealPlanRecipe(props) {
       <button type="button" onClick={() => { props.delete(props.recipe.recipeId); }} className="meal-plan-close" aria-label="Close">
         <img src="https://img.icons8.com/ultraviolet/40/000000/close-window.png" alt="" />
       </button>
-      <div className="card-body row">
+      <div className="card-body pb-5 row">
         <div className="col-6">
           <Link to={`/recipe-detail-page/${props.recipe.recipeId}`}>
             <h5 className="card-title text-primary">{props.recipe.recipeName}</h5>
