@@ -54,7 +54,7 @@ class AddRecipe extends React.Component {
   handleCurrentIngredients() {
     const ingredients = this.state.ingredients;
     if (!ingredients.length) {
-      return <div>Add First Ingredient</div>;
+      return <div><u>Add First Ingredient:</u></div>;
     } else {
       const ingredientList = ingredients.map(listIngredients);
       return ingredientList;
@@ -64,7 +64,7 @@ class AddRecipe extends React.Component {
   handleCurrentInstructions() {
     const instructions = this.state.instructions;
     if (!instructions.length) {
-      return <div>Add First Instruction</div>;
+      return <div><u>Add First Instruction:</u></div>;
     } else {
       const instructionList = instructions.map(listInstructions);
       return instructionList;
@@ -184,20 +184,20 @@ class AddRecipe extends React.Component {
         <TopBar title={'Add Recipe'} mealPlanIcon={true} addRecipeIcon={false} />
         <div className="addRecipe-container fadeIn">
           <div className="newRecipeContainer">
-            <div className="recipeNameInputField">
-              <label htmlFor="Recipe Name" className="newRecipeLabel">Recipe Name:</label>
+            <div className="recipeNameInputField ">
+              <label htmlFor="Recipe Name" className="newRecipeLabel "><u>Recipe Name:</u></label>
               <input type="text" value={this.state.recipeName} onChange={this.handleRecipeName} className="newRecipeInput" />
             </div>
             <div className="categoryInputField">
-              <label htmlFor="category" className="newRecipeLabel">Category:</label>
+              <label htmlFor="category" className="newRecipeLabel "><u>Category:</u></label>
               <input type="text" value={this.state.category} onChange={this.handleCategory} className="newRecipeInput" />
             </div>
             <div className="servingsInputField">
-              <label htmlFor="unit" className="newRecipeLabel">Number of Servings:</label>
+              <label htmlFor="unit" className="newRecipeLabel"><u>Number of Servings:</u></label>
               <input type="text" value={this.state.numberOfServings} onChange={this.handleServings} className="newRecipeInput" />
             </div>
             <form className="addIngredients" onSubmit={this.handleAddIngredient}>
-              <div className="ingredientsHeader">Add Ingredients</div>
+              <div className="ingredientsHeader ">Add Ingredients</div>
               {this.handleCurrentIngredients()}
               <div className="addNewIngredientField">
                 <label htmlFor="Ingredient" className="newIngredientLabel">Ingredient:</label>
@@ -211,7 +211,10 @@ class AddRecipe extends React.Component {
                 <label htmlFor="unit" className="newIngredientLabel">Unit:</label>
                 <input type="text" value={this.state.ingredientInProgress.unit} onChange={this.handleNewUnit} className="newIngredientInput" />
               </div>
-              <button className="addIngredientButton">Add Ingredient</button>
+              <div className="text-center py-2 ">
+                <button className="addIngredientButton glow-on-hover">Add Ingredient</button>
+              </div>
+
             </form>
           </div>
           <form className="addInstruction" onSubmit={this.handleAddInstruction}>
@@ -220,17 +223,23 @@ class AddRecipe extends React.Component {
             <div className="addNewIngredientField">
               <textarea type="text" value={this.state.instructionInProgress.instructionDetail} onChange={this.handleNewinstruction} className="newInstructionInput newIngredientInput" />
             </div>
-            <button className="addIngredientButton">Add Instruction</button>
+            <div className="text-center py-2 border-bottom border-dark">
+              <button className="addIngredientButton glow-on-hover  ">Add Instruction</button>
+            </div>
+
           </form>
           <form onSubmit={this.handlePhotoSubmit}>
             <label className="w-100">
             Upload Image:
-              <input id="photoInput" type="file" name="myImage"/>
+              <input id="photoInput" className="fileInput" type="file" accept="image/png, image/jpeg, image/jpg" name="myImage"/>
             </label>
             <br />
-            <button type="submit">Submit Image</button>
+            <div className="mb-2 pb-2 text-center border-bottom border-dark">
+              <button type="submit" className="glow-on-hover">Submit Image</button>
+            </div>
+
           </form>
-          <div className="submit-container">
+          <div className="submit-container text-center">
             <Link to='/myRecipes'>
               <button className="submitRecipe glow-on-hover mr-2" type="button" onClick={() => this.handleSubmitNewRecipe()}>Submit</button>
               <button className="CancelButton glow-on-hover" type="button" onClick={() => this.handleCancel()}>Cancel</button>

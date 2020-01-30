@@ -29,6 +29,10 @@ a{
   left: 2px;
 }
 
+.category{
+
+}
+
 .recipeName{
   bottom: 50px;
   font-size: x-large;
@@ -257,7 +261,7 @@ a{
 }
 
 .newRecipeContainer{
-  margin-top: 68px;
+  margin-top: 85px;
   flex-wrap: wrap;
 }
 
@@ -343,8 +347,17 @@ a{
 
 .close{
   position: absolute;
-  right: 1%;
-  width: 20px;
+  right: 20%;
+  width: 50px;
+  cursor: pointer;
+  bottom: 11%;
+}
+.meal-plan-close{
+  position: absolute;
+  right: 22%;
+  width: 50px;
+  cursor: pointer;
+  bottom: 0;
 }
 .passwordList{
   color: black;

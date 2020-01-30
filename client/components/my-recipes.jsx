@@ -89,7 +89,7 @@ function FavRecipe(props) {
   return (
     <div className="card fadeIn">
       <button type="button" className="close" onClick={() => { props.delete(props.recipe.recipeId); }}aria-label="Close">
-        <span aria-hidden="true">&times;</span>
+        <img src="https://img.icons8.com/ultraviolet/40/000000/close-window.png" alt=""/>
       </button>
       <div className="card-body row">
         <div className="col-6">
