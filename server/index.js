@@ -34,14 +34,12 @@ const storage = multer.diskStorage({
 const upload = multer({ storage: storage }).single('photo');
 
 app.post('/api/recipe-photos', (req, res, next) => {
+  console.log('req.file:', req.file);
   upload(req, res, err => {
     if (err) {
       next(err);
-      return false;
     } else {
-      console.log(req.file.filename);
-
-      return true;
+      res.json(`/images/${req.file.filename}`);
     }
   });
 });
