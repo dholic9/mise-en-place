@@ -188,12 +188,17 @@ a{
   width: 80%;
 }
 
-.favStar{
-  text-shadow: -1px 0 white, 0 1px white, 1px 0 white, 0 -1px white;
+.star{
   top: 94px;
   position: absolute;
   left: 20px;
   font-size: xx-large;
+}
+
+.star:hover{
+  animation: shake 0.82s cubic-bezier(.36,.07,.19,.97) both;
+  transform: translate3d(0, 0, 0);
+  perspective: 1000px;
 }
 
 .icon{
@@ -341,19 +346,47 @@ a{
   width: 24px;
 }
 
-.close{
+.delete-button{
   position: absolute;
-  right: 20%;
-  width: 50px;
+  right: 23%;
   cursor: pointer;
-  bottom: 11%;
+  bottom: 9%;
+  float: right;
+  font-size: 1.5rem;
+  font-weight: 700;
+  line-height: 1;
+  color: #000;
+  text-shadow: 0 1px 0 #fff;
+  width: 11%;
 }
+
 .meal-plan-close{
   position: absolute;
-  right: 22%;
-  width: 50px;
+  right: 24%;
+  width: 9%;
   cursor: pointer;
-  bottom: 0;
+  bottom: 4%;
+}
+
+.meal-plan-close:hover,.delete-button:hover {
+  animation: shake 0.82s cubic-bezier(.36,.07,.19,.97) both;
+  transform: translate3d(0, 0, 0);
+  perspective: 1000px;
+}
+
+@keyframes shake {
+  10%, 90% {
+    transform: translate3d(-1px, 0, 0);
+  }
+  20%, 80% {
+    transform: translate3d(2px, 0, 0);
+  }
+  30%, 50%, 70% {
+    transform: translate3d(-4px, 0, 0);
+  }
+  40%, 60% {
+    transform: translate3d(4px, 0, 0);
+  }
 }
 .passwordList{
   color: black;

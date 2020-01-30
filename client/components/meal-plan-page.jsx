@@ -54,7 +54,7 @@ export default class MealPlan extends React.Component {
       />));
     return (
       <React.Fragment>
-        <TopBar mealPlanIcon={true} addRecipeIcon={false} title={'Meal Plan'}/>
+        <TopBar mealPlanIcon={true} addRecipeIcon={true} title={'Meal Plan'}/>
         <div className="recipes-container fadeIn">
           {display}
         </div>
@@ -69,9 +69,7 @@ function MealPlanRecipe(props) {
   return (
 
     <div className="card">
-      <button type="button" onClick={() => { props.delete(props.recipe.recipeId); }} className="meal-plan-close" aria-label="Close">
-        <img src="https://img.icons8.com/ultraviolet/40/000000/close-window.png" alt="" />
-      </button>
+      <img src="https://img.icons8.com/ios-filled/100/000000/delete-forever.png" className="meal-plan-close" onClick={() => { props.delete(props.recipe.recipeId); }} />
       <div className="card-body row">
         <div className="col-6">
           <Link to={`/recipe-detail-page/${props.recipe.recipeId}`}>

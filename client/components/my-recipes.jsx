@@ -88,9 +88,7 @@ function FavRecipe(props) {
   const image = props.recipe.image ? props.recipe.image : '/images/new-logo.png';
   return (
     <div className="card fadeIn">
-      <button type="button" className="close" onClick={() => { props.delete(props.recipe.recipeId); }}aria-label="Close">
-        <img src="https://img.icons8.com/ultraviolet/40/000000/close-window.png" alt=""/>
-      </button>
+      <img className="delete-button" src="https://img.icons8.com/ios-filled/100/000000/delete-forever.png" onClick={() => { props.delete(props.recipe.recipeId); }}/>
       <div className="card-body row">
         <div className="col-6">
           <Link to={`/recipe-detail-page/${props.recipe.recipeId}`}>
@@ -102,8 +100,7 @@ function FavRecipe(props) {
               <p>Serving: {props.recipe.numberOfServings}</p>
             </div>
             <div className="button-container">
-              <i className="fas fa-plus mr-3" onClick={() => { props.addToMealPlan(props.recipe.recipeId); }}></i>
-              <i className="fas fa-share"></i>
+              <img src="https://img.icons8.com/ios-filled/40/000000/meal.png" onClick={() => { props.addToMealPlan(props.recipe.recipeId); }}/>
             </div>
           </div>
         </div>
