@@ -211,9 +211,9 @@ class AddRecipe extends React.Component {
             <button className="addIngredientButton">Add Instruction</button>
           </form>
           <form action='/upload' method="POST" encType="multipart/form-data">
-            <label>
+            <label className="w-100">
             Upload Image:
-              <input type="file" accept="image/png, image/jpeg" name="foodImage"/>
+              <input className="fileInput" type="file" accept="image/png, image/jpeg" name="foodImage"/>
             </label>
             <br />
             <button type="submit">Submit Image</button>

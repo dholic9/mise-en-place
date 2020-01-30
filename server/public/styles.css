@@ -426,3 +426,7 @@ a{
 .submit-container :nth-child(2).glow-on-hover:after{
   background: #f5e297;
 }
+
+.fileInput{
+  width:90%
+}
