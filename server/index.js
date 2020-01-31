@@ -27,7 +27,7 @@ app.get('/api/health-check', (req, res, next) => {
 const storage = multer.diskStorage({
   destination: './server/public/images',
   filename: (req, file, cb) => {
-    cb(null, path.basename(file.originalname, path.extname(file.originalname)) + '-' + Date.now() + path.extname(file.originalname));
+    cb(null, path.basename(file.originalname, path.extname(file.originalname)) + path.extname(file.originalname));
   }
 });
 
@@ -39,7 +39,8 @@ app.post('/api/recipe-photos', (req, res, next) => {
     if (err) {
       next(err);
     } else {
-      res.json(`/images/${req.file.filename}`);
+      const resBody = req.file.filename;
+      res.json(resBody);
     }
   });
 });
