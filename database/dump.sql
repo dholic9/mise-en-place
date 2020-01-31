@@ -279,7 +279,6 @@ COPY public."FavoriteRecipes" ("userId", "recipeId") FROM stdin;
 1	2
 19	6
 19	5
-20	6
 18	3
 18	4
 18	6
@@ -287,6 +286,7 @@ COPY public."FavoriteRecipes" ("userId", "recipeId") FROM stdin;
 19	8
 19	9
 19	10
+20	12
 \.
 
 
@@ -361,6 +361,12 @@ COPY public."Ingredients" ("ingredientId", "ingredientName") FROM stdin;
 74	heavy cream
 75	freshly grated nutmeg
 76	freshly grated Parmigiano-Reggiano 
+77	cashews
+78	water
+79	cashew milk
+81	coconut oil
+82	cocoa butter
+83	flaky salt
 \.
 
 
@@ -424,6 +430,12 @@ COPY public."Instructions" ("instructionId", "recipeId", "instructionDetail", "i
 53	10	Push veggies to edges of pan and crack eggs into center.\nCook and scramble until eggs have just set.	5	2020-01-30 20:58:49.336146+00
 54	10	Add in chicken, noodles and sauce and toss everything together and cook 1 – 2 minutes.	6	2020-01-30 20:58:49.336146+00
 55	10	Serve warm topped with cilantro, peanuts and optional red pepper flakes and sesame seeds.	7	2020-01-30 20:58:49.336146+00
+56	12	Make the cashew milk: In a medium bowl, submerge the cashews completely with cold water. Cover the bowl with plastic wrap and refrigerate overnight.	1	2020-01-30 23:47:50.748397+00
+57	12	Strain the cashews, discarding the soaking liquid, and add them to a blender along with fresh water. Blend the mixture on high for 2 minutes.	2	2020-01-30 23:47:50.748397+00
+58	12	In a medium bowl, combine the cashew and coconut milks, then set aside for later.	3	2020-01-30 23:47:50.748397+00
+59	12	In a large sauté pan, cook the sugar over medium heat. When most of the sugar has dissolved, about 5 minutes, gently stir the liquid with a wooden spoon to prevent it from burning. Continue to cook the sugar until it is a rich brown color, 12 minutes. Reduce the heat to low and add half of the coconut oil; stir until it is completely dissolved, 2 minutes.	4	2020-01-30 23:47:50.748397+00
+60	12	Add the remaining coconut oil and remaining ice cream ingredients, and stir until all has dissolved. Transfer the caramel and the milk mixture to a high-speed blender, and blend on high for 3 minutes, until completely emulsified.	5	2020-01-30 23:47:50.748397+00
+61	12	Chill the ice cream base for 2 hours in the refrigerator, spin in an ice cream maker until the mixture hardens, then serve immediately or refrigerate overnight.	6	2020-01-30 23:47:50.748397+00
 \.
 
 
@@ -441,8 +453,8 @@ COPY public."MealPlan" ("userId", "recipeId") FROM stdin;
 11	5
 19	6
 18	4
-20	6
 19	5
+20	1
 \.
 
 
@@ -529,6 +541,13 @@ COPY public."RecipeIngredients" ("ingredientId", "recipeId", quantity, unit, "cr
 65	10	2	drops	2020-01-30 20:58:49.326382+00
 66	10	1	Pack	2020-01-30 20:58:49.326382+00
 68	10	1	Pack	2020-01-30 20:58:49.326382+00
+20	12	2	tbsp	2020-01-30 23:47:50.737809+00
+77	12	1	cup	2020-01-30 23:47:50.737809+00
+78	12	1	cup	2020-01-30 23:47:50.737809+00
+79	12	1	cup	2020-01-30 23:47:50.737809+00
+81	12	0.25	cup	2020-01-30 23:47:50.737809+00
+82	12	6	tbsp	2020-01-30 23:47:50.737809+00
+83	12	1	tbsp	2020-01-30 23:47:50.737809+00
 \.
 
 
@@ -546,6 +565,7 @@ COPY public."Recipes" ("recipeId", "recipeName", category, "numberOfServings", "
 8	Hashbrown Patties	Breakfast	2	neow	/images/hashbrown.jpg	2020-01-30 20:00:43.290163+00
 9	Roasted Brussels Sprouts	Lunch/Dinner	6	neow	/images/brussel-sprouts.jpeg	2020-01-30 20:13:04.814919+00
 10	Pad Thai	Street Food	2	Weilin	/images/pad-thai.jpg	2020-01-30 20:58:49.296152+00
+12	Vegan Salted Caramel Ice Cream	dessert	4	weilin	/images/vegan-salted-caramel-ice-cream.jpg	2020-01-30 23:47:50.67136+00
 \.
 
 
@@ -566,21 +586,21 @@ COPY public."Users" ("userId", name, "userName", email, password, image, "create
 -- Name: Ingredients_ingredientId_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('public."Ingredients_ingredientId_seq"', 76, true);
+SELECT pg_catalog.setval('public."Ingredients_ingredientId_seq"', 83, true);
 
 
 --
 -- Name: Instructions_instructionId_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('public."Instructions_instructionId_seq"', 55, true);
+SELECT pg_catalog.setval('public."Instructions_instructionId_seq"', 61, true);
 
 
 --
 -- Name: Recipes_recipeId_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('public."Recipes_recipeId_seq"', 11, true);
+SELECT pg_catalog.setval('public."Recipes_recipeId_seq"', 12, true);
 
 
 --
