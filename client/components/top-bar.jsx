@@ -8,8 +8,11 @@ export default class TopBar extends React.Component {
   }
 
   render() {
-    const iconDisplay = this.props.displayIcon
-      ? <i className="fas icon fa-shopping-cart col-2 text-dark"/>
+    const mealPlanIcon = this.props.mealPlanIcon
+      ? <img src="/images/tomato-milk.png" className="mealPlanIcon"/>
+      : null;
+    const addRecipeIcon = this.props.addRecipeIcon
+      ? <i className="fas fa-plus-circle addRecipeIcon"/>
       : null;
     return (
       <div className="
@@ -19,15 +22,17 @@ export default class TopBar extends React.Component {
         justify-content-center
         d-flex
         row
-        text-dark
+        align-items-center
         "
       >
-        <img src="/images/logo1.png" className="logo" alt=""/>
-        <div className="title-text col-12 p-0 text-center">
+        <Link to={'/add-recipe'}>
+          {addRecipeIcon}
+        </Link>
+        <div>
           {this.props.title}
         </div>
-        <Link to={'/mealplan'}>
-          {iconDisplay}
+        <Link to={'/shoppingList'}>
+          {mealPlanIcon}
         </Link>
       </div>
     );

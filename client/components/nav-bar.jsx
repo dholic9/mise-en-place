@@ -6,7 +6,7 @@ import {
 
 const tabs = [{
   path: '/public-page',
-  icon: 'fa-home'
+  icon: 'fa-hamburger'
 }, {
   path: '/myRecipes',
   icon: 'fa-star'
@@ -14,7 +14,7 @@ const tabs = [{
   path: '/mealplan',
   icon: 'fa-clipboard-list'
 }, {
-  path: '/',
+  path: '/account',
   icon: 'fa-user'
 }
 ];
@@ -22,7 +22,7 @@ const tabs = [{
 function renderTab({ path, icon }, index) {
   const { pathname } = useLocation();
   const isCurrentPath = pathname === path;
-  const color = isCurrentPath ? 'blue' : 'black';
+  const color = isCurrentPath ? 'white' : 'black';
   return (
     <Link className="black" to={path} key={index}>
       <div className="col-3 w-25">

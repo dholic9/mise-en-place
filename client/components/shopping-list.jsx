@@ -1,11 +1,12 @@
 import React from 'react';
 import TopBar from './top-bar';
-import { Link } from 'react-router-dom';
+import NavBar from './nav-bar';
+import Swal from 'sweetalert2';
 
 export default class ShoppingList extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { shoppingList: [] };
+    this.state = { shoppingList: [], errorMessage: '' };
     this.removeItem = this.removeItem.bind(this);
   }
 
@@ -20,7 +21,11 @@ export default class ShoppingList extends React.Component {
     fetch('/api/shoppinglist', init)
       .then(response => response.json())
       .then(shoppingList => {
-        this.setState({ shoppingList });
+        if (!shoppingList.error) {
+          this.setState({ shoppingList });
+        } else {
+          this.setState(state => ({ shoppingList: [], errorMessage: shoppingList.error }), () => { Swal.fire(this.state.errorMessage); });
+        }
       });
   }
 
@@ -58,13 +63,25 @@ export default class ShoppingList extends React.Component {
     const display = data.map((element, index) => (<Item key={index} remove={this.removeItem}ingredient={element}/>));
     return (
       <React.Fragment>
-        <TopBar title={'Shopping List'} displayIcon={false}/>
+        <TopBar title={'Shopping List'} mealPlanIcon={false} addRecipeIcon={false}/>
         <div className="shoppinglist-container">
           {display}
         </div>
+        <NavBar/>
       </React.Fragment>
     );
   }
+
+}
+
+function capitalizeWords(string) {
+  return string
+    .toLowerCase()
+    .split(' ')
+    .map(function (word) {
+      return word[0].toUpperCase() + word.substr(1);
+    })
+    .join(' ');
 
 }
 
@@ -72,25 +89,32 @@ function Item(props) {
   const details = props.ingredient.recipe.map((element, index) => {
     const unit = element.unit === '-' ? '' : element.unit;
     return (
-      <p className="text-left" key={index}>{`${element.quantity} ${unit} for ${element.recipeName}`}</p>)
+
+      <p className="text-left m-0" key={index}>{`${element.quantity} ${unit} for ${element.recipeName}`}</p>
+    )
     ;
   });
+
+  const tempName = props.ingredient.ingredientName;
+
   return (
 
     <div className="card mb-1">
       <div className="card-body">
-        <h5 className="card-title text-center">{props.ingredient.ingredientName}</h5>
-        <div className="card-text row">
-          <div className="col-3 align-items-center justify-content-center d-flex">
-            <i className="fas fa-times" onClick={() => { props.remove(props.ingredient.ingredientName); }}></i>
+        <h5 className="card-title text-center">{<u>{capitalizeWords(tempName)}</u>}</h5>
+        <div className="card-text  align-items-center row">
+          <div className="col-3  justify-content-center d-flex">
+            <input type="checkbox" className='checkbox' />
           </div>
-          <div className="qty-unit col-9">
+          <div className=" align-items-center qty-unit col-9">
             {details}
           </div>
 
         </div>
       </div>
+      <div className="row">
+        <NavBar />
+      </div>
     </div>
-
   );
 }

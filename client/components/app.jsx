@@ -1,10 +1,7 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
 import {
   BrowserRouter as Router,
-  Switch,
   Route,
-  Link,
   Redirect
 } from 'react-router-dom';
 import MyRecipes from './my-recipes';
@@ -13,8 +10,11 @@ import ShoppingList from './shopping-list';
 import Login from './login';
 import AppContext from '../lib/context';
 import PublicPage from './public-page';
+import Account from './account';
 import RecipeDetailPage from './recipe-detail-page';
 import SignUp from './sign-up-page';
+import AddRecipe from './add-recipe';
+import Swal from 'sweetalert2';
 
 export default class App extends React.Component {
   constructor(props) {
@@ -33,7 +33,6 @@ export default class App extends React.Component {
   }
 
   handleUserLogin(user) {
-    console.log('user passed in: ', user);
     return (fetch('api/users', {
       method: 'POST',
       headers: {
@@ -41,18 +40,21 @@ export default class App extends React.Component {
       },
       body: JSON.stringify(user)
     })
-      .then(res => res.ok ? res.json() : Promise.reject(new Error('Incorrect login information')))
+      .then(res => res.ok ? res.json() : (
+        Swal.fire('User Name or Password was invalid'),
+        Promise.reject(new Error('User Name or Password was invalid'))
+        ))
       .then(data => {
         if (typeof data !== 'number') {
-          return console.log('error');
+          return console.error('error');
         }
         this.setState({ user: data });
-      }));
+      })
 
+    );
   }
 
   handleUserSignup(user) {
-    console.log('sign up user: ', user);
     return fetch('api/users/create', {
       method: 'POST',
       headers: {
@@ -60,7 +62,10 @@ export default class App extends React.Component {
       },
       body: JSON.stringify(user)
     })
-      .then(res => res.ok ? res.json() : Promise.reject(new Error('Failed to Create User')))
+      .then(res => res.ok ? res.json() : (
+        Swal.fire('One or more inputs were invalid'),
+        Promise.reject(new Error('Failed to Create User'))
+      ))
       .then(data => {
         console.log('data returned:', data);
       });
@@ -91,7 +96,9 @@ export default class App extends React.Component {
           <Route exact path="/mealplan" component={MealPlan} />
           <Route exact path="/sign-up" component={SignUp}/>
           <Route exact path="/public-page" component={PublicPage}/>
+          <Route exact path="/account" component={Account}/>
           <Route path="/recipe-detail-page/:recipeId" component={RecipeDetailPage}/>
+          <Route exact path="/add-recipe" component={AddRecipe}/>
         </Router>
       </AppContext.Provider>
     );

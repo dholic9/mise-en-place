@@ -2,6 +2,7 @@ import React from 'react';
 import TopBar from './top-bar';
 import { Link } from 'react-router-dom';
 import NavBar from './nav-bar';
+import Swal from 'sweetalert2';
 
 export default class MyRecipe extends React.Component {
   constructor(props) {
@@ -10,6 +11,7 @@ export default class MyRecipe extends React.Component {
       favoriteRecipes: []
     };
     this.addToMealPlan = this.addToMealPlan.bind(this);
+    this.deleteFavRecipes = this.deleteFavRecipes.bind(this);
   }
 
   componentDidMount() {
@@ -21,11 +23,29 @@ export default class MyRecipe extends React.Component {
       method: 'GET'
 
     };
-    fetch('/api/fav', init)
+    fetch('api/fav', init)
       .then(response => response.json())
       .then(data => {
         this.setState(state => ({ favoriteRecipes: data }));
       });
+  }
+
+  deleteFavRecipes(recipeId) {
+    const init = {
+      method: 'DELETE'
+    };
+    fetch(`/api/myrecipes/${recipeId}`, init)
+      .then(() => {
+        const newFavRecipes = [...this.state.favoriteRecipes];
+        newFavRecipes.forEach((recipe, index) => {
+          if (recipe.recipeId === recipeId) {
+            newFavRecipes.splice(index, 1);
+          }
+        });
+        Swal.fire('Successfully removed from your favorite recipes!');
+        this.setState({ favoriteRecipes: newFavRecipes });
+      });
+
   }
 
   addToMealPlan(recipeId) {
@@ -40,35 +60,39 @@ export default class MyRecipe extends React.Component {
       .then(response => response.json())
       .then(result => {
         if (!result.error) {
-          window.alert('added to meal plan');
+          Swal.fire('Added to meal plan!');
         } else {
-          window.alert(result.error);
+          Swal.fire(result.error);
         }
       });
   }
 
   render() {
     const data = this.state.favoriteRecipes;
-    const display = data.map(element => (<FavRecipe key={element.recipeId} recipe={element} addToMealPlan={this.addToMealPlan}/>));
+    const display = data.map(element => (<FavRecipe key={element.recipeId} recipe={element} delete={this.deleteFavRecipes} addToMealPlan={this.addToMealPlan}/>));
     return (
       <React.Fragment>
-        <TopBar displayIcon={true} title={'My Recipes'}/>
-        <div className="recipes-container">
-          {display}
+        <div className="container-fluid mb-4 pb-4 p-0 w-100 fadeIn">
+          <TopBar mealPlanIcon={true} addRecipeIcon={true} title={'My Recipes'}/>
+          <div className="recipes-container">
+            {display}
+          </div>
+          <NavBar />
         </div>
-        <NavBar />
       </React.Fragment>
     );
   }
 }
 
 function FavRecipe(props) {
+  const image = props.recipe.image ? props.recipe.image : '/images/new-logo.png';
   return (
-    <div className="card">
+    <div className="card fadeIn">
+      <img className="delete-button" src="https://img.icons8.com/ios-filled/100/000000/delete-forever.png" onClick={() => { props.delete(props.recipe.recipeId); }}/>
       <div className="card-body row">
         <div className="col-6">
           <Link to={`/recipe-detail-page/${props.recipe.recipeId}`}>
-            <h5 className="card-title">{props.recipe.recipeName}</h5>
+            <h5 className="card-title text-primary">{props.recipe.recipeName}</h5>
           </Link>
           <div className="card-text">
             <div className="category-serving">
@@ -76,12 +100,11 @@ function FavRecipe(props) {
               <p>Serving: {props.recipe.numberOfServings}</p>
             </div>
             <div className="button-container">
-              <i className="fas fa-plus mr-3" onClick={() => { props.addToMealPlan(props.recipe.recipeId); }}></i>
-              <i className="fas fa-share"></i>
+              <img className="add-meal-plan" src="https://img.icons8.com/ios-filled/40/000000/meal.png" onClick={() => { props.addToMealPlan(props.recipe.recipeId); }}/>
             </div>
           </div>
         </div>
-        <img className="picture col-6" src={props.recipe.image} />
+        <img className="picture col-6" src={image} />
       </div>
     </div >
   );

@@ -1,6 +1,12 @@
 .recipe{
   height: 100vmin;
 }
+body{
+  width: 100%;
+  font-family: 'Kalam', cursive;
+  font-size: 1.5rem;
+  font-weight: bold;
+}
 
 a{
   text-decoration: none;
@@ -10,9 +16,11 @@ a{
 .my-recipe{
   width: 100%;
 }
+
 .row{
   margin: 0;
 }
+
 .logo{
   height: 80px;
   width: 80px;
@@ -24,21 +32,22 @@ a{
   bottom: 50px;
   font-size: x-large;
   position: relative;
-  color: black;
-  text-shadow: -1px 0 white, 0 1px white, 1px 0 white, 0 -1px white;
+  color:white;
   left: 25px;
   width: fit-content;
 }
-.featured{
-  padding-top: 68px;
-  padding-bottom: 67px;
 
+.featured{
+  padding-top: 67px;
+  padding-bottom: 67px;
 }
+
 .image{
   width: 100%;
   height: 100vmin;
   object-fit: cover;
 }
+
 .outline{
   text-shadow:
     -1px -1px 0 #000,
@@ -53,38 +62,50 @@ a{
   top: 0;
   overflow: hidden;
   width: 100%;
-  font-size: 1.5rem;
+  font-size: 1.75rem;
   font-weight: bold;
-  background-color: rgba(219, 219, 219, 0.993);
+  background-color: #ffffff;
+  color: #16c2d1;
+  box-shadow: 0px 11px 35px 2px rgba(0,0,0,0.14)
 }
+
 .nav-bar {
   bottom: -2px;
   right:0;
   height: 69px;
   font-size: 2em;
   color: white;
-  background-color: rgb(197, 197, 197);
+  background-color: #5ab9ea ;
 }
+
 .white{
   color: white
 }
+
 .black{
   color:black
 }
+
 .picture{
   height: 150px;
   width: 30px;
   object-fit: cover;
 }
+
 .fa-utensils, .fa-times{
   cursor: pointer;
 }
+
 .shoppinglist-container .card-title{
   font-size: 2rem;
 }
+
 .fa-times{
   font-size: 3rem;
   color: rgb(61, 153, 214);
+}
+.shoppinglist-container{
+  margin-bottom: 17%;
 }
 
 .recipes-container, .shoppinglist-container{
@@ -92,31 +113,51 @@ a{
   flex-direction: column;
   text-align: center;
   margin-top: 20%;
+  margin-bottom: 66px;
 }
+
 .recipeContainer{
   top: 68px;
   position: absolute;
   padding-bottom: 66px;
 }
+
 .button-container{
   font-size: 2rem;
 }
+
 .button-container .fas{
  cursor: pointer;
 }
-
-.ratatouille{
-  background-image: url("/images/ratatouille.jpg");
-  background-position: center;
+.pink{
+  color: #4b86b4;
+}
+.login-background{
+  background-image: url("images/cupcakes.jpeg");
   background-size: cover;
   background-repeat: no-repeat;
-  background-position-x: 75%;
-  object-fit: cover;
   height: 100vh;
   width:100%;
 }
-
-
+.intro-card{
+  background-color: rgb(255, 255, 255);
+  width: 85%;
+  padding: 10%;
+  border-radius: 1.5em;
+  box-shadow: 0px 11px 35px 2px rgba(0,0,0,0.14)
+}
+.login-button{
+  color: white;
+  background: linear-gradient(to right, #63ace5,  #0e9aa7);
+}
+.signup-button{
+  color: #4b86b4;
+  font-size: 1em;
+}
+.input-rounding{
+  background-color: rgba(136,126,126,0.04);
+  border-radius: 20px;
+}
 .ingredient{
   display: flex;
   justify-content: space-evenly;
@@ -125,19 +166,17 @@ a{
 .quantity{
   text-align: center;
 }
-.login-title{
-  background-color: rgba(230, 230, 230, 0.459);
-}
+
 .ing{
   width: 99%;
 }
 
 .oddIngredient{
-  background-color: violet;
+  background-color: #dddddd;
 }
 
 .evenIngredient{
-  background-color: yellowgreen;
+  background-color: rgb(255, 255, 255);
 }
 
 .instructionOrder{
@@ -148,12 +187,17 @@ a{
   width: 80%;
 }
 
-.favStar{
-  text-shadow: -1px 0 white, 0 1px white, 1px 0 white, 0 -1px white;
-  top: 70px;
+.star{
+  top: 94px;
   position: absolute;
   left: 20px;
   font-size: xx-large;
+}
+
+.star:hover{
+  animation: shake 0.82s cubic-bezier(.36,.07,.19,.97) both;
+  transform: translate3d(0, 0, 0);
+  perspective: 1000px;
 }
 
 .icon{
@@ -162,8 +206,31 @@ a{
   right:0;
   top: 2.5vh;
 }
+.account-icon{
+  width: 50%;
+  height: 70%;
+  object-fit: cover;
+  border-radius: 50%;
+}
 .clickable{
   cursor: pointer;
+}
+
+.fadeIn{
+  animation: fadein 0.75s ease-in-out;
+}
+
+.longFadeIn{
+  animation: fadein 1s ease-in-out;
+}
+
+@keyframes fadein {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+.nav-bar > a:hover {
+  border-bottom: 3px solid black;
 }
 
 .black{
@@ -172,4 +239,243 @@ a{
 
 .blue{
   color: blue;
+}
+
+.signup{
+  color: whitesmoke;
+  text-shadow: -1px 1px 0 #000,
+  1px 1px 0 #000,
+  1px -1px 0 #000,
+  -1px -1px 0 #000;
+}
+
+.mealPlanIcon{
+  position: absolute;
+  right: 16px;
+  top: 6px;
+}
+.addRecipeIcon{
+  position: absolute;
+  left: 25px;
+  top: 22px;
+}
+
+.newRecipeContainer{
+  margin-top: 85px;
+  flex-wrap: wrap;
+}
+
+.servingsInputField{
+  margin-bottom: 10px;
+}
+
+.newRecipeLabel{
+ width: 100%;
+ font-size: x-large;
+}
+
+.newRecipeInput{
+  border-radius: 25px;
+  text-align: center;
+  font-size: x-large;
+  display: block;
+  margin: auto;
+}
+
+.addNewIngredientField{
+  display: flex;
+}
+
+.ingredientsHeader{
+  font-size: xx-large;
+  background-color: rgb(168, 168, 168);
+  color: white;
+  text-align: center;
+}
+
+.newIngredientLabel{
+  font-size: x-large;
+  width: 50%;
+}
+
+.newIngredientInput{
+  border-radius: 25px;
+  width: 50%;
+}
+
+.ingredientContainer{
+  display: flex;
+}
+
+.addedQuantity{
+  width: 20%;
+  text-align: center;
+}
+
+.addedUnit{
+  width: 20%;
+}
+
+.addedIngredient{
+  width: 60%;
+  text-align: center;
+}
+
+.newIngredientInput{
+  text-align: center;
+  font-size: x-large;
+}
+
+.addNewIngredientField{
+  margin-top:5px;
+  margin-bottom: 5px;
+}
+
+.newInstructionInput{
+  width: 80%;
+  border-radius: 25px;
+  margin: auto;
+  height: auto;
+}
+
+.addIngredent{
+  justify-content: center;
+}
+.checkbox{
+  height: 24px;
+  width: 24px;
+}
+
+.delete-button{
+  position: absolute;
+  right: 23%;
+  cursor: pointer;
+  bottom: 9%;
+  float: right;
+  font-size: 1.5rem;
+  font-weight: 700;
+  line-height: 1;
+  color: #000;
+  text-shadow: 0 1px 0 #fff;
+  width: 11%;
+}
+
+.meal-plan-close{
+  position: absolute;
+  right: 24%;
+  width: 9%;
+  cursor: pointer;
+  bottom: 5%;
+}
+
+.add-meal-plan:hover,.meal-plan-close:hover,.delete-button:hover {
+  animation: shake 0.82s cubic-bezier(.36,.07,.19,.97) both;
+  transform: translate3d(0, 0, 0);
+  perspective: 1000px;
+}
+
+@keyframes shake {
+  10%, 90% {
+    transform: translate3d(-1px, 0, 0);
+  }
+  20%, 80% {
+    transform: translate3d(2px, 0, 0);
+  }
+  30%, 50%, 70% {
+    transform: translate3d(-4px, 0, 0);
+  }
+  40%, 60% {
+    transform: translate3d(4px, 0, 0);
+  }
+}
+.passwordList{
+  color: black;
+  font-size: 13px;
+}
+
+
+/* Button styling*/
+.logoutButton{
+  bottom: 10%
+}
+.glow-on-hover {
+    width: 175px;
+    height: 50px;
+    border: none;
+    outline: none;
+    color: #fff;
+    /* background: #111; */
+    cursor: pointer;
+    position: relative;
+    z-index: 0;
+    border-radius: 10px;
+}
+
+.glow-on-hover:before {
+    content: '';
+    background: linear-gradient(45deg, #ff0000, #ff7300, #fffb00, #48ff00, #00ffd5, #002bff, #7a00ff, #ff00c8, #ff0000);
+    position: absolute;
+    top: -2px;
+    left:-2px;
+    background-size: 400%;
+    z-index: -1;
+    filter: blur(5px);
+    width: calc(100% + 4px);
+    height: calc(100% + 4px);
+    animation: glowing 20s linear infinite;
+    opacity: 0;
+    transition: opacity .3s ease-in-out;
+    border-radius: 10px;
+}
+
+.glow-on-hover:active {
+    color: #000
+}
+
+.glow-on-hover:active:after {
+    background: transparent;
+}
+
+.glow-on-hover:hover:before {
+    opacity: 1;
+}
+
+.glow-on-hover:after {
+    z-index: -1;
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: #16c2d1;
+    left: 0;
+    top: 0;
+    border-radius: 10px;
+}
+
+@keyframes glowing {
+    0% { background-position: 0 0; }
+    50% { background-position: 400% 0; }
+    100% { background-position: 0 0; }
+}
+
+.submit-container{
+  margin-bottom: 80px;
+}
+
+.submit-container :nth-child(1).glow-on-hover:after {
+  background: #88d8b0;
+}
+.submit-container :nth-child(2).glow-on-hover:after{
+  background: #f5e297;
+}
+
+.fileInput{
+  width:90%
+}
+.file-style{
+  background: #d2d4dc;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: all 0.3s;
+  width: 76%;
 }
