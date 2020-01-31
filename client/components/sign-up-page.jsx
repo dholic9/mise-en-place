@@ -67,16 +67,16 @@ export default class SignUp extends React.Component {
     };
     const lowerCase = /[a-z]/g;
     const upperCase = /[A-Z]/g;
-    const numbers = /[0-9]/g
-    if(!user.password.match(lowerCase)){
-      return Swal.fire('Password must contain a lowercased letter')
-    } else if(!user.password.match(upperCase)){
-      return Swal.fire('Password must contain an uppercased letter')
-    } else if(!user.password.match(numbers)){
-      return Swal.fire('Password must contain a number')
+    const numbers = /[0-9]/g;
+    if (!user.password.match(lowerCase)) {
+      return Swal.fire('Password must contain a lowercased letter');
+    } else if (!user.password.match(upperCase)) {
+      return Swal.fire('Password must contain an uppercased letter');
+    } else if (!user.password.match(numbers)) {
+      return Swal.fire('Password must contain a number');
     } else {
       this.context.handleUserSignup(user)
-      .then(() => { this.props.history.push('/login'); });
+        .then(() => { this.props.history.push('/login'); });
     }
   }
 
