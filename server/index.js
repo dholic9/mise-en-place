@@ -39,10 +39,8 @@ app.post('/api/recipe-photos', (req, res, next) => {
     if (err) {
       next(err);
     } else {
-      console.log('req.file.filename: ', req.file.filename);
-
-      res.status(204).json(req.file);
-
+      const resBody = req.file.filename;
+      res.json(resBody);
     }
   });
 });
