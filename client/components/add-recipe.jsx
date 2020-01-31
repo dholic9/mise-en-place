@@ -34,6 +34,7 @@ class AddRecipe extends React.Component {
     this.handleAddIngredient = this.handleAddIngredient.bind(this);
     this.handleNewinstruction = this.handleNewinstruction.bind(this);
     this.handleAddInstruction = this.handleAddInstruction.bind(this);
+    this.handlePhotoSubmit = this.handlePhotoSubmit.bind(this);
     this.fileInput = React.createRef();
   }
 
@@ -148,6 +149,7 @@ class AddRecipe extends React.Component {
   handleSubmitNewRecipe() {
     const data = this.state;
     const recipe = {
+      image: data.image,
       recipeName: data.recipeName,
       category: data.category,
       numberOfServings: data.numberOfServings,

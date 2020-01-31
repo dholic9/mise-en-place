@@ -287,6 +287,7 @@ COPY public."FavoriteRecipes" ("userId", "recipeId") FROM stdin;
 19	9
 19	10
 20	12
+20	13
 \.
 
 
@@ -367,6 +368,10 @@ COPY public."Ingredients" ("ingredientId", "ingredientName") FROM stdin;
 81	coconut oil
 82	cocoa butter
 83	flaky salt
+84	unsalted butter 
+86	chilli powder
+87	chicken tender
+88	whipping cream
 \.
 
 
@@ -436,6 +441,9 @@ COPY public."Instructions" ("instructionId", "recipeId", "instructionDetail", "i
 59	12	In a large sauté pan, cook the sugar over medium heat. When most of the sugar has dissolved, about 5 minutes, gently stir the liquid with a wooden spoon to prevent it from burning. Continue to cook the sugar until it is a rich brown color, 12 minutes. Reduce the heat to low and add half of the coconut oil; stir until it is completely dissolved, 2 minutes.	4	2020-01-30 23:47:50.748397+00
 60	12	Add the remaining coconut oil and remaining ice cream ingredients, and stir until all has dissolved. Transfer the caramel and the milk mixture to a high-speed blender, and blend on high for 3 minutes, until completely emulsified.	5	2020-01-30 23:47:50.748397+00
 61	12	Chill the ice cream base for 2 hours in the refrigerator, spin in an ice cream maker until the mixture hardens, then serve immediately or refrigerate overnight.	6	2020-01-30 23:47:50.748397+00
+62	13	In small bowl, stir together 2 teaspoons kosher salt, 2 teaspoons garlic powder and 2 teaspoons chili powder. Sprinkle over 1 lb uncooked chicken breast tenders (not breaded) to completely coat.\n	1	2020-01-31 00:34:54.828263+00
+63	13	In 10-inch skillet, melt 2 tablespoons of the unsalted butter over medium-low or medium heat. Add coated chicken tenders; cook 3 to 4 minutes on each side or until browned and no longer pink in center. Transfer chicken to plate; set aside.	2	2020-01-31 00:34:54.828263+00
+64	13	In same skillet, heat 1 cup whipping cream, scraping up any brown bits from bottom of skillet. Increase heat to simmer or until cream comes to a boil. Reduce heat; simmer until cream is reduced by half. Stir in remaining 2 tablespoons unsalted butter. Season to taste with salt. Return chicken to skillet.	3	2020-01-31 00:34:54.828263+00
 \.
 
 
@@ -548,6 +556,11 @@ COPY public."RecipeIngredients" ("ingredientId", "recipeId", quantity, unit, "cr
 81	12	0.25	cup	2020-01-30 23:47:50.737809+00
 82	12	6	tbsp	2020-01-30 23:47:50.737809+00
 83	12	1	tbsp	2020-01-30 23:47:50.737809+00
+16	13	2	tbsp	2020-01-31 00:34:54.822547+00
+84	13	4	tbsp	2020-01-31 00:34:54.822547+00
+86	13	2	tbsp	2020-01-31 00:34:54.822547+00
+87	13	1	lb	2020-01-31 00:34:54.822547+00
+88	13	1	cup	2020-01-31 00:34:54.822547+00
 \.
 
 
@@ -566,6 +579,7 @@ COPY public."Recipes" ("recipeId", "recipeName", category, "numberOfServings", "
 9	Roasted Brussels Sprouts	Lunch/Dinner	6	neow	/images/brussel-sprouts.jpeg	2020-01-30 20:13:04.814919+00
 10	Pad Thai	Street Food	2	Weilin	/images/pad-thai.jpg	2020-01-30 20:58:49.296152+00
 12	Vegan Salted Caramel Ice Cream	dessert	4	weilin	/images/vegan-salted-caramel-ice-cream.jpg	2020-01-30 23:47:50.67136+00
+13	Chicken Lazone	Dinner	4	weilin	/images/chicken-lazone.jpeg	2020-01-31 00:34:54.787584+00
 \.
 
 
@@ -586,21 +600,21 @@ COPY public."Users" ("userId", name, "userName", email, password, image, "create
 -- Name: Ingredients_ingredientId_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('public."Ingredients_ingredientId_seq"', 83, true);
+SELECT pg_catalog.setval('public."Ingredients_ingredientId_seq"', 88, true);
 
 
 --
 -- Name: Instructions_instructionId_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('public."Instructions_instructionId_seq"', 61, true);
+SELECT pg_catalog.setval('public."Instructions_instructionId_seq"', 64, true);
 
 
 --
 -- Name: Recipes_recipeId_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('public."Recipes_recipeId_seq"', 12, true);
+SELECT pg_catalog.setval('public."Recipes_recipeId_seq"', 13, true);
 
 
 --
