@@ -43,7 +43,7 @@ export default class App extends React.Component {
       .then(res => res.ok ? res.json() : (
         Swal.fire('User Name or Password was invalid'),
         Promise.reject(new Error('User Name or Password was invalid'))
-        ))
+      ))
       .then(data => {
         if (typeof data !== 'number') {
           return console.error('error');
