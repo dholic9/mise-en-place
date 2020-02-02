@@ -23,6 +23,7 @@ export default class TopBar extends React.Component {
         d-flex
         row
         align-items-center
+        text-center
         "
       >
         <Link to={'/add-recipe'}>
