@@ -34,7 +34,10 @@ const storage = multer.diskStorage({
 const upload = multer({ storage: storage }).single('photo');
 
 app.post('/api/recipe-photos', (req, res, next) => {
+<<<<<<< HEAD
 
+=======
+>>>>>>> master
   upload(req, res, err => {
     if (err) {
       next(err);
@@ -450,7 +453,6 @@ app.post('/api/recipe', (req, res, next) => {
     const userParams = [req.session.userId];
     db.query(findUserNameSql, userParams)
       .then(response => {
-        console.log(response.rows[0]);
         const createdBy = response.rows[0].userName;
         const params = [recipe.recipeName, recipe.category, recipe.numberOfServings, createdBy, recipe.image];
         const sql = `

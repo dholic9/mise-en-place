@@ -96,7 +96,6 @@ function Item(props) {
   });
 
   const tempName = props.ingredient.ingredientName;
-
   return (
 
     <div className="card mb-1">
