@@ -74,16 +74,16 @@ export default class ShoppingList extends React.Component {
 
 }
 
-function capitalizeWords(string) {
-  return string
-    .toLowerCase()
-    .split(' ')
-    .map(function (word) {
-      return word[0].toUpperCase() + word.substr(1);
-    })
-    .join(' ');
+// function capitalizeWords(string) {
+//   return string
+//     .toLowerCase()
+//     .split(' ')
+//     .map(function (word) {
+//       return word[0].toUpperCase() + word.substr(1);
+//     })
+//     .join(' ');
 
-}
+// }
 
 function Item(props) {
   const details = props.ingredient.recipe.map((element, index) => {
@@ -101,7 +101,7 @@ function Item(props) {
 
     <div className="card mb-1">
       <div className="card-body">
-        <h5 className="card-title text-center">{<u>{capitalizeWords(tempName)}</u>}</h5>
+        <h5 className="card-title text-center"><u>{tempName}</u></h5>
         <div className="card-text  align-items-center row">
           <div className="col-3  justify-content-center d-flex">
             <input type="checkbox" className='checkbox' />

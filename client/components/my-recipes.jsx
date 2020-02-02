@@ -100,7 +100,7 @@ function FavRecipe(props) {
               <p>Serving: {props.recipe.numberOfServings}</p>
             </div>
             <div className="button-container">
-              <img src="https://img.icons8.com/ios-filled/40/000000/meal.png" onClick={() => { props.addToMealPlan(props.recipe.recipeId); }}/>
+              <img className="add-meal-plan" src="https://img.icons8.com/ios-filled/40/000000/meal.png" onClick={() => { props.addToMealPlan(props.recipe.recipeId); }}/>
             </div>
           </div>
         </div>
