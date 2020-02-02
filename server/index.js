@@ -64,14 +64,17 @@ app.post('/api/users', (req, res, next) => {
 
         return bcrypt.compare(password, hash)
           .then(matches => {
+            console.log(matches);
             if (matches === true) {
               req.session.userId = result.rows[0].userId;
               return res.status(200).json(result.rows[0].userId);
-            } else {
-              res.json({ error: 'Incorrect Username or Password' });
-              res.redirect('/login');
+            } else if (matches === false) {
+              return (res.json({ error: 'Incorrect Username or Password' }),
+              res.redirect('/login'));
             }
-          });
+          })
+          .catch(err => { console.error(err); })
+        ;
       }
     });
 });
