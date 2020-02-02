@@ -58,6 +58,7 @@ app.post('/api/users', (req, res, next) => {
 
   db.query(sql, values)
     .then(result => {
+      console.log('result.rows: ', result.rows);
       if (!result.rows[0]) {
         return next(new ClientError('Incorrect User Name or Password', 400));
       } else {
