@@ -6,7 +6,7 @@ function renderListItem(recipe, index) {
   return (
     <Link to={`/recipe-detail-page/${recipe.recipeId}`} key={index}>
       <div className=" recipe" >
-        <img src={image} alt={recipe.name} className="image clickable" />
+        <img src={image} alt={recipe.name} className="image featured-image clickable" />
         <h4 className="recipeName outline">{recipe.recipeName}</h4>
       </div>
     </Link>

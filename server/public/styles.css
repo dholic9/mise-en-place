@@ -495,4 +495,9 @@ a{
   .meal-plan-close{
     width: 54px;
   }
+  .image-detail{
+    height: 72vmin;
+    object-fit: contain;
+  }
+
 }
