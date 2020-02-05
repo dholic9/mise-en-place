@@ -87,7 +87,7 @@ export default class MyRecipe extends React.Component {
 function FavRecipe(props) {
   const image = props.recipe.image ? props.recipe.image : '/images/new-logo.png';
   return (
-    <div className="card fadeIn">
+    <div className="card  fav-recipe-item fadeIn">
       <img className="delete-button" src="https://img.icons8.com/ios-filled/100/000000/delete-forever.png" onClick={() => { props.delete(props.recipe.recipeId); }}/>
       <div className="card-body row">
         <div className="col-6">

@@ -68,7 +68,7 @@ function MealPlanRecipe(props) {
   const image = props.recipe.image ? props.recipe.image : '/images/new-logo.png';
   return (
 
-    <div className="card">
+    <div className="card fav-recipe-item">
       <img src="https://img.icons8.com/ios-filled/100/000000/delete-forever.png" className="meal-plan-close" onClick={() => { props.delete(props.recipe.recipeId); }} />
       <div className="card-body row">
         <div className="col-6">

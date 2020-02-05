@@ -479,3 +479,20 @@ a{
   transition: all 0.3s;
   width: 76%;
 }
+
+
+@media screen and (min-width: 590px){
+  .fav-recipe-item{
+    height: 40vh;
+  }
+  .picture{
+    height: 29vh;
+    /* object-fit: contain; */
+  }
+  .delete-button{
+    width: 54px;
+  }
+  .meal-plan-close{
+    width: 54px;
+  }
+}
