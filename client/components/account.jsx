@@ -17,7 +17,8 @@ export default class Account extends React.Component {
       .then(response => response.json())
       .then(data => {
         this.setState({ user: data });
-      });
+      })
+      .catch(err => console.error(err));
   }
 
   logout() {

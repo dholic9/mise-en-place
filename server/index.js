@@ -57,22 +57,19 @@ app.post('/api/users', (req, res, next) => {
 
   db.query(sql, values)
     .then(result => {
-      if (!result.rows[0]) {
-        return next(new ClientError('Incorrect User Name or Password', 400));
-      } else {
-        const hash = result.rows[0].password;
+      const hash = result.rows[0].password;
 
-        return bcrypt.compare(password, hash)
-          .then(matches => {
-            if (matches === true) {
-              req.session.userId = result.rows[0].userId;
-              return res.status(200).json(result.rows[0].userId);
-            } else {
-              res.json({ error: 'Incorrect Username or Password' });
-              res.redirect('/login');
-            }
-          });
-      }
+      return bcrypt.compare(password, hash)
+        .then(matches => {
+          if (matches === true) {
+            req.session.userId = result.rows[0].userId;
+            return res.status(200).json(result.rows[0].userId);
+          } else {
+            return (
+              next(new ClientError('Incorrect User Name or Password', 400))
+            );
+          }
+        });
     });
 });
 
