@@ -51,7 +51,7 @@ export default class Account extends React.Component {
                 : <img className="mt-2  mb-4 account-icon" src={'/images/sadPatrick.gif'} alt="" />}
             </div>
           </div>
-          <div className="row border-bottom py-4 my-5 flex-column align-items-center text-center">
+          <div className="row border-bottom py-4 mt-5 mb-3 flex-column align-items-center text-center">
             <h4><u>Name</u>:  {this.state.user.name} </h4>
             <h4><u>User Name</u>:  {this.state.user.userName}</h4>
             <h4><u>Email</u>: {this.state.user.email}</h4>
