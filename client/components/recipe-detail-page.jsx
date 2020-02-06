@@ -57,7 +57,7 @@ class RecipeDetailPage extends React.Component {
           <div className="servings">Servings: {recipe.numberOfServings}</div>
         </div>
         <img src="https://img.icons8.com/emoji/48/000000/star-emoji.png" className="star" onClick={() => addToFav(recipe.recipeId)}></img>
-        <img src={image} alt={recipe.recipeName} className="image" />
+        <img src={image} alt={recipe.recipeName} className="image image-detail" />
         <div className="ingredientList">
           <div className="text-center border-bottom border-dark m-0">Ingredients</div>
           {this.generateIngredients()}
