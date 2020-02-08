@@ -29,8 +29,8 @@ Try the application live at [http://miseenplace.davidjinhong.com](http://miseenp
 
 ## Preview
 
-![features-screen](/images/preview-recipe.png "features-screen")
-![login-screen](/images/preview-login.png "login-screen")
+![features-screen](/images/preview-recipe.png)
+![login-screen](/images/preview-login.png)
 
 ## Development
 
