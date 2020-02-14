@@ -33,41 +33,41 @@ export default class App extends React.Component {
   }
 
   handleUserLogin(user) {
-    return (fetch('api/users', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(user)
-    })
+    return (
+      fetch('api/users', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(user)
+      })
       .then(res => res.ok ? res.json() : (
         Swal.fire('User Name or Password was invalid'),
         Promise.reject(new Error('User Name or Password was invalid'))
       ))
       .then(data => {
-
         this.setState({ user: data });
       })
-
     );
   }
 
   handleUserSignup(user) {
-    return fetch('api/users/create', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(user)
-    })
+    return (
+      fetch('api/users/create', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(user)
+      })
       .then(res => res.ok ? res.json() : (
         Swal.fire('One or more inputs were invalid'),
         Promise.reject(new Error('Failed to Create User'))
       ))
       .then(data => {
         console.log('data returned:', data);
-      });
-
+      })
+    );
   }
 
   componentDidMount() {

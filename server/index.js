@@ -57,6 +57,9 @@ app.post('/api/users', (req, res, next) => {
 
   db.query(sql, values)
     .then(result => {
+      if(result.rows.length <1){
+        return next(new ClientError('Incorrect User Name or Password', 400))
+      }
       const hash = result.rows[0].password;
 
       return bcrypt.compare(password, hash)
@@ -70,7 +73,7 @@ app.post('/api/users', (req, res, next) => {
             );
           }
         });
-    });
+    })
 });
 
 /*     POST USERS Sign Up  */
