@@ -47,8 +47,8 @@ export default class Account extends React.Component {
             <div className="col-12  flex-column text-center">
               <h2 className="border-bottom mb-4">Account Information</h2>
               {this.state.user.image
-                ? <img className="mt-2  mb-4 account-icon" src={this.state.user.image} alt=""/>
-                : <img className="mt-2  mb-4 account-icon" src={'/images/sadPatrick.gif'} alt="" />}
+                ? <img className="account-icon" src={this.state.user.image} alt=""/>
+                : <img className="account-icon" src={'/images/sadPatrick.gif'} alt="" />}
             </div>
           </div>
           <div className="row border-bottom py-3 my-3 flex-column align-items-center text-center">
@@ -59,7 +59,6 @@ export default class Account extends React.Component {
           <div className="row">
             <div className="col-12 logoutButton text-center ">
               <button type="button" onClick={this.logout} className="logoutButton glow-on-hover">Log Out</button>
-
             </div>
           </div>
           <div className="row">
@@ -69,7 +68,6 @@ export default class Account extends React.Component {
       </React.Fragment>
     );
   }
-
 }
 
 Account.contextType = AppContext;
