@@ -15,7 +15,8 @@ A full-stack web application for people who enjoy cooking and want to create and
 ## Live Demo
 
 Try the application live at [http://miseenplace.davidjinhong.com](http://miseenplace.davidjinhong.com)
-Only mobile-viewports supported.
+
+- Only mobile-viewports supported.
 
 ## Features
 
