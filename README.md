@@ -17,7 +17,7 @@ A full-stack web application for people who enjoy cooking and want to create and
 Try the application live at [http://miseenplace.davidjinhong.com](http://miseenplace.davidjinhong.com)
 
 - Example account for signing in { user: bob, pw: sponge }
-- Only mobile-viewports supported.
+- Only mobile-viewports supported at this moment.
 
 ## Features
 
