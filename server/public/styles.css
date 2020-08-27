@@ -229,9 +229,9 @@ a{
   to   { opacity: 1; }
 }
 
-.nav-bar > a:hover {
+/* .nav-bar > a:hover {
   border-bottom: 3px solid black;
-}
+} */
 
 .black{
   color: black;
@@ -486,7 +486,7 @@ a{
     height: 40vh;
   }
   .picture{
-    height: 29vh;
+    height: 25vh;
     /* object-fit: contain; */
   }
   .delete-button{
